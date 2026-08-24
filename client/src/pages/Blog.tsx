@@ -8,7 +8,8 @@ import { useLocation } from "wouter";
 import "./Blog.css";
 import "./BlogOverrides.css";
 
-import { articles, asset, blogPath, BlogArticle, loginUrl } from "./blogData";
+import { articles, asset, BlogArticle, blogPath, loginUrl } from "./blogData";
+import { ArticleVisuals } from "./articleVisuals";
 
 const categories = ["Todos", ...Array.from(new Set(articles.map((article) => article.category)))];
 
@@ -186,6 +187,7 @@ export function ArticleReader({ article, onClose }: { article: BlogArticle; onCl
     <figure className="blog-reader-hero"><img src={asset(article.image)} alt="" /><figcaption>Una mirada Bitaxus para entender mejor lo que ocurre detrás de cada operación.</figcaption></figure>
     <div className="blog-reader-layout"><aside className="blog-reader-toc"><span>En este artículo</span><a href="#inicio">Introducción</a><a href="#contenido">La idea central</a><a href="#faq">Preguntas frecuentes</a><a href="#cierre">Cierre</a></aside><div className="blog-reader-prose" id="contenido">
       <p id="inicio">{article.summary}</p>
+      <ArticleVisuals article={article} />
       {renderArticleBlocks(article)}
       <div id="faq" />
       <div id="cierre" />
