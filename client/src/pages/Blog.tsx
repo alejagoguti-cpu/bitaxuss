@@ -196,15 +196,18 @@ function renderArticleBlocks(article: BlogArticle) {
       }
     }
   }
+  const closingIndex = lines.findIndex((line) => line === "Cobras. Pagas. Sabes.");
+  const closingContentIndexes = new Set<number>();
+  if (closingIndex >= 0) for (let index = closingIndex + 1; index <= closingIndex + 4; index += 1) closingContentIndexes.add(index);
   const visualIndexes = [Math.floor(lines.length * .18), Math.floor(lines.length * .4), Math.floor(lines.length * .63), Math.floor(lines.length * .84)];
   return lines.map((line, index) => {
     const visualPart = visualIndexes.indexOf(index);
     const visual = visualPart >= 0 ? <ArticleVisuals article={article} part={(visualPart + 1) as 1 | 2 | 3 | 4} /> : null;
     let block: ReactNode;
-    if (faqAnswerIndexes.has(index)) block = null;
+    if (faqAnswerIndexes.has(index) || closingContentIndexes.has(index)) block = null;
     else if (line.toLowerCase() === "preguntas frecuentes") block = <h2>Preguntas frecuentes</h2>;
-    else if (line.startsWith("Bitaxus ·")) block = <div className="blog-reader-cta"><p className="blog-eyebrow">{line}</p><h3>Cobras. Pagas. Sabes.</h3><p>Una experiencia Bitaxus para conservar el contexto de tus cobros, pagos y movimientos.</p><a href={`${asset("/")}#contacto`} className="blog-primary-cta">Conocer Bitaxus <ArrowRight /></a></div>;
-    else if (line.startsWith("👉")) block = <p className="blog-reader-link">{line.replace("👉 ", "")}</p>;
+    else if (line === "Cobras. Pagas. Sabes.") block = <section className="blog-reader-closing" aria-label="Conocer Bitaxus"><div className="blog-reader-closing-main"><p className="blog-eyebrow">BITAXUS / CIERRE</p><h2>Cobras. Pagas. Sabes.</h2><p>{lines[index + 1] || "Una experiencia Bitaxus para conservar el contexto de tus cobros, pagos y movimientos."}</p><p>{lines[index + 2] || "Entiende qué pasó, qué sigue pendiente y qué viene después."}</p><a href={`${asset("/")}#contacto`} className="blog-primary-cta">Conocer Bitaxus <ArrowRight /></a></div><div className="blog-reader-closing-signature"><span>AT</span><div><p className="blog-eyebrow">DESDE LA EXPERIENCIA</p><strong>Alejandra Torres</strong><p>{lines[index + 4] || "Una mirada de Bitaxus para tomar decisiones con más contexto."}</p></div></div></section>;
+    else if (line.startsWith("👉")) block = null;
     else if (faqQuestionIndexes.has(index)) block = <details className="blog-reader-faq-card" name="article-faq" open={index === faqIndex + 1} onToggle={(event) => { if (event.currentTarget.open) document.querySelectorAll<HTMLDetailsElement>('details[name="article-faq"]').forEach((detail) => { if (detail !== event.currentTarget) detail.open = false; }); }}><summary><span>{String(faqQuestionNumbers.get(index) || 1).padStart(2, "0")}</span><strong>{line}</strong><i>+</i></summary><div className="blog-reader-faq-answer"><p>{renderEmphasizedAnswer(lines[index + 1] || "")}</p></div></details>;
     else if (isArticleHeading(line, index, lines)) block = <h2>{line}</h2>;
     else block = <p>{line}</p>;
