@@ -223,3 +223,11 @@
 .article-page .blog-reader-author p { font-family: Inter, Arial, sans-serif; }
 .article-page .blog-reader-header h1 { line-height: 1.06; }
 .article-page .blog-reader-prose blockquote { font-family: Inter, Arial, sans-serif; font-weight: 700; letter-spacing: -.035em; }
+
+
+/* Enlaces reales de las tarjetas, conservando el CTA visual existente. */
+.blog-article-copy .blog-article-read,
+.blog-card-body .blog-article-read { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 11px 17px; border: 0; border-radius: 999px; color: #fff; background: linear-gradient(120deg, #e6382e, #9a1213); font-size: 13px; font-weight: 800; }
+.blog-article-copy .blog-article-read svg,
+.blog-card-body .blog-article-read svg { width: 16px; }
+.blog-article-read:hover { filter: brightness(1.08); transform: translateY(-1px); }

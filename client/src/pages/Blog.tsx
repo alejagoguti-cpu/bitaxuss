@@ -60,14 +60,14 @@ export default function Blog() {
             <label className="blog-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos…" aria-label="Buscar guías o artículos" /></label>
             <div className="blog-filters" aria-label="Filtrar publicaciones">{categories.map((category) => <button key={category} type="button" onClick={() => setActiveCategory(category)} className={activeCategory === category ? "active" : ""}>{category}</button>)}</div>
           </div>
-          <ArticleCard article={articles[0]} variant="featured" onRead={() => setLocation(`${blogPath}/article/${articles[0].id}`)} />
+          <ArticleCard article={articles[0]} variant="featured" href={`${blogPath}/article/${articles[0].id}`} />
         </div>
       </section>
 
       <section className="blog-section blog-latest">
         <div className="blog-shell">
           <div className="blog-section-head left"><p className="blog-eyebrow muted">Lo último</p><h2>Lecturas para tener más claridad.</h2></div>
-          {visibleArticles.length ? <div className="blog-card-grid">{visibleArticles.filter((article) => !article.featured).map((article) => <ArticleCard key={article.id} article={article} variant="latest" onRead={() => setLocation(`${blogPath}/article/${article.id}`)} />)}</div> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
+          {visibleArticles.length ? <div className="blog-card-grid">{visibleArticles.filter((article) => !article.featured).map((article) => <ArticleCard key={article.id} article={article} variant="latest" href={`${blogPath}/article/${article.id}`} />)}</div> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
         </div>
       </section>
 
@@ -87,7 +87,7 @@ export default function Blog() {
         <div className="blog-shell">
           <div className="blog-section-head left"><p className="blog-eyebrow">Bitaxus Global</p><h2>Cuando tu negocio cruza fronteras, hay mucho más que entender.</h2></div>
           <div className="blog-global-layout">
-            <ArticleCard article={articles[0]} variant="wide" onRead={() => setLocation(`${blogPath}/article/${articles[0].id}`)} />
+            <ArticleCard article={articles[0]} variant="wide" href={`${blogPath}/article/${articles[0].id}`} />
             <div className="blog-global-list">
               {articles.slice(1).map((article) => <button className="blog-list-article" type="button" key={article.id} onClick={() => setLocation(`${blogPath}/article/${article.id}`)}><span>{article.category}</span><strong>{article.title}</strong><ArrowRight /></button>)}
               <button className="blog-list-article" type="button" onClick={() => setLocation(`${blogPath}/article/${articles[2].id}`)}><span>Global</span><strong>Operar en varias monedas sin perder el control de tu caja</strong><ArrowRight /></button>
@@ -144,12 +144,12 @@ export function ArticleReader({ article, onClose }: { article: BlogArticle; onCl
   </article></div>;
 }
 
-function ArticleCard({ article, variant = "standard", onRead }: { article: (typeof articles)[number]; variant?: "standard" | "featured" | "wide" | "latest"; onRead: () => void }) {
+function ArticleCard({ article, variant = "standard", href }: { article: (typeof articles)[number]; variant?: "standard" | "featured" | "wide" | "latest"; href: string }) {
   if (variant === "latest") {
-    return <article className="blog-article-card latest"><div className="blog-card-media"><img src={asset(article.image)} width="1672" height="941" loading="lazy" decoding="async" alt="" /></div><div className="blog-card-body"><p className="blog-eyebrow">{article.category}</p><h3>{article.title}</h3><p>{article.summary}</p><button type="button" onClick={onRead}>Leer artículo <ArrowRight /></button></div></article>;
+    return <article className="blog-article-card latest"><div className="blog-card-media"><img src={asset(article.image)} width="1672" height="941" loading="lazy" decoding="async" alt="" /></div><div className="blog-card-body"><p className="blog-eyebrow">{article.category}</p><h3>{article.title}</h3><p>{article.summary}</p><a className="blog-article-read" href={href}>Leer artículo <ArrowRight /></a></div></article>;
   }
 
-  return <article className={`blog-article-card ${variant}`}><img src={asset(article.image)} width="1672" height="941" loading={variant === "featured" ? "eager" : "lazy"} fetchPriority={variant === "featured" ? "high" : "auto"} decoding="async" alt="" /><div className="blog-card-shade" /><div className="blog-article-copy"><h3 className="sr-only">{article.title}</h3><p className="blog-eyebrow">{article.category}</p><button type="button" onClick={onRead}>Leer artículo <ArrowRight /></button></div></article>;
+  return <article className={`blog-article-card ${variant}`}><img src={asset(article.image)} width="1672" height="941" loading={variant === "featured" ? "eager" : "lazy"} fetchPriority={variant === "featured" ? "high" : "auto"} decoding="async" alt="" /><div className="blog-card-shade" /><div className="blog-article-copy"><h3 className="sr-only">{article.title}</h3><p className="blog-eyebrow">{article.category}</p><a className="blog-article-read" href={href}>Leer artículo <ArrowRight /></a></div></article>;
 }
 
 function Capsule({ number, title, copy, active = false, onClick }: { number: string; title: string; copy: string; active?: boolean; onClick: () => void }) {
