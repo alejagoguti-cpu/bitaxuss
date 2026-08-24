@@ -19,7 +19,7 @@ function FooterColumn({ title, links }: { title: string; links: string[] }) {
 }
 
 export function SharedFooter() {
-  return <footer className="footer" data-node-id="2166-3789">
+  return <footer id="footer" className="footer" data-node-id="2166-3789">
     <div className="content-frame footer-top">
       <div className="footer-brand">
         <img src={asset("/2166-3795.webp")} width="105" height="30" loading="lazy" decoding="async" alt="Bitaxus" />
