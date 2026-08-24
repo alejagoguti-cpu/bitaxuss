@@ -2,7 +2,7 @@
  * Estilo de referencia: editorial Bitaxus.
  * Alternancia de fondos oscuros y claros como la landing Bitaxus, con acento rojo y titulares BELAMOR.
  */
-import { ArrowRight, ChevronDown, Search, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Search } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useLocation } from "wouter";
 import "./Blog.css";
@@ -121,7 +121,7 @@ export default function Blog() {
 export function ArticleReader({ article, onClose }: { article: BlogArticle; onClose: () => void }) {
   const isCashflow = article.id === "plataformas" || article.id === "tasa";
   return <div className="blog-reader-page" role="presentation"><article className="blog-reader" role="article" aria-label={article.title}>
-    <div className="blog-reader-bar"><button type="button" className="blog-reader-back" onClick={onClose}><span>←</span> Volver al blog</button><span className="blog-reader-mark">BITAXUS <i>LECTURA</i></span><button type="button" className="blog-reader-close" aria-label="Cerrar artículo" onClick={onClose}><X /></button></div>
+    <div className="blog-reader-bar"><button type="button" className="blog-reader-back" onClick={onClose}><span>←</span> Volver al blog</button><span className="blog-reader-mark">BITAXUS <i>LECTURA</i></span></div>
     <header className="blog-reader-header"><p className="blog-eyebrow">{article.category}</p><h1>{article.title}</h1><p className="blog-reader-dek">{article.summary}</p><div className="blog-reader-meta"><span>Por <b>Alejandra Torres</b></span><span>Fundadora de Bitaxus</span><span>{isCashflow ? "7 min de lectura" : "5 min de lectura"}</span></div></header>
     <figure className="blog-reader-hero"><img src={asset(article.image)} alt="" /><figcaption>Una mirada Bitaxus para entender mejor lo que ocurre detrás de cada operación.</figcaption></figure>
     <div className="blog-reader-layout"><aside className="blog-reader-toc"><span>En este artículo</span><a href="#contexto">La pregunta detrás del número</a><a href="#claridad">Lo que conviene separar</a><a href="#accion">Qué mirar desde hoy</a></aside><div className="blog-reader-prose">
