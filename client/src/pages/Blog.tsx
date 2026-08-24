@@ -2,7 +2,7 @@
  * Estilo de referencia: editorial Bitaxus.
  * Alternancia de fondos oscuros y claros como la landing Bitaxus, con acento rojo y titulares BELAMOR.
  */
-import { ArrowRight, BookOpen, ChevronDown, Compass, Landmark, Lightbulb, Search, Sparkles, X } from "lucide-react";
+import { ArrowRight, Menu, Search, X } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import "./Blog.css";
 import "./BlogOverrides.css";
@@ -51,6 +51,7 @@ export default function Blog() {
   const [selectedArticle, setSelectedArticle] = useState<(typeof articles)[number] | null>(null);
   const [email, setEmail] = useState("");
   const [newsletterMessage, setNewsletterMessage] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     document.title = "Blog Bitaxus | Ideas para entender mejor tu negocio";
@@ -74,20 +75,22 @@ export default function Blog() {
 
   return (
     <main className="blog-page">
-      <header className="blog-nav figma-node-2487">
-        <div className="blog-shell blog-nav-inner">
-          <a className="blog-logo" href={asset("/")} aria-label="Bitaxus, ir al inicio"><img src={asset("/2166-3795.webp")} width="196" height="56" alt="Bitaxus" /></a>
-          <nav className="blog-center-nav" aria-label="Navegación principal"><a className="home" href={asset("/")}>Inicio <ChevronDown /></a><a href={`${asset("/")}#empresas`}>Empresas <ChevronDown /></a><a href={`${asset("/")}#personas`}>Personas <ChevronDown /></a><a className="active" href={blogPath}>Blog <ChevronDown /></a><a href={`${asset("/")}#contacto`}>Ayuda <ChevronDown /></a></nav>
-          <div className="blog-nav-actions"><a className="blog-login" href={loginUrl}>Iniciar sesión</a><a className="blog-outline-cta" href={`${asset("/")}#contacto`}>Hablemos <ArrowRight /></a></div>
+      <section className="hero blog-home-hero" aria-labelledby="blog-home-hero-title">
+        <h1 id="blog-home-hero-title" className="sr-only">Bitaxus: cobra, paga y entiende tu dinero</h1>
+        <img className="hero-render" src={asset("/2166-3254.webp")} width="2560" height="1484" fetchPriority="high" decoding="async" alt="Bitaxus: vendiste como nunca, ¿y la plata?" />
+        <div className="hero-hotspots" aria-label="Navegación principal del hero">
+          <a href={asset("/")} className="hero-hotspot home">Inicio</a><a href={`${asset("/")}#empresas`} className="hero-hotspot empresas">Empresas</a><a href={`${asset("/")}#personas`} className="hero-hotspot personas">Personas</a><a href={blogPath} className="hero-hotspot blog">Blog</a><a href={`${asset("/")}#contacto`} className="hero-hotspot ayuda">Ayuda</a><a className="hero-hotspot login" href={loginUrl}>Iniciar sesión</a><a href={`${asset("/")}#contacto`} className="hero-hotspot speak">Hablemos</a><a href={`${asset("/")}#contacto`} className="hero-hotspot speak-main">Hablemos</a><a href={`${asset("/")}#agente`} className="hero-hotspot how">Ver cómo funciona</a>
         </div>
-      </header>
+        <div className="mobile-hero">
+          <header className="mobile-header"><img src={asset("/2166-3795.webp")} width="105" height="30" decoding="async" alt="Bitaxus" /><button type="button" className="menu-button" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={22} /> : <Menu size={22} />}</button></header>
+          {menuOpen && <nav className="mobile-nav" aria-label="Navegación principal"><a href={asset("/")} onClick={() => setMenuOpen(false)}>Inicio</a><a href={`${asset("/")}#empresas`} onClick={() => setMenuOpen(false)}>Empresas</a><a href={`${asset("/")}#personas`} onClick={() => setMenuOpen(false)}>Personas</a><a href={blogPath} onClick={() => setMenuOpen(false)}>Blog</a><a href={`${asset("/")}#contacto`} onClick={() => setMenuOpen(false)}>Ayuda</a></nav>}
+          <div className="mobile-hero-content"><p>Cobrar debería ser tan fácil como enviar un mensaje.</p><p className="mobile-hero-title">Vendiste<br />como nunca<br /><span>¿Y la plata?</span></p><p className="mobile-hero-copy">Bitaxus reúne tus cobros, pagos y movimientos para que sepas cuánto entra, cuánto sale y cuánto realmente te queda.</p><div className="button-row"><a href={`${asset("/")}#contacto`} className="button primary">Hablemos <ArrowRight /></a><a href={`${asset("/")}#agente`} className="button ghost">Ver cómo funciona</a></div></div>
+        </div>
+      </section>
 
-      <section className="blog-hero">
+      <section className="blog-hero blog-hero-tools">
         <div className="blog-shell blog-hero-grid">
           <div className="blog-hero-copy">
-            <p className="blog-eyebrow">Bitaxus Blog</p>
-            <h1>Entender mejor tu negocio también es parte de hacerlo <span>crecer.</span></h1>
-            <p className="blog-lede">Historias, aprendizajes y herramientas para entender mejor lo que pasa con tus clientes, tus cobros, tu operación y tu crecimiento.</p>
             <label className="blog-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos…" aria-label="Buscar guías o artículos" /></label>
             <div className="blog-filters" aria-label="Filtrar publicaciones">{categories.map((category) => <button key={category} type="button" onClick={() => setActiveCategory(category)} className={activeCategory === category ? "active" : ""}>{category}</button>)}</div>
           </div>
@@ -97,14 +100,14 @@ export default function Blog() {
 
       <section className="blog-section blog-latest">
         <div className="blog-shell">
-          <div className="blog-section-head left"><div className="blog-section-kicker"><span className="blog-icon-disc" aria-hidden="true"><Sparkles /></span><p className="blog-eyebrow muted">Lo último</p></div><h2>Lecturas para tener más claridad.</h2></div>
+          <div className="blog-section-head left"><p className="blog-eyebrow muted">Lo último</p><h2>Lecturas para tener más claridad.</h2></div>
           {visibleArticles.length ? <div className="blog-card-grid">{visibleArticles.filter((article) => !article.featured).map((article) => <ArticleCard key={article.id} article={article} onRead={() => setSelectedArticle(article)} />)}</div> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
         </div>
       </section>
 
       <section className="blog-section blog-capsules">
         <div className="blog-shell">
-          <div className="blog-section-head"><div className="blog-section-kicker"><span className="blog-icon-disc" aria-hidden="true"><Compass /></span><p className="blog-eyebrow">Explora por cápsulas</p></div><h2>Cuatro formas de mirar tu negocio</h2><p>Cada cápsula reúne los temas que más importan según el momento en el que estás.</p></div>
+          <div className="blog-section-head"><p className="blog-eyebrow">Explora por cápsulas</p><h2>Cuatro formas de mirar tu negocio</h2><p>Cada cápsula reúne los temas que más importan según el momento en el que estás.</p></div>
           <div className="blog-capsule-grid">
             <Capsule number="01" title="Control de negocio" copy="Entiende mejor lo que pasa dentro de tu operación." active onClick={() => setActiveCategory("Control de negocio")} />
             <Capsule number="02" title="Emprendimiento" copy="Crecer también cambia la forma de manejar tu empresa." onClick={() => setActiveCategory("Emprendimiento")} />
@@ -116,7 +119,7 @@ export default function Blog() {
 
       <section className="blog-section blog-global">
         <div className="blog-shell">
-          <div className="blog-section-head left"><div className="blog-section-kicker"><span className="blog-icon-disc dark" aria-hidden="true"><Landmark /></span><p className="blog-eyebrow">Bitaxus Global</p></div><h2>Cuando tu negocio cruza fronteras, hay mucho más que entender.</h2></div>
+          <div className="blog-section-head left"><p className="blog-eyebrow">Bitaxus Global</p><h2>Cuando tu negocio cruza fronteras, hay mucho más que entender.</h2></div>
           <div className="blog-global-layout">
             <ArticleCard article={articles[0]} variant="wide" onRead={() => setSelectedArticle(articles[0])} />
             <div className="blog-global-list">
@@ -129,16 +132,16 @@ export default function Blog() {
 
       <section className="blog-section blog-experience">
         <div className="blog-shell blog-experience-grid">
-          <div><div className="blog-section-kicker"><span className="blog-icon-disc" aria-hidden="true"><Landmark /></span><p className="blog-eyebrow">Desde la experiencia</p></div><h2>Muchos de estos temas empezaron antes de Bitaxus.</h2><p>Buena parte de lo que escribimos nace de situaciones reales que hemos visto acompañando empresas y emprendedores: negocios que crecían más rápido de lo que podían controlar, cobros que se enredaban y decisiones que se tomaban sin la información completa.</p><div className="blog-author"><span>AT</span><p><b>Alejandra Torres</b><small>Fundadora de Bitaxus</small></p></div></div>
+          <div><p className="blog-eyebrow">Desde la experiencia</p><h2>Muchos de estos temas empezaron antes de Bitaxus.</h2><p>Buena parte de lo que escribimos nace de situaciones reales que hemos visto acompañando empresas y emprendedores: negocios que crecían más rápido de lo que podían controlar, cobros que se enredaban y decisiones que se tomaban sin la información completa.</p><div className="blog-author"><span>AT</span><p><b>Alejandra Torres</b><small>Fundadora de Bitaxus</small></p></div></div>
           <div className="blog-experience-cards">{["Lo que aprendí acompañando negocios que crecían más rápido de lo que podían controlar", "El día que entendí por qué facturar no es lo mismo que recibir", "Cobrar bien no es incomodar: cómo lo aprendí como consultora"].map((title, index) => <button key={title} type="button" onClick={() => setSelectedArticle(articles[index + 1] || articles[0])}><span>0{index + 1}</span><strong>{title}</strong><ArrowRight /></button>)}</div>
         </div>
       </section>
 
       <section className="blog-section blog-explains">
-        <div className="blog-shell"><div className="blog-section-head"><div className="blog-section-kicker"><span className="blog-icon-disc" aria-hidden="true"><Lightbulb /></span><p className="blog-eyebrow">Bitaxus explica</p></div><h2>Hay cosas que suenan complicadas hasta que alguien las explica bien.</h2></div><div className="blog-explains-grid">{["¿Qué es la tesorería de una empresa?", "¿Qué diferencia hay entre facturado y recibido?", "¿Qué es cartera?", "¿Qué significa trazabilidad de un pago?"].map((title, index) => <button key={title} type="button" onClick={() => setSelectedArticle(articles[index % articles.length])}><span>0{index + 1}</span><strong>{title}</strong><ArrowRight /></button>)}</div></div>
+        <div className="blog-shell"><div className="blog-section-head"><p className="blog-eyebrow">Bitaxus explica</p><h2>Hay cosas que suenan complicadas hasta que alguien las explica bien.</h2></div><div className="blog-explains-grid">{["¿Qué es la tesorería de una empresa?", "¿Qué diferencia hay entre facturado y recibido?", "¿Qué es cartera?", "¿Qué significa trazabilidad de un pago?"].map((title, index) => <button key={title} type="button" onClick={() => setSelectedArticle(articles[index % articles.length])}><span>0{index + 1}</span><strong>{title}</strong><ArrowRight /></button>)}</div></div>
       </section>
 
-      <section className="blog-section blog-news-section"><div className="blog-shell"><div className="blog-news"><div><div className="blog-section-kicker"><span className="blog-icon-disc dark" aria-hidden="true"><BookOpen /></span><p className="blog-eyebrow">Ideas de Bitaxus</p></div><h2>Ideas para entender mejor el negocio que estás construyendo.</h2><p>Recibe nuevos artículos, aprendizajes y guías de Bitaxus.</p></div><form onSubmit={submitNewsletter}><input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="tu@empresa.com" aria-label="Correo electrónico" /><button type="submit">Suscribirme <ArrowRight /></button><small role="status">{newsletterMessage || "Al suscribirte, aceptas nuestra política de privacidad."}</small></form></div></div></section>
+      <section className="blog-section blog-news-section"><div className="blog-shell"><div className="blog-news"><div><p className="blog-eyebrow">Ideas de Bitaxus</p><h2>Ideas para entender mejor el negocio que estás construyendo.</h2><p>Recibe nuevos artículos, aprendizajes y guías de Bitaxus.</p></div><form onSubmit={submitNewsletter}><input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="tu@empresa.com" aria-label="Correo electrónico" /><button type="submit">Suscribirme <ArrowRight /></button><small role="status">{newsletterMessage || "Al suscribirte, aceptas nuestra política de privacidad."}</small></form></div></div></section>
 
       <section className="blog-product-cta"><div className="blog-shell"><h2>Leerlo ayuda. Tenerlo claro todos los días, más.</h2><p>Bitaxus está construyendo una experiencia para ayudarte a mantener más contexto sobre tus cobros, pagos y movimientos mientras tu negocio crece.</p><a href={asset("/")} className="blog-primary-cta">Conocer Bitaxus <ArrowRight /></a></div></section>
 
