@@ -1,0 +1,8 @@
+- [x] Inspeccionar el repositorio `alejagoguti-cpu/bitaxuss` y confirmar si contiene un recurso apto para el hero.
+- [x] Externalizar la ilustración principal de gran tamaño sin modificar la composición de Figma.
+- [ ] Actualizar la referencia del hero, eliminar la copia pesada del proyecto y validar la compilación.
+- [ ] Guardar el checkpoint final y entregar la versión del proyecto.
+- [x] Extraer la fuente BELAMOR proporcionada y registrarla como recurso estático del proyecto.
+- [x] Aplicar BELAMOR a los titulares de la landing y validar el renderizado.
+- [ ] Configurar el repositorio remoto de GitHub y publicar el código completo de Bitaxus.
+- [ ] Verificar en GitHub el commit y los archivos publicados.
