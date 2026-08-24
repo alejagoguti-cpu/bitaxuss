@@ -1,6 +1,6 @@
 /**
  * Estilo de referencia: editorial Bitaxus.
- * Fondo negro texturizado, acento rojo de firma, tipografía BELAMOR y tarjetas tecnológicas sobrias.
+ * Alternancia de fondos oscuros y claros como la landing Bitaxus, con acento rojo y titulares BELAMOR.
  */
 import { ArrowRight, ChevronDown, Search, X } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
