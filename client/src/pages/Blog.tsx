@@ -61,7 +61,6 @@ export default function Blog() {
 
   const selectGlobalCategory = (category: string) => {
     setActiveCategory(category);
-    window.setTimeout(() => document.querySelector(".blog-latest")?.scrollIntoView({ behavior: "smooth", block: "start" }), 40);
   };
 
   useEffect(() => {
@@ -131,7 +130,7 @@ export default function Blog() {
             <div className="blog-global-categories" aria-label="Explorar artículos por categoría">
               {categories.filter((category) => category !== "Todos").map((category) => {
                 const count = articles.filter((article) => article.category === category).length;
-                return <button className="blog-global-category-card" type="button" key={category} onClick={() => selectGlobalCategory(category)}><span className="blog-global-category-index">{String(count).padStart(2, "0")}</span><div><span className="blog-global-category-label">{category}</span><strong>{globalCategoryCopy[category] || "Ideas para entender mejor tu negocio."}</strong><small>{count} {count === 1 ? "artículo" : "artículos"}</small></div><ArrowRight /></button>;
+                return <button className={`blog-global-category-card ${activeCategory === category ? "active" : ""}`} type="button" key={category} onClick={() => selectGlobalCategory(category)} aria-pressed={activeCategory === category}><span className="blog-global-category-index">{String(count).padStart(2, "0")}</span><div><span className="blog-global-category-label">{category}</span><strong>{globalCategoryCopy[category] || "Ideas para entender mejor tu negocio."}</strong><small>{count} {count === 1 ? "artículo" : "artículos"}</small></div><ArrowRight /></button>;
               })}
             </div>
           </div>
