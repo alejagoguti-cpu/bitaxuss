@@ -19,10 +19,8 @@ export default function Blog() {
   const [email, setEmail] = useState("");
   const [newsletterMessage, setNewsletterMessage] = useState("");
   const latestCarouselRef = useRef<HTMLDivElement>(null);
-
-  const scrollLatest = (direction: number) => {
-    latestCarouselRef.current?.scrollBy({ left: direction * Math.max(300, latestCarouselRef.current.clientWidth * 0.72), behavior: "smooth" });
-  };
+  const [latestPage, setLatestPage] = useState(0);
+  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
 
   useEffect(() => {
     document.title = "Blog Bitaxus | Ideas para entender mejor tu negocio";
@@ -38,6 +36,34 @@ export default function Blog() {
       return categoryMatches && searchMatches;
     });
   }, [activeCategory, query]);
+
+  const latestPageSize = 3;
+  const latestPageCount = Math.max(1, Math.ceil(visibleArticles.length / latestPageSize));
+
+  const goToLatestPage = (page: number) => {
+    const container = latestCarouselRef.current;
+    const firstSlide = container?.querySelector<HTMLElement>(".blog-card-slide");
+    if (!container || !firstSlide) return;
+    const gap = Number.parseFloat(getComputedStyle(container).columnGap || getComputedStyle(container).gap || "24") || 24;
+    const nextPage = Math.max(0, Math.min(page, latestPageCount - 1));
+    setLatestPage(nextPage);
+    container.scrollTo({ left: nextPage * latestPageSize * (firstSlide.offsetWidth + gap), behavior: "smooth" });
+  };
+
+  const scrollLatest = (direction: number) => goToLatestPage(latestPage + direction);
+
+  useEffect(() => {
+    setLatestPage(0);
+    latestCarouselRef.current?.scrollTo({ left: 0, behavior: "auto" });
+  }, [activeCategory, query]);
+
+  useEffect(() => {
+    if (isCarouselPaused || latestPageCount <= 1) return;
+    const timer = window.setInterval(() => {
+      goToLatestPage((latestPage + 1) % latestPageCount);
+    }, 5200);
+    return () => window.clearInterval(timer);
+  }, [isCarouselPaused, latestPage, latestPageCount]);
 
   const submitNewsletter = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -69,7 +95,7 @@ export default function Blog() {
       <section className="blog-section blog-latest">
         <div className="blog-shell">
           <div className="blog-latest-heading"><div className="blog-section-head left"><p className="blog-eyebrow muted">Lo último</p><h2>Lecturas para tener más claridad.</h2></div><div className="blog-carousel-controls" aria-label="Navegar por artículos"><button type="button" onClick={() => scrollLatest(-1)} aria-label="Artículos anteriores"><ArrowLeft /></button><button type="button" onClick={() => scrollLatest(1)} aria-label="Siguientes artículos"><ArrowRight /></button></div></div>
-          {visibleArticles.length ? <div className="blog-card-carousel" ref={latestCarouselRef} role="list">{visibleArticles.map((article) => <div className="blog-card-slide" role="listitem" key={article.id}><ArticleCard article={article} variant="latest" href={`${blogPath}/article/${article.id}`} /></div>)}</div> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
+          {visibleArticles.length ? <><div className="blog-card-carousel" ref={latestCarouselRef} role="list" onMouseEnter={() => setIsCarouselPaused(true)} onMouseLeave={() => setIsCarouselPaused(false)} onFocusCapture={() => setIsCarouselPaused(true)} onBlurCapture={() => setIsCarouselPaused(false)}>{visibleArticles.map((article) => <div className="blog-card-slide" role="listitem" key={article.id}><ArticleCard article={article} variant="latest" href={`${blogPath}/article/${article.id}`} /></div>)}</div><div className="blog-carousel-dots" role="tablist" aria-label="Páginas del carrusel">{Array.from({ length: latestPageCount }, (_, index) => <button key={index} type="button" role="tab" aria-selected={latestPage === index} aria-label={`Ir a la página ${index + 1}`} className={latestPage === index ? "active" : ""} onClick={() => goToLatestPage(index)} />)}</div></> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
         </div>
       </section>
 
