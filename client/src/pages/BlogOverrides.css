@@ -614,3 +614,44 @@
   .article-page .blog-reader-prose > .blog-reader-author,
   .article-page .blog-reader-prose > .blog-reader-closing { animation: none; }
 }
+
+
+/* Recursos visuales Bitaxus: contraste oscuro, rojo editorial y textura de operación. */
+.article-page .reader-reference-frame { overflow: hidden; padding: 36px 36px 31px; border: 1px solid rgba(255,255,255,.16); border-radius: 16px; color: #fff; background: #0a0a0a; box-shadow: 0 18px 42px rgba(0,0,0,.14); }
+.article-page .reader-reference-frame::before { position: absolute; inset: 0; content: ""; background-image: radial-gradient(rgba(255,255,255,.15) .8px, transparent .8px); background-size: 13px 13px; opacity: .12; pointer-events: none; }
+.article-page .reader-reference-frame::after { right: -90px; bottom: -125px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(186,11,13,.42), transparent 68%); filter: blur(20px); }
+.article-page .reader-reference-frame .reader-reference-eyebrow { margin-bottom: 16px; color: #ff6b60; font-size: 10px; letter-spacing: .2em; }
+.article-page .reader-reference-frame h3 { max-width: 650px; margin-bottom: 27px; color: #fff; font-size: clamp(28px, 3.6vw, 43px); letter-spacing: -.06em; }
+.article-page .reader-reference-columns { gap: 10px; }
+.article-page .reader-reference-column { min-height: 151px; padding: 23px 21px 20px; border: 1px solid rgba(255,255,255,.14); border-radius: 11px; background: rgba(255,255,255,.045); }
+.article-page .reader-reference-column.accent { border-color: rgba(239,68,55,.56); background: linear-gradient(145deg, rgba(186,11,13,.3), rgba(255,255,255,.04)); }
+.article-page .reader-reference-column > span { margin-bottom: 15px; color: rgba(255,255,255,.48); font-size: 10px; letter-spacing: .17em; }
+.article-page .reader-reference-column.accent > span { color: #ff8b80; }
+.article-page .reader-reference-column strong { margin-bottom: 10px; color: #fff; font-size: clamp(21px, 2.2vw, 28px); }
+.article-page .reader-reference-column p { color: rgba(255,255,255,.63); font-size: 13px; line-height: 1.48; }
+.article-page .reader-reference-conclusion { margin-top: 23px; color: #ff847a; font-size: 13px; text-align: left; }
+.article-page .reader-reference-flow { gap: 9px; }
+.article-page .reader-reference-flow > div { min-height: 82px; padding: 15px 16px; border: 1px solid rgba(255,255,255,.14); border-radius: 11px; background: rgba(255,255,255,.045); }
+.article-page .reader-reference-flow > div:nth-child(2) { border-color: rgba(239,68,55,.56); background: rgba(186,11,13,.28); }
+.article-page .reader-reference-flow span, .article-page .reader-reference-timeline span { margin-bottom: 15px; color: #ff766c; }
+.article-page .reader-reference-flow strong { color: #fff; font-size: 21px; }
+.article-page .reader-reference-flow i { color: #ff6b60; }
+.article-page .reader-reference-timeline::before { background: rgba(239,68,55,.55); }
+.article-page .reader-reference-timeline span { border-color: #e44b40; color: #fff; background: #0a0a0a; }
+.article-page .reader-reference-timeline p { color: rgba(255,255,255,.68); }
+.article-page .reader-reference-checklist { gap: 9px; }
+.article-page .reader-reference-checklist > div { min-height: 72px; padding: 15px 16px; border: 1px solid rgba(255,255,255,.13); border-bottom-color: rgba(239,68,55,.52); background: rgba(255,255,255,.045); }
+.article-page .reader-reference-checklist span { color: rgba(255,255,255,.42); }
+.article-page .reader-reference-checklist strong { color: #fff; font-size: 18px; }
+@media (max-width: 620px) {
+  .article-page .reader-reference-frame { padding: 25px 17px 22px; border-radius: 14px; }
+  .article-page .reader-reference-frame h3 { margin-bottom: 22px; font-size: 29px; line-height: 1; }
+  .article-page .reader-reference-column { padding: 20px 17px 18px; border-radius: 9px; }
+  .article-page .reader-reference-column strong { font-size: 24px; }
+  .article-page .reader-reference-column p { font-size: 13px; }
+  .article-page .reader-reference-flow > div { min-height: 65px; border-radius: 9px; }
+  .article-page .reader-reference-flow strong { font-size: 21px; }
+  .article-page .reader-reference-checklist > div { min-height: 66px; border-radius: 0; }
+  .article-page .reader-reference-checklist strong { font-size: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .article-page .reader-reference-frame { transition: none; } }
