@@ -12,6 +12,7 @@ function Router() {
   return (
     <Switch>
       <Route path={`${appBasePath}/blog`} component={Blog} />
+      <Route path={`${appBasePath}/blog/`} component={Blog} />
       <Route path={appBasePath || "/"} component={Home} />
       {appBasePath && <Route path={`${appBasePath}/`} component={Home} />}
       <Route path={"/404"} component={NotFound} />
