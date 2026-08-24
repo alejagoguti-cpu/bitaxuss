@@ -1,42 +1,27 @@
-/* Ajustes finales: las portadas ya contienen el copy editorial; se evita duplicarlo sobre la imagen. */
+/* Ajustes editoriales: las portadas ya contienen copy integrado. */
 .blog-hero h1 { max-width: 630px; font-size: clamp(34px, 4vw, 53px); line-height: 1.1; }
 .blog-card-shade { background: linear-gradient(0deg, rgba(0,0,0,.62) 3%, rgba(0,0,0,.02) 76%); }
 .blog-article-copy, .blog-article-card.featured .blog-article-copy { right: 22px; bottom: 22px; left: 22px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
 .blog-article-copy .blog-eyebrow { margin: 0; padding: 7px 10px; border: 1px solid rgba(255,255,255,.32); border-radius: 999px; color: #fff; background: rgba(0,0,0,.42); backdrop-filter: blur(4px); }
 .blog-article-copy button { margin: 0; }
-@media (max-width: 620px) { .blog-hero h1 { font-size: 38px; }.blog-article-copy, .blog-article-card.featured .blog-article-copy { right: 18px; bottom: 18px; left: 18px; } }
 
-/* Cabecera: réplica del inicio Bitaxus, con cápsula central y bordes rojos translúcidos. */
-.blog-nav { min-height: 138px; border-bottom: 0; background: #000; backdrop-filter: none; }
-.blog-nav-inner { width: min(1450px, calc(100% - 64px)); min-height: 138px; gap: 34px; }
-.blog-logo { flex: 0 0 272px; }.blog-logo img { width: 196px; }
-.blog-center-nav { display: flex !important; flex: 1; align-items: stretch; justify-content: center; min-width: 0; max-width: 680px; min-height: 58px; overflow: hidden; border-radius: 18px; background: linear-gradient(98deg, rgba(32,32,32,.94), rgba(20,20,20,.96)); box-shadow: inset 0 1px 0 rgba(255,255,255,.03); }
-.blog-center-nav a { display: inline-flex; flex: 1; min-width: 0; align-items: center; justify-content: center; gap: 9px; padding: 0 16px; color: rgba(255,255,255,.86); font-size: 15px; font-weight: 700; white-space: nowrap; }
-.blog-center-nav a svg { width: 15px; height: 15px; stroke-width: 2; opacity: .8; }.blog-center-nav a:hover { color: #fff; background: rgba(255,255,255,.04); }.blog-center-nav a.home { border: 1px solid rgba(255,255,255,.78); border-radius: 17px; background: linear-gradient(113deg, rgba(185,28,24,.82), rgba(37,24,24,.84) 71%); }.blog-center-nav a.active { color: #fff; background: rgba(255,255,255,.06); }
-.blog-nav-actions { flex: 0 0 272px; justify-content: flex-end; gap: 14px; }.blog-nav-actions .blog-login { display: inline-flex; align-items: center; min-height: 58px; padding: 0 24px; border-radius: 17px; color: #fff; background: linear-gradient(104deg, rgba(86,27,27,.82), rgba(58,13,15,.76)); font-size: 15px; font-weight: 800; }.blog-nav-actions .blog-login:hover { color: #fff; background: linear-gradient(104deg, rgba(110,32,32,.9), rgba(76,17,20,.84)); }.blog-outline-cta { min-height: 58px; padding: 0 22px; border-color: rgba(255,255,255,.78); border-radius: 17px; background: linear-gradient(110deg, rgba(165,29,25,.72), rgba(32,23,23,.7)); font-size: 15px; font-weight: 800; }
-@media (max-width: 1050px) { .blog-nav { min-height: 92px; }.blog-nav-inner { min-height: 92px; width: min(100% - 40px, 920px); }.blog-logo, .blog-nav-actions { flex-basis: auto; }.blog-logo img { width: 144px; }.blog-center-nav { min-height: 50px; }.blog-center-nav a { padding: 0 11px; font-size: 13px; }.blog-nav-actions .blog-login, .blog-outline-cta { min-height: 50px; padding: 0 15px; font-size: 13px; } }
-@media (max-width: 780px) { .blog-nav { min-height: 70px; }.blog-nav-inner { min-height: 70px; width: min(100% - 32px, 620px); }.blog-center-nav { display: none !important; }.blog-logo img { width: 112px; }.blog-nav-actions { margin-left: auto; }.blog-nav-actions .blog-login { display: none; }.blog-outline-cta { min-height: 42px; padding: 0 13px; border-radius: 14px; font-size: 12px; } }
+/* Cabecera Bitaxus: una única composición proporcional para impedir solapamientos. */
+.blog-nav { border-bottom: 0; background: radial-gradient(ellipse 42% 145% at 77% 52%, rgba(94,16,18,.34), transparent 67%), #000; backdrop-filter: none; }
+.blog-nav-inner { display: flex; width: min(90%, 1700px); margin: 0 auto; align-items: center; justify-content: flex-start; gap: 0; }
+.blog-logo img { display: block; height: auto; }
+.blog-center-nav { display: flex; align-items: stretch; overflow: hidden; border-radius: 18px; background: linear-gradient(98deg, #212121, #171717); box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
+.blog-center-nav a { display: inline-flex; flex: 1; min-width: 0; align-items: center; justify-content: center; gap: 9px; color: rgba(255,255,255,.9); font-weight: 700; text-align: center; white-space: nowrap; }.blog-center-nav a svg { flex: none; opacity: .82; }.blog-center-nav a.home { border: 1px solid rgba(255,255,255,.8); border-radius: 17px; background: linear-gradient(112deg, #ae2420, #32201f 76%); }.blog-center-nav a.active { background: rgba(255,255,255,.06); }.blog-center-nav a:hover { color: #fff; background-color: rgba(255,255,255,.06); }
+.blog-nav-actions { display: flex; align-items: center; }.blog-nav-actions .blog-login, .blog-outline-cta { display: inline-flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; white-space: nowrap; }.blog-nav-actions .blog-login { border-radius: 17px; background: linear-gradient(104deg, #6a201f, #3c1114); }.blog-outline-cta { gap: 8px; border: 1px solid rgba(255,255,255,.8); border-radius: 17px; background: linear-gradient(110deg, #9f2723, #211b1b); }
 
-/* En escritorio, la franja conserva la composición exportada del inicio al píxel. Los enlaces permanecen accesibles sobre la misma geometría. */
 @media (min-width: 880px) {
-  .blog-nav { height: 171px; min-height: 171px; background: #000 url('../2166-3254.webp') top center / 100% auto no-repeat; }
-  .blog-nav-inner { width: 100%; height: 171px; min-height: 171px; margin: 0; }
-  .blog-nav .blog-logo, .blog-nav .blog-center-nav, .blog-nav .blog-nav-actions { position: absolute; opacity: 0; }
-  .blog-nav .blog-logo { top: 30px; left: 7%; width: 15%; height: 76px; }
-  .blog-nav .blog-center-nav { top: 48px; left: 26%; width: 38%; height: 64px; max-width: none; }
-  .blog-nav .blog-nav-actions { top: 48px; right: 7%; width: 23%; height: 64px; }
+  .blog-nav, .blog-nav-inner { height: 171px; min-height: 171px; }
+  .blog-logo { display: flex; flex: 0 0 12.16vw; align-items: center; }.blog-logo img { width: 12.16vw; max-width: 230px; min-width: 160px; }
+  .blog-center-nav { flex: 0 0 35.8vw; height: 58px; margin-left: 6.56vw; transform: translateY(-3px); }.blog-center-nav a { height: 56px; padding: 0 12px; font-size: 15px; }.blog-center-nav a svg { width: 15px; height: 15px; }
+  .blog-nav-actions { flex: 0 0 15.4vw; height: 58px; margin-left: 2.85vw; gap: 4%; transform: translateY(-3px); }.blog-nav-actions .blog-login { flex: 1 1 48%; height: 58px; padding: 0 12px; font-size: 15px; }.blog-outline-cta { flex: 1 1 52%; height: 58px; padding: 0 12px; font-size: 15px; }.blog-outline-cta svg { width: 16px; }
 }
 
-/* Geometría final de la franja de navegación: evita que la captura de hero invada la cabecera. */
-@media (min-width: 880px) {
-  .blog-nav { height: 171px; min-height: 171px; background: radial-gradient(ellipse 40% 130% at 76% 56%, rgba(95,15,17,.32), transparent 66%), #000; }
-  .blog-nav-inner { position: relative; display: flex; width: min(1700px, calc(100% - 64px)); height: 171px; min-height: 171px; margin: 0 auto; align-items: center; gap: 0; }
-  .blog-nav .blog-logo, .blog-nav .blog-center-nav, .blog-nav .blog-nav-actions { position: static; opacity: 1; height: auto; }
-  .blog-nav .blog-logo { display: flex; flex: 0 0 clamp(210px, 18.72vw, 354px); align-items: center; }
-  .blog-nav .blog-logo img { width: clamp(160px, 12.1vw, 229px); height: auto; }
-  .blog-nav .blog-center-nav { display: flex !important; flex: 0 1 677px; width: auto; max-width: none; min-height: 58px; transform: translateY(-3px); }
-  .blog-nav .blog-center-nav a { min-height: 56px; padding: 0 16px; }
-  .blog-nav .blog-nav-actions { display: flex; flex: 0 0 clamp(218px, 15.1vw, 286px); height: 58px; margin-left: clamp(20px, 2.65vw, 50px); justify-content: flex-start; gap: 16px; transform: translateY(-3px); }
-  .blog-nav .blog-nav-actions .blog-login { min-width: 133px; min-height: 58px; padding: 0 18px; white-space: nowrap; }
-  .blog-nav .blog-outline-cta { min-width: 137px; min-height: 58px; padding: 0 18px; white-space: nowrap; }
+@media (max-width: 879px) {
+  .blog-nav, .blog-nav-inner { min-height: 78px; }.blog-nav-inner { width: min(100% - 32px, 780px); gap: 16px; }.blog-logo { flex: 0 0 auto; }.blog-logo img { width: 125px; }.blog-center-nav { display: none; }.blog-nav-actions { margin-left: auto; gap: 10px; }.blog-nav-actions .blog-login { min-height: 43px; padding: 0 14px; font-size: 12px; }.blog-outline-cta { min-height: 43px; padding: 0 13px; font-size: 12px; }
 }
+
+@media (max-width: 520px) { .blog-nav-actions .blog-login { display: none; }.blog-hero h1 { font-size: 38px; }.blog-article-copy, .blog-article-card.featured .blog-article-copy { right: 18px; bottom: 18px; left: 18px; } }
