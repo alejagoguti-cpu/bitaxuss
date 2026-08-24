@@ -3,7 +3,7 @@
  * Fondo negro editorial, rojo #ba0b0d como firma de acción y composición tecnológica asimétrica.
  */
 import { ArrowRight, ChevronDown, Menu, Send, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const navLinks = [
   { label: "Inicio", href: "#inicio" },
@@ -49,33 +49,6 @@ export default function Home() {
   const [agentMessage, setAgentMessage] = useState("Selecciona una acción o escribe un mensaje para continuar.");
   const [exchangeAmount, setExchangeAmount] = useState("1.000");
   const [exchangeNotice, setExchangeNotice] = useState("");
-  useEffect(() => {
-    document.querySelectorAll<HTMLImageElement>('img[src^="/"]').forEach((image) => {
-      image.src = getPageAsset(image.getAttribute("src") || "");
-    });
-
-    const setBackground = (selector: string, asset: string) => {
-      document.querySelectorAll<HTMLElement>(selector).forEach((element) => {
-        element.style.backgroundImage = `url('${getPageAsset(asset)}')`;
-      });
-    };
-
-    setBackground(".agent-section", "/2189-770.webp");
-    setBackground(".global-section", "/2190-827.webp");
-    setBackground(".audience-card.company", "/2189-794.webp");
-    setBackground(".audience-card.people", "/2189-775.webp");
-    setBackground(".technology-section", "/2190-825.webp");
-    setBackground(".contact-section", "/2288-19.webp");
-    setBackground(".contact-panel", "/2166-4425.webp");
-    setBackground(".footer", "/2288-19.webp");
-
-    const fontStyle = document.createElement("style");
-    fontStyle.textContent = [300, 400, 500, 600, 700]
-      .map((weight) => `@font-face{font-family:'Belamor';src:url('${getPageAsset(`/fonts/Belamor-${weight === 300 ? "Light" : weight === 400 ? "Regular" : weight === 500 ? "Medium" : weight === 600 ? "SemiBold" : "Bold"}.otf`)}') format('opentype');font-weight:${weight};font-style:normal;font-display:swap;}`)
-      .join("");
-    document.head.appendChild(fontStyle);
-    return () => fontStyle.remove();
-  }, []);
   const modules: Array<[string, string, string[]]> = [
     ["Recaudos", "Canales habilitados para recibir y relacionar los pagos de tus clientes.", ["QR Dinámico", "Transferencias", "Tarjetas", "Conciliación"]],
     ["Pagos y dispersiones", "Organiza pagos individuales o múltiples desde una sola experiencia.", ["Pagos programados", "Dispersión masiva", "Beneficiarios", "Comprobantes"]],
@@ -98,7 +71,8 @@ export default function Home() {
   return (
     <main className="bitaxus-page" data-layer="Section 14" data-node-id="2166-4456">
       <section className="hero" id="inicio" aria-labelledby="hero-title" data-node-id="2166-3254">
-        <img className="hero-render" src="/2166-3254.svg" alt="Bitaxus: vendiste como nunca, ¿y la plata?" />
+        <h1 id="hero-title" className="sr-only">Bitaxus: cobra, paga y entiende tu dinero</h1>
+        <img className="hero-render" src={getPageAsset("/2166-3254.webp")} width="2560" height="1484" fetchPriority="high" decoding="async" alt="Bitaxus: vendiste como nunca, ¿y la plata?" />
         <div className="hero-hotspots" aria-label="Navegación principal del hero">
           <ScrollLink href="#inicio" className="hero-hotspot home">Inicio</ScrollLink>
           <ScrollLink href="#empresas" className="hero-hotspot empresas">Empresas</ScrollLink>
@@ -113,7 +87,7 @@ export default function Home() {
 
         <div className="mobile-hero">
           <header className="mobile-header">
-            <img src="/2166-3795.webp" alt="Bitaxus" />
+            <img src={getPageAsset("/2166-3795.webp")} width="105" height="30" decoding="async" alt="Bitaxus" />
             <button type="button" className="menu-button" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -121,7 +95,7 @@ export default function Home() {
           {menuOpen && <nav className="mobile-nav">{navLinks.map(({ label, href }) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}</nav>}
           <div className="mobile-hero-content">
             <p>Cobrar debería ser tan fácil como enviar un mensaje.</p>
-            <h1 id="hero-title">Vendiste<br />como nunca<br /><span>¿Y la plata?</span></h1>
+            <p className="mobile-hero-title">Vendiste<br />como nunca<br /><span>¿Y la plata?</span></p>
             <p className="mobile-hero-copy">Bitaxus reúne tus cobros, pagos y movimientos para que sepas cuánto entra, cuánto sale y cuánto realmente te queda.</p>
             <div className="button-row"><ScrollLink href="#contacto" className="button primary">Hablemos <ArrowRight /></ScrollLink><ScrollLink href="#agente" className="button ghost">Ver cómo funciona</ScrollLink></div>
           </div>
@@ -136,7 +110,7 @@ export default function Home() {
             <p>Usa WhatsApp y deja que nuestro Agente te guíe paso a paso para programar recaudos, organizar pagos y consultar tus operaciones.</p>
           </div>
           <article className="chat-demo" aria-label="Demostración de conversación con el agente Bitaxus">
-            <div className="chat-head"><img src="/2209-966.webp" alt="" /><div><strong>Bitaxus</strong><small>en línea</small></div></div>
+            <div className="chat-head"><img src={getPageAsset("/2209-966.webp")} width="40" height="40" loading="lazy" decoding="async" alt="" /><div><strong>Bitaxus</strong><small>en línea</small></div></div>
             <div className="chat-body">
               <p className="bubble outgoing">Quiero programar un recaudo.<small>10:44 AM</small></p>
               <p className="bubble incoming"><b>Bitaxus</b>¡Claro! Vamos paso a paso. ¿Cuánto vas a cobrar y cuál es el concepto?<small>10:45 AM</small></p>
@@ -151,14 +125,14 @@ export default function Home() {
         <div className="clarity-wrap content-frame">
           <p className="eyebrow center">COBRAR NO DEBERÍA SER INCÓMODO.</p>
           <h2 className="section-title">Recibe, paga y decide con más claridad.</h2>
-          <div className="operation-grid">{operations.map((operation) => <article className="operation-card" key={operation.title}><div className="icon-slab"><img src={operation.icon} alt="" /></div><h3>{operation.title}</h3><p>{operation.text}</p></article>)}</div>
+          <div className="operation-grid">{operations.map((operation) => <article className="operation-card" key={operation.title}><div className="icon-slab"><img src={getPageAsset(operation.icon)} loading="lazy" decoding="async" alt="" /></div><h3>{operation.title}</h3><p>{operation.text}</p></article>)}</div>
         </div>
       </section>
 
       <section className="steps-section" data-node-id="2189-704">
         <div className="content-frame">
           <h2 className="section-title dark-title">Registras lo que necesitas.<br />Nuestro agente te ayuda con lo demás.</h2>
-          <div className="step-grid">{steps.map(([title, text, icon]) => <article className="step" key={title}><div className="step-icon"><img src={icon} alt="" /></div><h3>{title}</h3><p>{text}</p></article>)}</div>
+          <div className="step-grid">{steps.map(([title, text, icon]) => <article className="step" key={title}><div className="step-icon"><img src={getPageAsset(icon)} loading="lazy" decoding="async" alt="" /></div><h3>{title}</h3><p>{text}</p></article>)}</div>
         </div>
       </section>
 
@@ -190,7 +164,7 @@ export default function Home() {
 
       <section className="pioneer-section" id="pioneros" data-node-id="2175-358">
         <div className="content-frame"><p className="eyebrow center red">SER PIONERO TIENE SUS BENEFICIOS.</p><p className="pioneer-intro">Accede a condiciones especiales pensadas para quienes forman parte de esta etapa de Bitaxus.</p>
-          <div className="pioneer-grid">{pioneerBenefits.map(([title, text, icon], index) => <article className={`pioneer-card ${index === 1 ? "featured" : ""}`} key={title}><div className="pioneer-icon"><img src={icon} alt="" /></div>{index > 1 && <span className="coming">PRÓXIMAMENTE</span>}<h3>{title}</h3><p>{text}</p></article>)}</div>
+          <div className="pioneer-grid">{pioneerBenefits.map(([title, text, icon], index) => <article className={`pioneer-card ${index === 1 ? "featured" : ""}`} key={title}><div className="pioneer-icon"><img src={getPageAsset(icon)} loading="lazy" decoding="async" alt="" /></div>{index > 1 && <span className="coming">PRÓXIMAMENTE</span>}<h3>{title}</h3><p>{text}</p></article>)}</div>
           <a href="#contacto" className="button primary pioneer-button">Quiero ser Pionero</a><p className="limited"><i /> Cupos limitados para esta etapa.</p>
         </div>
       </section>
@@ -203,11 +177,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="trust-section" data-node-id="2166-4601"><div className="content-frame"><h2 className="section-title dark-title">Seguridad, trazabilidad y acompañamiento.</h2><p className="trust-intro">Bitaxus aplica procesos de validación y seguimiento para proteger la información y mantener claridad sobre cada operación.</p><div className="trust-grid"><article><img src="/2167-4623.svg" alt="" /><h3>Tus datos protegidos</h3><p>Aplicamos medidas de seguridad para proteger la información asociada a tu cuenta y tus movimientos.</p></article><article><img src="/2167-4633.svg" alt="" /><h3>Operaciones verificadas</h3><p>Cada operación pasa por procesos de validación y seguimiento de acuerdo con su naturaleza.</p></article><article><img src="/2167-4643.svg" alt="" /><h3>Acompañamiento humano</h3><p>Nuestro equipo está disponible cuando una operación requiere orientación o revisión.</p></article></div></div></section>
+      <section className="trust-section" data-node-id="2166-4601"><div className="content-frame"><h2 className="section-title dark-title">Seguridad, trazabilidad y acompañamiento.</h2><p className="trust-intro">Bitaxus aplica procesos de validación y seguimiento para proteger la información y mantener claridad sobre cada operación.</p><div className="trust-grid"><article><img src={getPageAsset("/2167-4623.svg")} loading="lazy" decoding="async" alt="" /><h3>Tus datos protegidos</h3><p>Aplicamos medidas de seguridad para proteger la información asociada a tu cuenta y tus movimientos.</p></article><article><img src={getPageAsset("/2167-4633.svg")} loading="lazy" decoding="async" alt="" /><h3>Operaciones verificadas</h3><p>Cada operación pasa por procesos de validación y seguimiento de acuerdo con su naturaleza.</p></article><article><img src={getPageAsset("/2167-4643.svg")} loading="lazy" decoding="async" alt="" /><h3>Acompañamiento humano</h3><p>Nuestro equipo está disponible cuando una operación requiere orientación o revisión.</p></article></div></div></section>
 
       <section className="contact-section" id="contacto" data-node-id="2166-4424"><div className="contact-panel"><h2>Deja de organizar tus cobros y pagos a mano.</h2><p>Programa tus cobros y pagos, recibe actualizaciones de nuestro Agente y consulta todo desde WhatsApp.</p><div className="button-row"><a href={whatsappUrl} className="button primary" target="_blank" rel="noreferrer">Hablemos</a><a href={whatsappUrl} className="button whatsapp" target="_blank" rel="noreferrer">Escríbenos por WhatsApp <ArrowRight /></a></div></div></section>
 
-      <footer className="footer" data-node-id="2166-3789"><div className="content-frame footer-top"><div className="footer-brand"><img src="/2166-3795.webp" alt="Bitaxus" /><h3>Tu operación,<br />conectada.</h3><p>Bitaxus facilita y coordina servicios de recaudo, pagos y dispersión mediante aliados, proveedores y canales habilitados.</p><div className="social-row"><a href="#contacto" aria-label="Red social Bitaxus"><img src="/2166-3804.svg" alt="" /></a><a href="#contacto" aria-label="Red social Bitaxus"><img src="/2166-3807.svg" alt="" /></a><a href="#contacto" aria-label="Red social Bitaxus"><img src="/2166-3810.svg" alt="" /></a></div></div>
+      <footer className="footer" data-node-id="2166-3789"><div className="content-frame footer-top"><div className="footer-brand"><img src={getPageAsset("/2166-3795.webp")} width="105" height="30" loading="lazy" decoding="async" alt="Bitaxus" /><h3>Tu operación,<br />conectada.</h3><p>Bitaxus facilita y coordina servicios de recaudo, pagos y dispersión mediante aliados, proveedores y canales habilitados.</p><div className="social-row"><a href="#contacto" aria-label="Red social Bitaxus"><img src={getPageAsset("/2166-3804.svg")} loading="lazy" decoding="async" alt="" /></a><a href="#contacto" aria-label="Red social Bitaxus"><img src={getPageAsset("/2166-3807.svg")} loading="lazy" decoding="async" alt="" /></a><a href="#contacto" aria-label="Red social Bitaxus"><img src={getPageAsset("/2166-3810.svg")} loading="lazy" decoding="async" alt="" /></a></div></div>
         <FooterColumn title="Explora" links={["Inicio", "Empresas", "Personas", "Bitaxus Global", "Pioneros", "Blog", "Ayuda"]} />
         <FooterColumn title="Producto" links={["Recaudos", "Pagos y dispersiones", "Integraciones API", "Orquestación", "Agente Bitaxus", "Iniciar sesión"]} />
         <FooterColumn title="Legal" links={["Términos y condiciones de uso", "Tratamiento y protección de datos", "Privacidad y uso de cookies", "Términos del programa Pioneros", "Peticiones, consultas y reclamos"]} />

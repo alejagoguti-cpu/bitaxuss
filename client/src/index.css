@@ -1,13 +1,12 @@
 /* Estilo de referencia: reproducción fiel del Figma Bitaxus. Negro editorial, rojo de firma y paneles tecnológicos. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Michroma&family=Montserrat:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@font-face { font-family: 'Belamor'; src: url('/fonts/Belamor-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Belamor'; src: url('/fonts/Belamor-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Belamor'; src: url('/fonts/Belamor-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Belamor'; src: url('/fonts/Belamor-SemiBold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: 'Belamor'; src: url('/fonts/Belamor-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Belamor'; src: url('../fonts/Belamor-Light.otf') format('opentype'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Belamor'; src: url('../fonts/Belamor-Regular.otf') format('opentype'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Belamor'; src: url('../fonts/Belamor-Medium.otf') format('opentype'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Belamor'; src: url('../fonts/Belamor-SemiBold.otf') format('opentype'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Belamor'; src: url('../fonts/Belamor-Bold.otf') format('opentype'); font-weight: 700; font-style: normal; font-display: swap; }
 
 @custom-variant dark (&:is(.dark *));
 
@@ -20,11 +19,24 @@
 
 :root { --background: #000; --foreground: #fbf9f8; --border: rgba(255,255,255,.12); --ring: #ba0b0d; }
 * { box-sizing: border-box; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 html { scroll-behavior: smooth; background: #000; }
 body { margin: 0; min-width: 320px; background: #000; color: #fbf9f8; font-family: Inter, sans-serif; }
+@media (max-width: 880px) {
+  .mobile-hero-title { margin: 0; font: 700 clamp(32px, 10vw, 53px)/1.3 Belamor, Montserrat, sans-serif; letter-spacing: -.09em; text-transform: uppercase; }
+  .mobile-hero-title span { display: inline-block; margin-top: 5px; padding: 3px 8px; border: 1px solid rgba(255,255,255,.8); border-radius: 10px; background: linear-gradient(90deg, #8e1713, #271211); }
+}
 .chat-input input { flex: 1; min-width: 0; padding: 11px 16px; border: 0; border-radius: 999px; color: #1b1c1c; outline: 0; background: #fff; }
 .chat-feedback { min-height: 38px; margin: 0; padding: 10px 16px; color: #34635d; background: #eff8f5; font-size: 11px; line-height: 1.4; }
 .exchange-notice { margin: 14px 0 0; color: rgba(255,255,255,.78); font-size: 12px; line-height: 1.5; }
+.agent-section { background-image: url('../2189-770.webp'); }
+.global-section { background-image: url('../2190-827.webp'); }
+.audience-card.company { background-image: url('../2189-794.webp'); }
+.audience-card.people { background-image: url('../2189-775.webp'); }
+.technology-section { background-image: url('../2190-825.webp'); }
+.contact-section { background-image: url('../2288-19.webp'); }
+.contact-panel { background-image: url('../2166-4425.webp'); }
+.footer { background-image: url('../2288-19.webp'); }
 button, input { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 a { color: inherit; text-decoration: none; }
