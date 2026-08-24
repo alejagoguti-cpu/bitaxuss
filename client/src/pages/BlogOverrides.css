@@ -677,3 +677,24 @@
   .article-page .reader-reference-timeline > div > span:not(.reader-visual-icon) { margin: 0; }
   .article-page .reader-reference-checklist > div > .reader-visual-icon { width: 42px; height: 42px; margin-bottom: 11px; }
 }
+
+
+/* Secuencia mixta: piezas claras y oscuras para un ritmo visual más cercano a Bitaxus. */
+.article-page .reader-reference-frame.reader-reference-light { color: #171515; border-color: #e8e5e3; background: #fff; box-shadow: 0 16px 34px rgba(35,25,22,.07); }
+.article-page .reader-reference-frame.reader-reference-light::before { background-image: radial-gradient(#ba0b0d .7px, transparent .7px); opacity: .055; }
+.article-page .reader-reference-frame.reader-reference-light::after { background: radial-gradient(circle, rgba(186,11,13,.16), transparent 68%); }
+.article-page .reader-reference-frame.reader-reference-light .reader-reference-eyebrow { color: #a90005; }
+.article-page .reader-reference-frame.reader-reference-light h3 { color: #171515; }
+.article-page .reader-reference-light .reader-reference-column { border-color: #e7e2df; background: #fff; }
+.article-page .reader-reference-light .reader-reference-column.accent { border-color: rgba(186,11,13,.28); background: #fff7f6; }
+.article-page .reader-reference-light .reader-reference-column > span:not(.reader-visual-icon) { color: #8f8784; }
+.article-page .reader-reference-light .reader-reference-column.accent > span:not(.reader-visual-icon) { color: #a90005; }
+.article-page .reader-reference-light .reader-reference-column strong { color: #171515; }
+.article-page .reader-reference-light .reader-reference-column p { color: #6f6865; }
+.article-page .reader-reference-light .reader-reference-conclusion { color: #a90005; }
+.article-page .reader-reference-light .reader-reference-timeline::before { background: #e1b8b4; }
+.article-page .reader-reference-light .reader-reference-timeline span:not(.reader-visual-icon) { color: #a90005; background: #fff; }
+.article-page .reader-reference-light .reader-reference-timeline p { color: #68615e; }
+@media (max-width: 620px) {
+  .article-page .reader-reference-frame.reader-reference-light { box-shadow: 0 12px 26px rgba(35,25,22,.055); }
+}
