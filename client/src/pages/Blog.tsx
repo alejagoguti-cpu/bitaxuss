@@ -74,7 +74,7 @@ export default function Blog() {
 
   return (
     <main className="blog-page">
-      <header className="blog-nav">
+      <header className="blog-nav figma-node-2487">
         <div className="blog-shell blog-nav-inner">
           <a className="blog-logo" href={asset("/")} aria-label="Bitaxus, ir al inicio"><img src={asset("/2166-3795.webp")} width="196" height="56" alt="Bitaxus" /></a>
           <nav className="blog-center-nav" aria-label="Navegación principal"><a className="home" href={asset("/")}>Inicio <ChevronDown /></a><a href={`${asset("/")}#empresas`}>Empresas <ChevronDown /></a><a href={`${asset("/")}#personas`}>Personas <ChevronDown /></a><a className="active" href={blogPath}>Blog <ChevronDown /></a><a href={`${asset("/")}#contacto`}>Ayuda <ChevronDown /></a></nav>
