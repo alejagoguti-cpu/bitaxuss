@@ -296,3 +296,11 @@
 
 /* Barra BITAXUS · LECTURA en blanco, coherente con el hero. */
 .article-page .blog-reader-bar { color: #2a2423; border-bottom-color: #e6e1df; background: #fff; }.article-page .blog-reader-bar::after { background: linear-gradient(90deg, #ba0b0d, rgba(239,68,55,.34), transparent); }.article-page .blog-reader-back { color: #5f5957; }.article-page .blog-reader-back:hover { color: #ba0b0d; }.article-page .blog-reader-back span { color: #ba0b0d; }.article-page .blog-reader-mark { color: #1b1817; }.article-page .blog-reader-mark i { color: #ba0b0d; }
+
+
+/* Refinamiento del titular: menos volumen, más lectura editorial. */
+.article-page .blog-reader-header { padding-top: 76px; padding-bottom: 58px; }
+.article-page .blog-reader-header h1 { max-width: 1120px; font-size: clamp(36px, 3.7vw, 58px); line-height: 1.04; letter-spacing: -.055em; text-transform: none; text-wrap: balance; }
+.article-page .blog-reader-dek { max-width: 650px; margin-top: 24px; font-size: 16px; line-height: 1.55; }
+.article-page .blog-reader-meta { margin-top: 26px; }
+@media (max-width: 620px) { .article-page .blog-reader-header { padding: 52px 22px 42px; }.article-page .blog-reader-header h1 { font-size: 37px; line-height: 1.02; } }
