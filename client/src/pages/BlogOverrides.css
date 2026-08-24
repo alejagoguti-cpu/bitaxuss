@@ -383,3 +383,20 @@
 @media (min-width: 941px) and (max-width: 1100px) { .blog-global .blog-shell { width: min(980px, calc(100% - 40px)); }.blog-global-layout { gap: 22px; }.blog-global-layout > .blog-article-card.wide { height: 350px; min-height: 350px; }.blog-global-list { gap: 0 18px; }.blog-list-article strong { font-size: 13px; } }
 @media (max-width: 940px) { .blog-global .blog-shell { width: min(720px, calc(100% - 40px)); }.blog-global-layout { grid-template-columns: 1fr; gap: 26px; }.blog-global-layout > .blog-article-card.wide { height: 340px; min-height: 340px; }.blog-global-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 22px; }.blog-list-article strong { font-size: 14px; } }
 @media (max-width: 620px) { .blog-global { padding: 56px 0 62px; }.blog-global .blog-shell { width: min(100% - 32px, 520px); }.blog-global .blog-section-head.left { margin-bottom: 25px; }.blog-global .blog-section-head h2 { font-size: 34px; }.blog-global-layout { gap: 22px; }.blog-global-layout > .blog-article-card.wide { height: 286px; min-height: 286px; border-radius: 17px; }.blog-global-list { grid-template-columns: 1fr; gap: 0; }.blog-list-article { min-height: 63px; padding: 11px 0; }.blog-list-article strong { font-size: 14px; } }
+
+
+/* Hub Global escalable: una tarjeta por categoría, nunca una lista infinita de artículos. */
+.blog-global-categories { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; gap: 12px; }
+.blog-global-category-card { position: relative; display: grid; grid-template-columns: 34px minmax(0, 1fr) 18px; gap: 12px; align-items: center; min-height: 112px; padding: 18px 16px; overflow: hidden; border: 1px solid rgba(255,255,255,.14); border-radius: 16px; color: #fff; background: linear-gradient(135deg, rgba(255,255,255,.085), rgba(255,255,255,.025)); text-align: left; transition: transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease; }
+.blog-global-category-card::before { position: absolute; top: -46px; right: -42px; width: 120px; height: 120px; content: ""; border-radius: 50%; background: rgba(239,68,55,.14); filter: blur(20px); pointer-events: none; }
+.blog-global-category-card:hover { border-color: rgba(239,68,55,.66); background: linear-gradient(135deg, rgba(186,11,13,.2), rgba(255,255,255,.045)); box-shadow: 0 14px 30px rgba(0,0,0,.24), 0 0 20px rgba(186,11,13,.12); transform: translateY(-3px); }
+.blog-global-category-index { display: grid; width: 32px; height: 32px; place-items: center; border: 1px solid rgba(239,68,55,.55); border-radius: 50%; color: #ff756b; background: rgba(186,11,13,.16); font: 700 11px/1 Inter, sans-serif; }
+.blog-global-category-card > div { position: relative; z-index: 1; min-width: 0; }
+.blog-global-category-label { display: block; margin-bottom: 8px; color: #f05a4e; font: 800 9px/1 Inter, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.blog-global-category-card strong { display: block; color: rgba(255,255,255,.95); font: 700 15px/1.16 Belamor, Montserrat, sans-serif; letter-spacing: -.035em; }
+.blog-global-category-card small { display: block; margin-top: 9px; color: rgba(255,255,255,.48); font: 500 11px/1 Inter, sans-serif; }
+.blog-global-category-card > svg { position: relative; z-index: 1; width: 16px; height: 16px; color: #ef4437; transition: transform .22s ease; }
+.blog-global-category-card:hover > svg { transform: translateX(3px); }
+@media (min-width: 941px) and (max-width: 1100px) { .blog-global-categories { gap: 10px; }.blog-global-category-card { grid-template-columns: 30px minmax(0, 1fr) 16px; gap: 9px; min-height: 104px; padding: 15px 12px; }.blog-global-category-card strong { font-size: 13px; } }
+@media (max-width: 940px) { .blog-global-categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }.blog-global-category-card { min-height: 105px; } }
+@media (max-width: 620px) { .blog-global-categories { grid-template-columns: 1fr; gap: 10px; }.blog-global-category-card { min-height: 96px; padding: 15px 14px; }.blog-global-category-card strong { font-size: 14px; } }

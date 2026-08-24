@@ -10,7 +10,14 @@ import "./BlogOverrides.css";
 
 import { articles, asset, blogPath, BlogArticle, loginUrl } from "./blogData";
 
-const categories = ["Todos", "Control de negocio", "Emprendimiento", "Clientes y ventas"];
+const categories = ["Todos", ...Array.from(new Set(articles.map((article) => article.category)))];
+
+const globalCategoryCopy: Record<string, string> = {
+  "Control de negocio": "Mira qué está pasando dentro de tu operación.",
+  "Emprendimiento": "Acompaña el crecimiento sin perder claridad.",
+  "Clientes y ventas": "Convierte tus acuerdos y cobros en relaciones más sanas.",
+  "Global": "Entiende lo que cambia cuando tu negocio cruza fronteras.",
+};
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("Todos");
@@ -51,6 +58,11 @@ export default function Blog() {
   };
 
   const scrollLatest = (direction: number) => goToLatestPage(latestPage + direction);
+
+  const selectGlobalCategory = (category: string) => {
+    setActiveCategory(category);
+    window.setTimeout(() => document.querySelector(".blog-latest")?.scrollIntoView({ behavior: "smooth", block: "start" }), 40);
+  };
 
   useEffect(() => {
     setLatestPage(0);
@@ -116,9 +128,11 @@ export default function Blog() {
           <div className="blog-section-head left"><p className="blog-eyebrow">Bitaxus Global</p><h2>Cuando tu negocio cruza fronteras, hay mucho más que entender.</h2></div>
           <div className="blog-global-layout">
             <ArticleCard article={articles[0]} variant="wide" href={`${blogPath}/article/${articles[0].id}`} />
-            <div className="blog-global-list">
-              {articles.slice(1).map((article) => <button className="blog-list-article" type="button" key={article.id} onClick={() => setLocation(`${blogPath}/article/${article.id}`)}><span>{article.category}</span><strong>{article.title}</strong><ArrowRight /></button>)}
-              <button className="blog-list-article" type="button" onClick={() => setLocation(`${blogPath}/article/${articles[2].id}`)}><span>Global</span><strong>Operar en varias monedas sin perder el control de tu caja</strong><ArrowRight /></button>
+            <div className="blog-global-categories" aria-label="Explorar artículos por categoría">
+              {categories.filter((category) => category !== "Todos").map((category) => {
+                const count = articles.filter((article) => article.category === category).length;
+                return <button className="blog-global-category-card" type="button" key={category} onClick={() => selectGlobalCategory(category)}><span className="blog-global-category-index">{String(count).padStart(2, "0")}</span><div><span className="blog-global-category-label">{category}</span><strong>{globalCategoryCopy[category] || "Ideas para entender mejor tu negocio."}</strong><small>{count} {count === 1 ? "artículo" : "artículos"}</small></div><ArrowRight /></button>;
+              })}
             </div>
           </div>
         </div>
