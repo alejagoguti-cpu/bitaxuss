@@ -16,3 +16,27 @@
 .blog-nav-actions { flex: 0 0 272px; justify-content: flex-end; gap: 14px; }.blog-nav-actions .blog-login { display: inline-flex; align-items: center; min-height: 58px; padding: 0 24px; border-radius: 17px; color: #fff; background: linear-gradient(104deg, rgba(86,27,27,.82), rgba(58,13,15,.76)); font-size: 15px; font-weight: 800; }.blog-nav-actions .blog-login:hover { color: #fff; background: linear-gradient(104deg, rgba(110,32,32,.9), rgba(76,17,20,.84)); }.blog-outline-cta { min-height: 58px; padding: 0 22px; border-color: rgba(255,255,255,.78); border-radius: 17px; background: linear-gradient(110deg, rgba(165,29,25,.72), rgba(32,23,23,.7)); font-size: 15px; font-weight: 800; }
 @media (max-width: 1050px) { .blog-nav { min-height: 92px; }.blog-nav-inner { min-height: 92px; width: min(100% - 40px, 920px); }.blog-logo, .blog-nav-actions { flex-basis: auto; }.blog-logo img { width: 144px; }.blog-center-nav { min-height: 50px; }.blog-center-nav a { padding: 0 11px; font-size: 13px; }.blog-nav-actions .blog-login, .blog-outline-cta { min-height: 50px; padding: 0 15px; font-size: 13px; } }
 @media (max-width: 780px) { .blog-nav { min-height: 70px; }.blog-nav-inner { min-height: 70px; width: min(100% - 32px, 620px); }.blog-center-nav { display: none !important; }.blog-logo img { width: 112px; }.blog-nav-actions { margin-left: auto; }.blog-nav-actions .blog-login { display: none; }.blog-outline-cta { min-height: 42px; padding: 0 13px; border-radius: 14px; font-size: 12px; } }
+
+/* En escritorio, la franja conserva la composición exportada del inicio al píxel. Los enlaces permanecen accesibles sobre la misma geometría. */
+@media (min-width: 880px) {
+  .blog-nav { height: 171px; min-height: 171px; background: #000 url('../2166-3254.webp') top center / 100% auto no-repeat; }
+  .blog-nav-inner { width: 100%; height: 171px; min-height: 171px; margin: 0; }
+  .blog-nav .blog-logo, .blog-nav .blog-center-nav, .blog-nav .blog-nav-actions { position: absolute; opacity: 0; }
+  .blog-nav .blog-logo { top: 30px; left: 7%; width: 15%; height: 76px; }
+  .blog-nav .blog-center-nav { top: 48px; left: 26%; width: 38%; height: 64px; max-width: none; }
+  .blog-nav .blog-nav-actions { top: 48px; right: 7%; width: 23%; height: 64px; }
+}
+
+/* Geometría final de la franja de navegación: evita que la captura de hero invada la cabecera. */
+@media (min-width: 880px) {
+  .blog-nav { height: 171px; min-height: 171px; background: radial-gradient(ellipse 40% 130% at 76% 56%, rgba(95,15,17,.32), transparent 66%), #000; }
+  .blog-nav-inner { position: relative; display: flex; width: min(1700px, calc(100% - 64px)); height: 171px; min-height: 171px; margin: 0 auto; align-items: center; gap: 0; }
+  .blog-nav .blog-logo, .blog-nav .blog-center-nav, .blog-nav .blog-nav-actions { position: static; opacity: 1; height: auto; }
+  .blog-nav .blog-logo { display: flex; flex: 0 0 clamp(210px, 18.72vw, 354px); align-items: center; }
+  .blog-nav .blog-logo img { width: clamp(160px, 12.1vw, 229px); height: auto; }
+  .blog-nav .blog-center-nav { display: flex !important; flex: 0 1 677px; width: auto; max-width: none; min-height: 58px; transform: translateY(-3px); }
+  .blog-nav .blog-center-nav a { min-height: 56px; padding: 0 16px; }
+  .blog-nav .blog-nav-actions { display: flex; flex: 0 0 clamp(218px, 15.1vw, 286px); height: 58px; margin-left: clamp(20px, 2.65vw, 50px); justify-content: flex-start; gap: 16px; transform: translateY(-3px); }
+  .blog-nav .blog-nav-actions .blog-login { min-width: 133px; min-height: 58px; padding: 0 18px; white-space: nowrap; }
+  .blog-nav .blog-outline-cta { min-width: 137px; min-height: 58px; padding: 0 18px; white-space: nowrap; }
+}
