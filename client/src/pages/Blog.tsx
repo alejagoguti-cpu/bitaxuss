@@ -160,6 +160,17 @@ export default function Blog() {
   );
 }
 
+const renderEmphasizedAnswer = (text: string): ReactNode => {
+  const pattern = /(facturaci[oó]n|caja|cobro|cobrar|costos?|gastos?|tesorer[ií]a|plazo|cliente|compromisos?|informaci[oó]n|trazabilidad|decisiones?|Bitaxus)/gi;
+  let emphasized = 0;
+  return text.split(pattern).map((part, index) => {
+    const isTerm = pattern.test(part);
+    pattern.lastIndex = 0;
+    if (isTerm && emphasized < 3) { emphasized += 1; return <strong key={`emphasis-${index}`}>{part}</strong>; }
+    return <span key={`answer-${index}`}>{part}</span>;
+  });
+};
+
 const isArticleHeading = (line: string, index: number, lines: string[]) => {
   if (line.length < 18 || line.length > 105) return false;
   if (/^[¿?]/.test(line) || /[.!,:;]$/.test(line)) return false;
@@ -170,15 +181,26 @@ const isArticleHeading = (line: string, index: number, lines: string[]) => {
 function renderArticleBlocks(article: BlogArticle) {
   const lines = article.content.split(/\n+/).map((line) => line.trim()).filter(Boolean);
   const faqIndex = lines.findIndex((line) => line.toLowerCase() === "preguntas frecuentes");
+  const faqQuestionIndexes = new Set<number>();
+  const faqAnswerIndexes = new Set<number>();
+  if (faqIndex >= 0) {
+    for (let index = faqIndex + 1; index < lines.length; index += 1) {
+      if (lines[index].endsWith("?") && lines[index].length < 180) {
+        faqQuestionIndexes.add(index);
+        if (lines[index + 1] && !lines[index + 1].endsWith("?")) faqAnswerIndexes.add(index + 1);
+      }
+    }
+  }
   const visualIndexes = [Math.floor(lines.length * .18), Math.floor(lines.length * .4), Math.floor(lines.length * .63), Math.floor(lines.length * .84)];
   return lines.map((line, index) => {
     const visualPart = visualIndexes.indexOf(index);
     const visual = visualPart >= 0 ? <ArticleVisuals article={article} part={(visualPart + 1) as 1 | 2 | 3 | 4} /> : null;
     let block: ReactNode;
-    if (line.toLowerCase() === "preguntas frecuentes") block = <h2>Preguntas frecuentes</h2>;
+    if (faqAnswerIndexes.has(index)) block = null;
+    else if (line.toLowerCase() === "preguntas frecuentes") block = <h2>Preguntas frecuentes</h2>;
     else if (line.startsWith("Bitaxus ·")) block = <div className="blog-reader-cta"><p className="blog-eyebrow">{line}</p><h3>Cobras. Pagas. Sabes.</h3><p>Una experiencia Bitaxus para conservar el contexto de tus cobros, pagos y movimientos.</p><a href={`${asset("/")}#contacto`} className="blog-primary-cta">Conocer Bitaxus <ArrowRight /></a></div>;
     else if (line.startsWith("👉")) block = <p className="blog-reader-link">{line.replace("👉 ", "")}</p>;
-    else if (faqIndex >= 0 && index > faqIndex && line.endsWith("?") && line.length < 180) block = <h3 className="blog-reader-faq-question">{line}</h3>;
+    else if (faqQuestionIndexes.has(index)) block = <details className="blog-reader-faq-card" open={index === faqIndex + 1}><summary><span>{String(index - faqIndex).padStart(2, "0")}</span><strong>{line}</strong><i>+</i></summary><div className="blog-reader-faq-answer"><p>{renderEmphasizedAnswer(lines[index + 1] || "")}</p></div></details>;
     else if (isArticleHeading(line, index, lines)) block = <h2>{line}</h2>;
     else block = <p>{line}</p>;
     return <Fragment key={`article-block-${index}`}>{visual}{block}</Fragment>;
