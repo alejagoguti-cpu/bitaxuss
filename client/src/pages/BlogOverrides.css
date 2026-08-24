@@ -711,3 +711,36 @@
 .article-page .reader-reference-frame .reader-visual-icon.reader-visual-icon-red svg { color: #fff !important; stroke: #fff !important; }
 .article-page .reader-reference-frame.reader-reference-dark .reader-visual-icon:not(.reader-visual-icon-red) { color: #a90005 !important; background: #fff !important; }
 .article-page .reader-reference-frame.reader-reference-light .reader-visual-icon:not(.reader-visual-icon-red) { color: #a90005 !important; background: #fff !important; }
+
+
+/* Nueve direcciones visuales: una por artículo, misma marca y distinta personalidad editorial. */
+.article-page .reader-theme-orbit { border-radius: 16px 36px 16px 36px; }
+.article-page .reader-theme-orbit::before { background-image: radial-gradient(rgba(186,11,13,.42) .8px, transparent .8px); background-size: 15px 15px; opacity: .12; }
+.article-page .reader-theme-ledger { border-radius: 6px; border-top: 3px solid #ba0b0d; }
+.article-page .reader-theme-ledger::before { background-image: linear-gradient(rgba(186,11,13,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(186,11,13,.08) 1px, transparent 1px); background-size: 24px 24px; opacity: .33; }
+.article-page .reader-theme-ledger .reader-reference-column { border-radius: 5px; }
+.article-page .reader-theme-closeout { border-radius: 4px 22px 4px 22px; border-left: 4px solid #ba0b0d; }
+.article-page .reader-theme-closeout::after { right: auto; bottom: -70px; left: -90px; background: radial-gradient(circle, rgba(186,11,13,.32), transparent 68%); }
+.article-page .reader-theme-closeout .reader-reference-timeline::before { background: #ba0b0d; }
+.article-page .reader-theme-network { border-radius: 28px; }
+.article-page .reader-theme-network::before { background-image: radial-gradient(rgba(186,11,13,.28) 1px, transparent 1px); background-size: 28px 28px; opacity: .16; }
+.article-page .reader-theme-network .reader-reference-column { border-radius: 24px 8px 24px 8px; }
+.article-page .reader-theme-capacity { border-radius: 10px 10px 34px 34px; border-bottom: 3px solid #ba0b0d; }
+.article-page .reader-theme-capacity .reader-reference-flow > div { border-radius: 5px 20px 5px 20px; }
+.article-page .reader-theme-delegation { border-radius: 20px; border-right: 3px solid #ba0b0d; }
+.article-page .reader-theme-delegation .reader-reference-checklist > div { border-radius: 14px; border-bottom: 0; box-shadow: inset 0 -2px 0 rgba(186,11,13,.35); }
+.article-page .reader-theme-agreement { border-radius: 42px 12px 42px 12px; border-color: rgba(239,68,55,.58); }
+.article-page .reader-theme-agreement .reader-reference-columns { gap: 22px; }
+.article-page .reader-theme-agreement .reader-reference-column { border-radius: 28px 8px 28px 8px; }
+.article-page .reader-theme-terms { border-radius: 12px; border-top: 1px solid #ba0b0d; border-bottom: 1px solid #ba0b0d; }
+.article-page .reader-theme-terms .reader-reference-timeline > div { padding-left: 22px; border-left: 1px solid rgba(186,11,13,.22); }
+.article-page .reader-theme-waiting { border-radius: 50px 10px 50px 10px; }
+.article-page .reader-theme-waiting::before { background-image: radial-gradient(rgba(255,255,255,.2) 1px, transparent 1px); background-size: 20px 20px; opacity: .13; }
+.article-page .reader-theme-waiting .reader-reference-flow > div:nth-child(2) { border-radius: 50%; }
+@media (max-width: 620px) {
+  .article-page .reader-theme-orbit { border-radius: 13px 25px 13px 25px; }
+  .article-page .reader-theme-network { border-radius: 18px; }
+  .article-page .reader-theme-agreement { border-radius: 25px 9px 25px 9px; }
+  .article-page .reader-theme-waiting { border-radius: 30px 8px 30px 8px; }
+  .article-page .reader-theme-terms .reader-reference-timeline > div { padding-left: 13px; }
+}
