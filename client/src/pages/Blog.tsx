@@ -2,7 +2,7 @@
  * Estilo de referencia: editorial Bitaxus.
  * Alternancia de fondos oscuros y claros como la landing Bitaxus, con acento rojo y titulares BELAMOR.
  */
-import { ArrowRight, Menu, Search, X } from "lucide-react";
+import { ArrowRight, Search, X } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import "./Blog.css";
 import "./BlogOverrides.css";
@@ -43,7 +43,7 @@ const articles = [
   },
 ];
 
-const categories = ["Todos", "Control de negocio", "Emprendimiento", "Clientes y ventas", "Global"];
+const categories = ["Todos", "Flujo de Caja", "Pagos y Cobros", "Estrategia"];
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("Todos");
@@ -51,7 +51,6 @@ export default function Blog() {
   const [selectedArticle, setSelectedArticle] = useState<(typeof articles)[number] | null>(null);
   const [email, setEmail] = useState("");
   const [newsletterMessage, setNewsletterMessage] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     document.title = "Blog Bitaxus | Ideas para entender mejor tu negocio";
@@ -62,7 +61,10 @@ export default function Blog() {
   const visibleArticles = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return articles.filter((article) => {
-      const categoryMatches = activeCategory === "Todos" || article.category === activeCategory;
+      const categoryMatches = activeCategory === "Todos"
+        || (activeCategory === "Flujo de Caja" && article.category === "Control de negocio")
+        || (activeCategory === "Pagos y Cobros" && article.category === "Global")
+        || (activeCategory === "Estrategia" && article.category === "Emprendimiento");
       const searchMatches = !normalizedQuery || `${article.title} ${article.summary} ${article.category}`.toLowerCase().includes(normalizedQuery);
       return categoryMatches && searchMatches;
     });
@@ -75,27 +77,13 @@ export default function Blog() {
 
   return (
     <main className="blog-page">
-      <section className="hero blog-home-hero" aria-labelledby="blog-home-hero-title">
-        <h1 id="blog-home-hero-title" className="sr-only">Bitaxus: cobra, paga y entiende tu dinero</h1>
-        <img className="hero-render" src={asset("/2166-3254.webp")} width="2560" height="1484" fetchPriority="high" decoding="async" alt="Bitaxus: vendiste como nunca, ¿y la plata?" />
-        <div className="hero-hotspots" aria-label="Navegación principal del hero">
-          <a href={asset("/")} className="hero-hotspot home">Inicio</a><a href={`${asset("/")}#empresas`} className="hero-hotspot empresas">Empresas</a><a href={`${asset("/")}#personas`} className="hero-hotspot personas">Personas</a><a href={blogPath} className="hero-hotspot blog">Blog</a><a href={`${asset("/")}#contacto`} className="hero-hotspot ayuda">Ayuda</a><a className="hero-hotspot login" href={loginUrl}>Iniciar sesión</a><a href={`${asset("/")}#contacto`} className="hero-hotspot speak">Hablemos</a><a href={`${asset("/")}#contacto`} className="hero-hotspot speak-main">Hablemos</a><a href={`${asset("/")}#agente`} className="hero-hotspot how">Ver cómo funciona</a>
-        </div>
-        <div className="mobile-hero">
-          <header className="mobile-header"><img src={asset("/2166-3795.webp")} width="105" height="30" decoding="async" alt="Bitaxus" /><button type="button" className="menu-button" aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={22} /> : <Menu size={22} />}</button></header>
-          {menuOpen && <nav className="mobile-nav" aria-label="Navegación principal"><a href={asset("/")} onClick={() => setMenuOpen(false)}>Inicio</a><a href={`${asset("/")}#empresas`} onClick={() => setMenuOpen(false)}>Empresas</a><a href={`${asset("/")}#personas`} onClick={() => setMenuOpen(false)}>Personas</a><a href={blogPath} onClick={() => setMenuOpen(false)}>Blog</a><a href={`${asset("/")}#contacto`} onClick={() => setMenuOpen(false)}>Ayuda</a></nav>}
-          <div className="mobile-hero-content"><p>Cobrar debería ser tan fácil como enviar un mensaje.</p><p className="mobile-hero-title">Vendiste<br />como nunca<br /><span>¿Y la plata?</span></p><p className="mobile-hero-copy">Bitaxus reúne tus cobros, pagos y movimientos para que sepas cuánto entra, cuánto sale y cuánto realmente te queda.</p><div className="button-row"><a href={`${asset("/")}#contacto`} className="button primary">Hablemos <ArrowRight /></a><a href={`${asset("/")}#agente`} className="button ghost">Ver cómo funciona</a></div></div>
-        </div>
-      </section>
-
-      <section className="blog-hero blog-hero-tools">
-        <div className="blog-shell blog-hero-grid">
-          <div className="blog-hero-copy">
-            <label className="blog-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos…" aria-label="Buscar guías o artículos" /></label>
-            <div className="blog-filters" aria-label="Filtrar publicaciones">{categories.map((category) => <button key={category} type="button" onClick={() => setActiveCategory(category)} className={activeCategory === category ? "active" : ""}>{category}</button>)}</div>
-          </div>
-          <ArticleCard article={articles[0]} variant="featured" onRead={() => setSelectedArticle(articles[0])} />
-        </div>
+      <section className="blog-figma-hero" aria-labelledby="blog-hero-title" data-node-id="2495-2">
+        <h1 id="blog-hero-title" className="sr-only">Entender mejor tu negocio también es parte de hacerlo crecer.</h1>
+        <img className="blog-figma-hero-render" src={asset("/blog-figma-2495-hero.webp")} width="1313" height="745" fetchPriority="high" decoding="async" alt="Hero de Bitaxus Blog: entender mejor tu negocio también es parte de hacerlo crecer." />
+        <nav className="blog-figma-nav-hotspots" aria-label="Navegación principal"><a href={asset("/")} className="blog-figma-hotspot home">Inicio</a><a href={`${asset("/")}#empresas`} className="blog-figma-hotspot companies">Empresas</a><a href={`${asset("/")}#personas`} className="blog-figma-hotspot people">Personas</a><a href={blogPath} className="blog-figma-hotspot active">Blog</a><a href={`${asset("/")}#contacto`} className="blog-figma-hotspot help">Ayuda</a><a href={loginUrl} className="blog-figma-hotspot login">Iniciar sesión</a><a href={`${asset("/")}#contacto`} className="blog-figma-hotspot contact">Hablemos</a></nav>
+        <label className="blog-figma-search"><Search size={17} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos…" aria-label="Buscar guías o artículos" /></label>
+        <div className="blog-figma-filters" aria-label="Filtrar publicaciones">{categories.map((category) => <button key={category} type="button" onClick={() => setActiveCategory(category)} className={activeCategory === category ? "active" : ""}>{category}</button>)}</div>
+        <button className="blog-figma-featured-link" type="button" onClick={() => setSelectedArticle(articles[0])}>Leer ahora</button>
       </section>
 
       <section className="blog-section blog-latest">
