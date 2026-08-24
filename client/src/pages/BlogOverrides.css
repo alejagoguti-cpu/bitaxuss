@@ -439,3 +439,19 @@
 .reader-comparison-premium > p { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: 9px; padding: 16px 0 19px; margin: 17px 0 0; color: #7e2926; background: transparent; font: 600 12px/1.45 Inter, sans-serif; text-align: left; }
 .reader-comparison-premium > p svg { flex: none; width: 16px; height: 16px; color: #ba0b0d; }
 @media (max-width: 620px) { .article-visual-system { gap: 24px; margin: 36px 0 46px; }.reader-diagram-premium { padding: 22px 18px 20px; }.reader-diagram-premium h3 { margin: 17px 0 21px; font-size: 25px; }.reader-flow-premium { grid-template-columns: 1fr; gap: 9px; }.reader-flow-step { min-height: 62px; }.reader-flow-step > svg { top: auto; right: 16px; bottom: -13px; transform: rotate(90deg); }.reader-visual-caption { margin-top: 20px; }.reader-comparison-premium { padding: 21px 17px 0; }.reader-comparison-premium .reader-comparison-grid { grid-template-columns: 1fr; gap: 9px; }.reader-comparison-premium .reader-comparison-grid > div { padding: 17px; }.reader-comparison-premium .reader-comparison-grid > div + div { border-left: 1px solid rgba(186,11,13,.18); }.reader-comparison-premium .reader-comparison-grid strong { font-size: 20px; } }
+
+
+/* Versión de referencia aprobada: una única comparación editorial, sin diagramas genéricos ni ruido visual. */
+.article-visual-system.reader-comparison-reference { display: block; position: relative; overflow: hidden; padding: 38px 38px 34px; margin: 48px 0 58px; border: 1px solid #e3dfdc; border-radius: 23px; background: #fff; box-shadow: 0 13px 30px rgba(54,39,35,.07); }
+.reader-comparison-reference::before { display: none; }
+.reader-reference-eyebrow { position: relative; z-index: 1; margin: 0 0 18px; color: #9f1d1f; font: 800 13px/1 Inter, Arial, sans-serif; letter-spacing: .16em; }
+.reader-comparison-reference h3 { position: relative; z-index: 1; max-width: 700px; margin: 0 0 34px; color: #171515; font: 700 clamp(31px, 4.2vw, 47px)/.98 Belamor, Montserrat, sans-serif; letter-spacing: -.055em; }
+.reader-reference-columns { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.reader-reference-column { min-height: 171px; padding: 28px 26px 25px; border: 1px solid #e2dedb; border-radius: 17px; background: #fbfaf9; }
+.reader-reference-column.accent { border-color: #e0c3c0; background: #fffafa; }
+.reader-reference-column > span { display: block; margin-bottom: 18px; color: #918b88; font: 800 12px/1 Inter, Arial, sans-serif; letter-spacing: .14em; }
+.reader-reference-column.accent > span { color: #a71d20; }
+.reader-reference-column strong { display: block; margin-bottom: 13px; color: #322a28; font: 700 clamp(22px, 2.5vw, 30px)/1 Belamor, Montserrat, sans-serif; letter-spacing: -.04em; }
+.reader-reference-column p { max-width: 320px; margin: 0; color: #77706d; font: 400 16px/1.45 Inter, Arial, sans-serif; }
+.reader-reference-conclusion { position: relative; z-index: 1; margin: 27px 0 0; color: #ae2427; font: 700 16px/1.35 Inter, Arial, sans-serif; text-align: center; }
+@media (max-width: 620px) { .article-visual-system.reader-comparison-reference { padding: 27px 18px 25px; margin: 38px 0 46px; border-radius: 18px; }.reader-reference-eyebrow { font-size: 10px; line-height: 1.25; }.reader-comparison-reference h3 { margin-bottom: 24px; font-size: 32px; }.reader-reference-columns { grid-template-columns: 1fr; gap: 11px; }.reader-reference-column { min-height: 0; padding: 22px 18px 20px; }.reader-reference-column > span { margin-bottom: 14px; font-size: 10px; }.reader-reference-column strong { font-size: 25px; }.reader-reference-column p { font-size: 14px; }.reader-reference-conclusion { margin-top: 21px; font-size: 14px; } }

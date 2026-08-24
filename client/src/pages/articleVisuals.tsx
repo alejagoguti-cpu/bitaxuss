@@ -1,42 +1,46 @@
-import { ArrowRight, Check, GitBranch } from "lucide-react";
 import type { BlogArticle } from "./blogData";
 
 type VisualPreset = {
   eyebrow: string;
   title: string;
-  steps: [string, string, string];
-  before: string;
-  after: string;
-  beforePoints: string[];
-  afterPoints: string[];
-  note: string;
+  leftLabel: string;
+  leftTitle: string;
+  leftCopy: string;
+  rightLabel: string;
+  rightTitle: string;
+  rightCopy: string;
+  conclusion: string;
 };
 
 const visualPresets: Record<string, VisualPreset> = {
-  "control-ventas": { eyebrow: "Lectura de caja", title: "Vender es solo el primer movimiento", steps: ["Facturado", "Recibido", "Disponible"], before: "Mirar solo las ventas", after: "Leer el dinero completo", beforePoints: ["Confunde facturación con caja", "Llega tarde a los compromisos"], afterPoints: ["Relaciona ingresos y tiempos", "Permite decidir con contexto"], note: "La señal importante no es únicamente cuánto vendiste, sino cuánto puedes sostener." },
-  "gastos-operacion": { eyebrow: "Mapa de costos", title: "El costo real aparece cuando conectas las piezas", steps: ["Fijos", "Variables", "Recurrentes"], before: "Recortar por intuición", after: "Entender la estructura", beforePoints: ["Ve gastos aislados", "Pierde costos silenciosos"], afterPoints: ["Detecta duplicidades", "Protege lo que sí aporta"], note: "Un ahorro puntual no siempre significa que operar el negocio cueste menos." },
-  "cierre-mes": { eyebrow: "Cierre con contexto", title: "Un cierre útil explica cómo llegaste al saldo", steps: ["Movimientos", "Conciliación", "Lectura"], before: "Cerrar mirando el saldo", after: "Cerrar entendiendo el mes", beforePoints: ["Solo registra un número", "Deja preguntas abiertas"], afterPoints: ["Reconstruye el recorrido", "Deja decisiones listas"], note: "El cierre no es una fotografía: es una explicación breve y comprobable." },
-  "empresa-crecio": { eyebrow: "Escala operativa", title: "Crecer cambia la forma de guardar el contexto", steps: ["Más clientes", "Más movimientos", "Más sistema"], before: "Controlar desde la memoria", after: "Diseñar una operación", beforePoints: ["Depende de una persona", "Se fragmenta con el volumen"], afterPoints: ["Distribuye responsabilidades", "Conserva trazabilidad"], note: "La operación debe evolucionar antes de que el crecimiento la vuelva frágil." },
-  "contratar-mas": { eyebrow: "Capacidad real", title: "Más personas no corrigen un proceso confuso", steps: ["Problema", "Proceso", "Capacidad"], before: "Contratar para apagar", after: "Ordenar antes de crecer", beforePoints: ["Multiplica pasos innecesarios", "Traslada la confusión al equipo"], afterPoints: ["Aclara responsables", "Libera tiempo operativo"], note: "La pregunta no es cuántas personas faltan, sino qué parte del sistema está frenando." },
-  "delegar-control": { eyebrow: "Delegación", title: "Delegar también es conservar el criterio", steps: ["Criterio", "Proceso", "Seguimiento"], before: "Pasar tareas", after: "Transferir control", beforePoints: ["Todo vuelve al fundador", "No hay una forma común"], afterPoints: ["El equipo decide mejor", "La información queda disponible"], note: "Delegar no es desaparecer: es construir una operación que pueda avanzar contigo o sin ti." },
-  "cobrar-parte-vender": { eyebrow: "Cobro y relación", title: "Cobrar bien empieza cuando vendes", steps: ["Acuerdo", "Fecha", "Seguimiento"], before: "Cobrar al final", after: "Acordar desde el inicio", beforePoints: ["El cobro parece incómodo", "El cliente recibe señales ambiguas"], afterPoints: ["El acuerdo queda visible", "La relación gana claridad"], note: "Un cobro claro protege la relación porque evita conversaciones que debieron ocurrir antes." },
-  "condiciones-pago": { eyebrow: "Condiciones", title: "Una venta completa también define cuándo llega el dinero", steps: ["Qué", "Cuándo", "Cómo"], before: "Dejarlo para después", after: "Hacerlo parte del acuerdo", beforePoints: ["Abre interpretaciones", "Desordena la caja"], afterPoints: ["Alinea expectativas", "Facilita el seguimiento"], note: "Las condiciones de pago no son una nota al pie: son parte del valor que estás vendiendo." },
-  "plazo-cliente": { eyebrow: "Decisión de plazo", title: "Dar tiempo también tiene un costo para el negocio", steps: ["Venta", "Espera", "Caja"], before: "Aceptar sin medir", after: "Decidir con contexto", beforePoints: ["Financia al cliente sin verlo", "Compromete recursos futuros"], afterPoints: ["Mide el tiempo de espera", "Protege la continuidad"], note: "Cada plazo que concedes cambia la velocidad con la que tu negocio puede moverse." },
+  "control-ventas": { eyebrow: "DOS FORMAS DE LEER EL MISMO CRECIMIENTO", title: "Más movimiento no siempre es más claridad.", leftLabel: "NEGOCIO A", leftTitle: "Vende más", leftCopy: "Cobra tarde, acumula pendientes y decide con información incompleta.", rightLabel: "NEGOCIO B", rightTitle: "Controla mejor", rightCopy: "Cobra a tiempo, conoce sus compromisos y sabe qué puede mover.", conclusion: "La claridad suele ganarle al volumen." },
+  "gastos-operacion": { eyebrow: "DOS FORMAS DE ENTENDER LOS COSTOS", title: "Ahorrar no siempre significa operar mejor.", leftLabel: "NEGOCIO A", leftTitle: "Recorta gastos", leftCopy: "Elimina costos visibles, pero no ve cómo cambia el costo total de operar.", rightLabel: "NEGOCIO B", rightTitle: "Lee su estructura", rightCopy: "Conoce sus gastos recurrentes y decide qué sostiene realmente el negocio.", conclusion: "El costo real aparece cuando conectas las piezas." },
+  "cierre-mes": { eyebrow: "DOS FORMAS DE CERRAR EL MES", title: "Un saldo no siempre cuenta toda la historia.", leftLabel: "NEGOCIO A", leftTitle: "Mira cuánto quedó", leftCopy: "Cierra con un número, pero deja movimientos y pendientes sin explicar.", rightLabel: "NEGOCIO B", rightTitle: "Entiende cómo llegó", rightCopy: "Concilia, relaciona movimientos y empieza el siguiente mes con contexto.", conclusion: "Cerrar bien es poder explicar lo que pasó." },
+  "empresa-crecio": { eyebrow: "DOS FORMAS DE LEER EL CRECIMIENTO", title: "Más clientes no siempre significan más control.", leftLabel: "NEGOCIO A", leftTitle: "Crece desde la memoria", leftCopy: "Acumula personas, movimientos y decisiones que dependen de unos pocos.", rightLabel: "NEGOCIO B", rightTitle: "Diseña su operación", rightCopy: "Distribuye responsabilidades y conserva el contexto mientras crece.", conclusion: "Crecer también cambia la forma de organizarse." },
+  "contratar-mas": { eyebrow: "DOS FORMAS DE CREAR CAPACIDAD", title: "Más personas no siempre resuelven el problema.", leftLabel: "NEGOCIO A", leftTitle: "Contrata para apagar", leftCopy: "Suma manos a procesos confusos y termina multiplicando las interrupciones.", rightLabel: "NEGOCIO B", rightTitle: "Ordena primero", rightCopy: "Aclara responsabilidades y libera al equipo para hacer mejor su trabajo.", conclusion: "La capacidad empieza por un proceso que se entiende." },
+  "delegar-control": { eyebrow: "DOS FORMAS DE DELEGAR", title: "Pasar tareas no siempre es transferir control.", leftLabel: "NEGOCIO A", leftTitle: "Reparte pendientes", leftCopy: "Las decisiones vuelven al fundador porque nadie comparte el mismo criterio.", rightLabel: "NEGOCIO B", rightTitle: "Construye un sistema", rightCopy: "Deja procesos visibles para que el equipo avance con autonomía.", conclusion: "Delegar también es conservar el criterio." },
+  "cobrar-parte-vender": { eyebrow: "DOS FORMAS DE ENTENDER EL COBRO", title: "Cobrar no debería empezar después de vender.", leftLabel: "NEGOCIO A", leftTitle: "Cobra al final", leftCopy: "Deja fechas y condiciones abiertas, y convierte el seguimiento en una tensión.", rightLabel: "NEGOCIO B", rightTitle: "Acuerda desde el inicio", rightCopy: "Hace visible cuándo y cómo se paga, cuidando la relación con el cliente.", conclusion: "La claridad también forma parte de la venta." },
+  "condiciones-pago": { eyebrow: "DOS FORMAS DE CERRAR UN ACUERDO", title: "Una venta no termina cuando el cliente dice que sí.", leftLabel: "NEGOCIO A", leftTitle: "Deja lo importante para después", leftCopy: "Abre interpretaciones sobre fechas, formas de pago y próximos pasos.", rightLabel: "NEGOCIO B", rightTitle: "Define el acuerdo completo", rightCopy: "Alinea expectativas y protege el flujo de caja desde el primer día.", conclusion: "Las condiciones de pago también son parte del valor." },
+  "plazo-cliente": { eyebrow: "DOS FORMAS DE DAR PLAZO", title: "Esperar también es una decisión financiera.", leftLabel: "NEGOCIO A", leftTitle: "Acepta sin medir", leftCopy: "Financia al cliente sin ver cuánto tiempo puede sostener esa espera.", rightLabel: "NEGOCIO B", rightTitle: "Decide con contexto", rightCopy: "Conoce el impacto del plazo y protege la continuidad de su operación.", conclusion: "Cada plazo cambia la velocidad del negocio." },
 };
 
 export function ArticleVisuals({ article }: { article: BlogArticle }) {
   const preset = visualPresets[article.id] || visualPresets["control-ventas"];
-  return <div className="article-visual-system" aria-label={`Recursos visuales sobre ${article.title}`}>
-    <section className="reader-diagram reader-diagram-premium">
-      <div className="reader-visual-topline"><p className="blog-eyebrow">{preset.eyebrow}</p><span>BITAXUS / 01</span></div>
-      <h3>{preset.title}</h3>
-      <div className="reader-flow-premium">{preset.steps.map((step, index) => <div className="reader-flow-step" key={step}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong>{index < preset.steps.length - 1 && <ArrowRight />}</div>)}</div>
-      <div className="reader-visual-caption"><GitBranch /><span>De una operación aislada a una lectura conectada.</span></div>
-    </section>
-    <section className="reader-comparison reader-comparison-premium">
-      <div className="reader-visual-topline"><p className="blog-eyebrow">Comparación Bitaxus</p><span>BITAXUS / 02</span></div>
-      <div className="reader-comparison-grid"><div><span>Antes</span><strong>{preset.before}</strong><ul>{preset.beforePoints.map((point) => <li key={point}>{point}</li>)}</ul></div><div className="better"><span>Con más contexto</span><strong>{preset.after}</strong><ul>{preset.afterPoints.map((point) => <li key={point}>{point}</li>)}</ul></div></div>
-      <p><Check /> {preset.note}</p>
-    </section>
-  </div>;
+  return <section className="article-visual-system reader-comparison-reference" aria-label={`Comparación sobre ${article.title}`}>
+    <p className="reader-reference-eyebrow">{preset.eyebrow}</p>
+    <h3>{preset.title}</h3>
+    <div className="reader-reference-columns">
+      <div className="reader-reference-column">
+        <span>{preset.leftLabel}</span>
+        <strong>{preset.leftTitle}</strong>
+        <p>{preset.leftCopy}</p>
+      </div>
+      <div className="reader-reference-column accent">
+        <span>{preset.rightLabel}</span>
+        <strong>{preset.rightTitle}</strong>
+        <p>{preset.rightCopy}</p>
+      </div>
+    </div>
+    <p className="reader-reference-conclusion">{preset.conclusion}</p>
+  </section>;
 }
