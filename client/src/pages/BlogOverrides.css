@@ -107,3 +107,28 @@
 .blog-card-body button svg { width: 15px; }
 @media (max-width: 940px) { .blog-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .blog-card-grid { grid-template-columns: 1fr; gap: 18px; }.blog-card-media { aspect-ratio: 1.65 / 1; }.blog-card-body { min-height: 0; padding: 22px 20px 20px; }.blog-card-body h3 { font-size: 25px; } }
+
+
+/* Rediseño editorial de “Desde la experiencia”. */
+.blog-experience { overflow: hidden; background-color: #f7f4f2; background-image: linear-gradient(90deg, rgba(186,11,13,.055) 1px, transparent 1px), radial-gradient(circle at 4% 36%, rgba(186,11,13,.1), transparent 24%); background-size: 25% 100%, auto; }
+.blog-experience::before { position: absolute; top: 0; right: 0; bottom: 0; left: 0; content: ""; pointer-events: none; background: linear-gradient(90deg, transparent 0 23%, rgba(255,255,255,.55) 23% 23.1%, transparent 23.1% 100%); }
+.blog-experience-grid { grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr); gap: clamp(48px, 7vw, 96px); align-items: center; }
+.blog-experience-grid > div:first-child { position: relative; max-width: 520px; padding-left: 27px; }
+.blog-experience-grid > div:first-child::before { position: absolute; top: 5px; bottom: 7px; left: 0; width: 3px; content: ""; border-radius: 3px; background: linear-gradient(180deg, #ba0b0d 0 22%, rgba(186,11,13,.14) 74%, transparent); }
+.blog-experience .blog-eyebrow { margin-bottom: 18px; color: #ba0b0d; }
+.blog-experience h2 { max-width: 510px; margin: 0 0 23px; color: #171616; font-size: clamp(34px, 4vw, 52px); line-height: 1.02; }
+.blog-experience-grid > div:first-child > p:not(.blog-eyebrow) { max-width: 490px; margin: 0; color: #625d5b; font-size: 15.5px; line-height: 1.7; }
+.blog-author { width: fit-content; margin-top: 30px; padding: 10px 18px 10px 10px; border: 1px solid rgba(186,11,13,.13); border-radius: 999px; background: rgba(255,255,255,.78); box-shadow: 0 10px 26px rgba(69,38,33,.07); }
+.blog-author > span { width: 49px; height: 49px; border: 1px solid rgba(186,11,13,.2); color: #1b1c1c; background: #fff; box-shadow: 0 0 0 5px rgba(186,11,13,.08); font-size: 12px; }
+.blog-author p { font-size: 13.5px !important; }
+.blog-author small { color: #77706d; }
+.blog-experience-cards { position: relative; gap: 16px; padding: 12px 0; }
+.blog-experience-cards::before { position: absolute; top: 35px; bottom: 35px; left: 34px; width: 1px; content: ""; background: linear-gradient(180deg, transparent, rgba(186,11,13,.24) 14%, rgba(186,11,13,.24) 86%, transparent); }
+.blog-experience-cards button { z-index: 1; grid-template-columns: 40px 1fr 40px; gap: 18px; min-height: 108px; padding: 20px 21px 20px 18px; border: 1px solid rgba(41,31,29,.11); border-left: 3px solid transparent; border-radius: 21px; color: #1b1c1c; background: rgba(255,255,255,.92); box-shadow: 0 12px 28px rgba(49,35,31,.08); transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease, background .22s ease; }
+.blog-experience-cards button:hover { border-color: rgba(186,11,13,.26); border-left-color: #ba0b0d; background: #fff; box-shadow: 0 18px 34px rgba(49,35,31,.13); transform: translateX(8px); }
+.blog-experience-cards span { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(186,11,13,.2); border-radius: 50%; color: #ba0b0d; background: #fff7f6; font-size: 11px; box-shadow: 0 0 0 5px #f7f4f2; }
+.blog-experience-cards strong { color: #1b1c1c; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.17; }
+.blog-experience-cards svg { display: grid; width: 34px; height: 34px; padding: 8px; border: 1px solid rgba(186,11,13,.22); border-radius: 50%; color: #ba0b0d; background: #fff7f6; transition: color .22s ease, background .22s ease, transform .22s ease; }
+.blog-experience-cards button:hover svg { color: #fff; background: #ba0b0d; transform: translateX(2px); }
+@media (max-width: 940px) { .blog-experience-grid { gap: 45px; }.blog-experience-grid > div:first-child { max-width: 650px; } }
+@media (max-width: 620px) { .blog-experience { background-size: 50% 100%, auto; }.blog-experience-grid { gap: 34px; }.blog-experience-grid > div:first-child { padding-left: 19px; }.blog-experience h2 { font-size: 36px; }.blog-author { margin-top: 24px; }.blog-experience-cards { padding: 0; }.blog-experience-cards::before { left: 27px; }.blog-experience-cards button { grid-template-columns: 34px 1fr 32px; gap: 12px; min-height: 96px; padding: 17px 14px 17px 12px; border-radius: 17px; }.blog-experience-cards span { width: 30px; height: 30px; }.blog-experience-cards strong { font-size: 16px; }.blog-experience-cards svg { width: 30px; height: 30px; padding: 7px; } }
