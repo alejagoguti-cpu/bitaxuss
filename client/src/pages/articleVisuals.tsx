@@ -32,12 +32,10 @@ function ReferenceFrame({ eyebrow, title, children, conclusion }: { eyebrow: str
   return <section className="reader-reference-frame"><p className="reader-reference-eyebrow">{eyebrow}</p><h3>{title}</h3>{children}{conclusion && <p className="reader-reference-conclusion">{conclusion}</p>}</section>;
 }
 
-export function ArticleVisuals({ article }: { article: BlogArticle }) {
+export function ArticleVisuals({ article, part }: { article: BlogArticle; part: 1 | 2 | 3 | 4 }) {
   const preset = visualPresets[article.id] || visualPresets["control-ventas"];
-  return <div className="article-visual-system" aria-label={`Diagramas sobre ${article.title}`}>
-    <ReferenceFrame eyebrow={preset.eyebrow} title={preset.title} conclusion={preset.conclusion}><div className="reader-reference-columns"><div className="reader-reference-column"><span>{preset.leftLabel}</span><strong>{preset.leftTitle}</strong><p>{preset.leftCopy}</p></div><div className="reader-reference-column accent"><span>{preset.rightLabel}</span><strong>{preset.rightTitle}</strong><p>{preset.rightCopy}</p></div></div></ReferenceFrame>
-    <ReferenceFrame eyebrow="RECORRIDO DE LA OPERACIÓN" title="Lo que ocurre entre una decisión y su resultado."><div className="reader-reference-flow">{preset.flow.map((item, index) => <div key={item}><span>0{index + 1}</span><strong>{item}</strong>{index < 2 && <i>→</i>}</div>)}</div></ReferenceFrame>
-    <ReferenceFrame eyebrow="SECUENCIA DEL NEGOCIO" title="Cada momento cambia lo que puedes decidir."><div className="reader-reference-timeline">{preset.timeline.map((item, index) => <div key={item}><span>{index + 1}</span><p>{item}</p></div>)}</div></ReferenceFrame>
-    <ReferenceFrame eyebrow="PREGUNTAS PARA LEER MEJOR" title="Tres señales antes de tomar la siguiente decisión."><div className="reader-reference-checklist">{preset.checklist.map((item, index) => <div key={item}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></div>)}</div></ReferenceFrame>
-  </div>;
+  if (part === 1) return <ReferenceFrame eyebrow={preset.eyebrow} title={preset.title} conclusion={preset.conclusion}><div className="reader-reference-columns"><div className="reader-reference-column"><span>{preset.leftLabel}</span><strong>{preset.leftTitle}</strong><p>{preset.leftCopy}</p></div><div className="reader-reference-column accent"><span>{preset.rightLabel}</span><strong>{preset.rightTitle}</strong><p>{preset.rightCopy}</p></div></div></ReferenceFrame>;
+  if (part === 2) return <ReferenceFrame eyebrow="RECORRIDO DE LA OPERACIÓN" title="Lo que ocurre entre una decisión y su resultado."><div className="reader-reference-flow">{preset.flow.map((item, index) => <div key={item}><span>0{index + 1}</span><strong>{item}</strong>{index < 2 && <i>→</i>}</div>)}</div></ReferenceFrame>;
+  if (part === 3) return <ReferenceFrame eyebrow="SECUENCIA DEL NEGOCIO" title="Cada momento cambia lo que puedes decidir."><div className="reader-reference-timeline">{preset.timeline.map((item, index) => <div key={item}><span>{index + 1}</span><p>{item}</p></div>)}</div></ReferenceFrame>;
+  return <ReferenceFrame eyebrow="PREGUNTAS PARA LEER MEJOR" title="Tres señales antes de tomar la siguiente decisión."><div className="reader-reference-checklist">{preset.checklist.map((item, index) => <div key={item}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></div>)}</div></ReferenceFrame>;
 }

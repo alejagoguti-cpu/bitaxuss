@@ -3,7 +3,7 @@
  * Alternancia de fondos oscuros y claros como la landing Bitaxus, con acento rojo y titulares BELAMOR.
  */
 import { ArrowLeft, ArrowRight, ChevronDown, Search } from "lucide-react";
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, FormEvent, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import "./Blog.css";
 import "./BlogOverrides.css";
@@ -170,13 +170,18 @@ const isArticleHeading = (line: string, index: number, lines: string[]) => {
 function renderArticleBlocks(article: BlogArticle) {
   const lines = article.content.split(/\n+/).map((line) => line.trim()).filter(Boolean);
   const faqIndex = lines.findIndex((line) => line.toLowerCase() === "preguntas frecuentes");
+  const visualIndexes = [Math.floor(lines.length * .18), Math.floor(lines.length * .4), Math.floor(lines.length * .63), Math.floor(lines.length * .84)];
   return lines.map((line, index) => {
-    if (line.toLowerCase() === "preguntas frecuentes") return <h2 key={`heading-${index}`}>Preguntas frecuentes</h2>;
-    if (line.startsWith("Bitaxus ·")) return <div className="blog-reader-cta" key={`cta-${index}`}><p className="blog-eyebrow">{line}</p><h3>Cobras. Pagas. Sabes.</h3><p>Una experiencia Bitaxus para conservar el contexto de tus cobros, pagos y movimientos.</p><a href={`${asset("/")}#contacto`} className="blog-primary-cta">Conocer Bitaxus <ArrowRight /></a></div>;
-    if (line.startsWith("👉")) return <p className="blog-reader-link" key={`link-${index}`}>{line.replace("👉 ", "")}</p>;
-    if (faqIndex >= 0 && index > faqIndex && line.endsWith("?") && line.length < 180) return <h3 className="blog-reader-faq-question" key={`faq-${index}`}>{line}</h3>;
-    if (isArticleHeading(line, index, lines)) return <h2 key={`heading-${index}`}>{line}</h2>;
-    return <p key={`paragraph-${index}`}>{line}</p>;
+    const visualPart = visualIndexes.indexOf(index);
+    const visual = visualPart >= 0 ? <ArticleVisuals article={article} part={(visualPart + 1) as 1 | 2 | 3 | 4} /> : null;
+    let block: ReactNode;
+    if (line.toLowerCase() === "preguntas frecuentes") block = <h2>Preguntas frecuentes</h2>;
+    else if (line.startsWith("Bitaxus ·")) block = <div className="blog-reader-cta"><p className="blog-eyebrow">{line}</p><h3>Cobras. Pagas. Sabes.</h3><p>Una experiencia Bitaxus para conservar el contexto de tus cobros, pagos y movimientos.</p><a href={`${asset("/")}#contacto`} className="blog-primary-cta">Conocer Bitaxus <ArrowRight /></a></div>;
+    else if (line.startsWith("👉")) block = <p className="blog-reader-link">{line.replace("👉 ", "")}</p>;
+    else if (faqIndex >= 0 && index > faqIndex && line.endsWith("?") && line.length < 180) block = <h3 className="blog-reader-faq-question">{line}</h3>;
+    else if (isArticleHeading(line, index, lines)) block = <h2>{line}</h2>;
+    else block = <p>{line}</p>;
+    return <Fragment key={`article-block-${index}`}>{visual}{block}</Fragment>;
   });
 }
 
@@ -187,7 +192,6 @@ export function ArticleReader({ article, onClose }: { article: BlogArticle; onCl
     <figure className="blog-reader-hero"><img src={asset(article.image)} alt="" /><figcaption>Una mirada Bitaxus para entender mejor lo que ocurre detrás de cada operación.</figcaption></figure>
     <div className="blog-reader-layout"><aside className="blog-reader-toc"><span>En este artículo</span><a href="#inicio">Introducción</a><a href="#contenido">La idea central</a><a href="#faq">Preguntas frecuentes</a><a href="#cierre">Cierre</a></aside><div className="blog-reader-prose" id="contenido">
       <p id="inicio">{article.summary}</p>
-      <ArticleVisuals article={article} />
       {renderArticleBlocks(article)}
       <div id="faq" />
       <div id="cierre" />

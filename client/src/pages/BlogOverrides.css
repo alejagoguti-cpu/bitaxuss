@@ -494,3 +494,13 @@
 .article-page .blog-reader-header::before { display: none !important; }
 .article-page .blog-reader-hero { background: #fff !important; }
 .article-page .blog-reader-hero::before { display: none !important; }
+
+
+/* Ritmo editorial final: texto más contenido y recursos repartidos entre la lectura. */
+.article-page .blog-reader-prose { font-size: 16px; line-height: 1.78; }
+.article-page .blog-reader-prose > p { margin: 0 0 24px; }
+.article-page .blog-reader-prose h2 { margin: 64px 0 22px; font-size: clamp(30px, 3.2vw, 42px); line-height: 1.02; }
+.article-page .blog-reader-prose h3.blog-reader-faq-question { margin: 34px 0 13px; font-size: 22px; line-height: 1.12; }
+.article-page .blog-reader-prose .reader-reference-frame { margin: 52px 0 58px; }
+@media (max-width: 820px) { .article-page .blog-reader-prose { font-size: 15.5px; line-height: 1.72; }.article-page .blog-reader-prose > p { margin-bottom: 21px; }.article-page .blog-reader-prose h2 { margin-top: 50px; font-size: 34px; }.article-page .blog-reader-prose .reader-reference-frame { margin: 40px 0 46px; } }
+@media (max-width: 620px) { .article-page .blog-reader-prose { font-size: 15px; line-height: 1.7; }.article-page .blog-reader-prose h2 { font-size: 31px; }.article-page .blog-reader-prose h3.blog-reader-faq-question { font-size: 20px; } }
