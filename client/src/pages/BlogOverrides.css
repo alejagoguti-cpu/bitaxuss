@@ -205,3 +205,21 @@
 .reader-comparison { position: relative; overflow: hidden; padding: 1px; border: 1px solid rgba(186,11,13,.23); background: linear-gradient(135deg, rgba(186,11,13,.58), rgba(186,11,13,.08) 45%, rgba(186,11,13,.3)); box-shadow: 0 20px 48px rgba(112,23,23,.1); }.reader-comparison::before { position: absolute; top: -100px; right: -70px; width: 230px; height: 230px; content: ""; border-radius: 50%; background: rgba(218,44,35,.18); filter: blur(33px); pointer-events: none; }.reader-comparison-grid { position: relative; z-index: 1; border: 0; background: #fff; }.reader-comparison-grid > div { background: rgba(255,255,255,.96); }.reader-comparison-grid > div.better { background: linear-gradient(145deg, #fff4f1, #fff); }.reader-comparison-grid > div + div { border-left-color: rgba(186,11,13,.18); }.reader-comparison-grid > div.better span { color: #ba0b0d; }.reader-comparison-grid .better li::before { background: #d82d27; }.reader-comparison > p { position: relative; z-index: 1; padding: 15px 18px 16px; margin: 0; color: #771619; background: #fff7f4; }
 .blog-reader-cta { position: relative; overflow: hidden; border: 1px solid rgba(186,11,13,.22); background: radial-gradient(circle at 90% 20%, rgba(224,54,43,.5), transparent 34%), linear-gradient(135deg, #360b0d, #83191c 58%, #4d1013); box-shadow: 0 22px 48px rgba(104,20,21,.16); }.blog-reader-cta::after { position: absolute; right: 5%; bottom: -80px; width: 220px; height: 220px; content: ""; border-radius: 50%; background: rgba(255,113,98,.18); filter: blur(30px); }.blog-reader-cta > * { position: relative; z-index: 1; }.blog-reader-cta .blog-eyebrow { color: #ff9a91; }.blog-reader-cta h3, .blog-reader-cta p:not(.blog-eyebrow) { color: #fff; }.blog-reader-cta p:not(.blog-eyebrow) { color: rgba(255,255,255,.78); }.blog-reader-cta .blog-primary-cta { color: #271011; background: #fff; box-shadow: 0 7px 18px rgba(0,0,0,.15); }
 .blog-reader-author { background: linear-gradient(135deg, #fff, #fff7f4); box-shadow: 0 16px 36px rgba(112,23,23,.07); }.blog-reader-author .blog-eyebrow, .blog-reader-author > div > span { color: #ba0b0d; }.blog-reader-avatar { background: radial-gradient(circle at 30% 20%, #ec5549, #8d1317 72%); box-shadow: 0 0 0 7px rgba(186,11,13,.08); }
+
+
+/* Tipografía única para toda la experiencia de lectura. */
+.article-page .blog-reader,
+.article-page .blog-reader * { font-family: Inter, Arial, sans-serif; }
+.article-page .blog-reader-header h1,
+.article-page .blog-reader-prose h2,
+.article-page .blog-reader-prose h3,
+.article-page .reader-diagram h3,
+.article-page .reader-comparison-grid strong,
+.article-page .blog-reader-faq summary,
+.article-page .blog-reader-author h3 { font-family: Inter, Arial, sans-serif; font-weight: 700; letter-spacing: -.045em; }
+.article-page .blog-reader-prose,
+.article-page .blog-reader-prose p,
+.article-page .blog-reader-faq details p,
+.article-page .blog-reader-author p { font-family: Inter, Arial, sans-serif; }
+.article-page .blog-reader-header h1 { line-height: 1.06; }
+.article-page .blog-reader-prose blockquote { font-family: Inter, Arial, sans-serif; font-weight: 700; letter-spacing: -.035em; }
