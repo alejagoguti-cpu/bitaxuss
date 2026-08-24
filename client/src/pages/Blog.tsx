@@ -146,9 +146,30 @@ export default function Blog() {
 
       <HomeFooter />
 
-      {selectedArticle && <div className="blog-dialog-backdrop" role="presentation" onMouseDown={() => setSelectedArticle(null)}><article className="blog-dialog" role="dialog" aria-modal="true" aria-label={selectedArticle.title} onMouseDown={(event) => event.stopPropagation()}><button type="button" className="blog-dialog-close" aria-label="Cerrar artículo" onClick={() => setSelectedArticle(null)}><X /></button><img src={asset(selectedArticle.image)} alt="" /><p className="blog-eyebrow">{selectedArticle.category}</p><h2>{selectedArticle.title}</h2><p>{selectedArticle.summary}</p><a href={`${asset("/")}#contacto`} className="blog-primary-cta" onClick={() => setSelectedArticle(null)}>Hablemos <ArrowRight /></a></article></div>}
+      {selectedArticle && <ArticleReader article={selectedArticle} onClose={() => setSelectedArticle(null)} />}
     </main>
   );
+}
+
+function ArticleReader({ article, onClose }: { article: (typeof articles)[number]; onClose: () => void }) {
+  const isCashflow = article.id === "plataformas" || article.id === "tasa";
+  return <div className="blog-reader-backdrop" role="presentation" onMouseDown={onClose}><article className="blog-reader" role="dialog" aria-modal="true" aria-label={article.title} onMouseDown={(event) => event.stopPropagation()}>
+    <div className="blog-reader-bar"><button type="button" className="blog-reader-back" onClick={onClose}><span>←</span> Volver al blog</button><span className="blog-reader-mark">BITAXUS <i>LECTURA</i></span><button type="button" className="blog-reader-close" aria-label="Cerrar artículo" onClick={onClose}><X /></button></div>
+    <header className="blog-reader-header"><p className="blog-eyebrow">{article.category}</p><h1>{article.title}</h1><p className="blog-reader-dek">{article.summary}</p><div className="blog-reader-meta"><span>Por <b>Alejandra Torres</b></span><span>Fundadora de Bitaxus</span><span>{isCashflow ? "7 min de lectura" : "5 min de lectura"}</span></div></header>
+    <figure className="blog-reader-hero"><img src={asset(article.image)} alt="" /><figcaption>Una mirada Bitaxus para entender mejor lo que ocurre detrás de cada operación.</figcaption></figure>
+    <div className="blog-reader-layout"><aside className="blog-reader-toc"><span>En este artículo</span><a href="#contexto">La pregunta detrás del número</a><a href="#claridad">Lo que conviene separar</a><a href="#accion">Qué mirar desde hoy</a></aside><div className="blog-reader-prose">
+      <p id="contexto">Hay momentos en los que un negocio parece estar creciendo, pero la operación empieza a pedir respuestas más claras. Las ventas suben, los clientes llegan y el equipo se mueve; aun así, cuando llega el momento de pagar o decidir, la sensación no siempre coincide con los números.</p>
+      <p>Eso no significa que estés haciendo algo mal. Muchas veces significa que estás mirando una parte de la historia y dejando por fuera lo que pasa entre una venta, un cobro y el dinero que realmente queda disponible.</p>
+      <h2>La pregunta detrás del número</h2><p>{isCashflow ? "Vender más no siempre significa que te esté quedando más. Las ventas miden lo que prometiste entregar, pero no necesariamente lo que ya entró ni lo que queda después de tus compromisos." : "Cada operación tiene un momento distinto: cuándo se acuerda, cuándo se factura, cuándo se cobra y cuándo ese dinero puede usarse para seguir operando."}</p>
+      <blockquote>Entender mejor tu negocio también es parte de hacerlo crecer.</blockquote>
+      <h2 id="claridad">Lo que conviene separar</h2><p>Cuando todo se mezcla en una sola cifra, las decisiones se vuelven intuitivas. Separar lo facturado, lo recibido y los compromisos próximos permite ver la película completa y conversar con el equipo desde la misma información.</p>
+      <div className="blog-reader-insight"><p className="blog-eyebrow">Concepto Bitaxus</p><h3>{isCashflow ? "Facturado ≠ Recibido ≠ Lo que te quedó" : "El movimiento no siempre es claridad"}</h3><p>Lo importante no es tener un tablero complejo. Es saber qué pasó, qué está pendiente y qué puedes decidir hoy con tranquilidad.</p></div>
+      <h2 id="accion">Qué mirar desde hoy</h2><p>Empieza por tres preguntas: cuánto de lo que registraste ya entró, qué está pendiente y qué compromisos vienen en las próximas semanas. Con esas respuestas a la mano, dejas de decidir por sensación y empiezas a decidir con contexto.</p>
+      <p>La claridad no aparece cuando tienes más datos, sino cuando sabes cuáles necesitas mirar en el momento correcto.</p>
+      <div className="blog-reader-cta"><p className="blog-eyebrow">Cómo lo estamos abordando en Bitaxus</p><h3>Una experiencia para mantener tus cobros, pagos y movimientos en contexto.</h3><a href={`${asset("/")}#contacto`} className="blog-primary-cta" onClick={onClose}>Conocer Bitaxus <ArrowRight /></a></div>
+      <h2>Para cerrar</h2><p>Crecer no es el problema. El problema es crecer a ciegas, celebrando ventas mientras la operación cuenta otra historia. Mirar de cerca lo que pasa dentro del negocio te ayuda a tomar mejores decisiones y seguir avanzando.</p>
+    </div></div>
+  </article></div>;
 }
 
 function ArticleCard({ article, variant = "standard", onRead }: { article: (typeof articles)[number]; variant?: "standard" | "featured" | "wide" | "latest"; onRead: () => void }) {
