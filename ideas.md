@@ -33,3 +33,33 @@ La imagen `frame.webp` de Figma es la especificación visual definitiva. La impl
 - La composición de `frame.webp` prevalece sobre convenciones genéricas de landing pages.
 - Los textos, colores, sombras y recursos exportados se mantienen sin sustituciones estéticas.
 - La adaptación móvil apila las composiciones evitando recortes de contenido, mientras conserva fondo oscuro, énfasis rojo y contraste alto.
+
+## Rediseño editorial del hero del Blog
+
+### Tres direcciones exploradas
+
+| Tema | Introducción breve | Probabilidad |
+|---|---|---:|
+| **Mesa de control** | Una portada editorial organizada como una mesa de trabajo: gran titular, herramientas de lectura y una única historia ancla. Busca claridad antes que espectáculo. | 0.04 |
+| **Índice de claridad** | Un hero casi tipográfico, de tono sobrio, que presenta el Blog como un índice de decisiones operativas. | 0.08 |
+| **Recibos nocturnos** | Una composición de documentos, números y marcas rojas sobre negro, más expresiva y densa. | 0.03 |
+
+### Dirección elegida: Mesa de control
+
+**Movimiento de diseño.** Editorial fintech contemporáneo: información estructurada, espacio negativo controlado y una historia principal presentada como objeto de lectura.
+
+**Principios rectores.** La jerarquía se expresa primero por tipografía; el rojo Bitaxus funciona como señal puntual, no como relleno; la imagen de portada se usa una sola vez como ancla; los controles se integran en una franja de trabajo discreta.
+
+**Filosofía de color.** Negro cálido para profundidad, blanco suave para legibilidad y rojo `#ba0b0d` reservado para el estado activo y el CTA. Las superficies no compiten con la lectura.
+
+**Paradigma de composición.** Hero asimétrico de dos columnas: texto y herramientas de exploración a la izquierda; una tarjeta editorial vertical contenida a la derecha. Sin capturas de pantalla a escala completa.
+
+**Elementos distintivos.** Rótulo de edición en mayúscula pequeña, línea vertical de señal y marco de lectura con numeración editorial.
+
+**Interacción y animación.** Búsqueda, filtros y CTA mantienen comportamiento real. Los estados cambian en menos de 200 ms mediante color, borde y desplazamiento mínimo; se respeta `prefers-reduced-motion`.
+
+**Tipografía.** BELAMOR en titular de cuatro líneas y numeración editorial; Inter/Montserrat para navegación, búsqueda y texto de apoyo.
+
+**Esencia y voz.** Bitaxus traduce movimientos del negocio en decisiones más claras. Personalidad: precisa, serena y directa. La voz evita promesas grandilocuentes: “Entender también es operar mejor.” y “Una lectura para la siguiente decisión.”
+
+**Marca.** El logotipo blanco conservado desde Figma y el rojo Bitaxus como firma funcional completan el sistema.

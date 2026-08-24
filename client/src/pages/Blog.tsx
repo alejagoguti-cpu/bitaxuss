@@ -45,14 +45,6 @@ const articles = [
 
 const categories = ["Todos", "Flujo de Caja", "Pagos y Cobros", "Estrategia"];
 
-const whatsappFeature = {
-  id: "whatsapp-feature",
-  category: "Pagos y Cobros",
-  title: "Mover dinero desde WhatsApp: cómo saber si el canal es confiable",
-  summary: "Una guía para entender qué señales revisar antes de mover dinero por un canal de mensajería.",
-  image: "/blog-whatsapp-feature-header.webp?v=2",
-};
-
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const [query, setQuery] = useState("");
@@ -85,23 +77,23 @@ export default function Blog() {
 
   return (
     <main className="blog-page">
-      <section className="blog-native-hero" aria-labelledby="blog-hero-title" data-node-id="2495-2">
-        <div className="blog-native-shell">
-          <header className="blog-native-nav">
-            <a className="blog-native-logo" href={asset("/")} aria-label="Bitaxus, ir al inicio"><img src={asset("/2166-3795.webp")} width="190" height="54" alt="Bitaxus" /></a>
-            <nav className="blog-native-nav-links" aria-label="Navegación principal"><a href={asset("/")}>Inicio <ChevronDown /></a><a href={`${asset("/")}#empresas`}>Empresas <ChevronDown /></a><a href={`${asset("/")}#personas`}>Personas <ChevronDown /></a><a className="active" href={blogPath}>Blog <ChevronDown /></a><a href={`${asset("/")}#contacto`}>Ayuda <ChevronDown /></a></nav>
-            <div className="blog-native-actions"><a href={loginUrl}>Iniciar sesión</a><a href={`${asset("/")}#contacto`}>Hablemos <ArrowRight /></a></div>
+      <section className="blog-editorial-hero" aria-labelledby="blog-hero-title">
+        <div className="blog-editorial-shell">
+          <header className="blog-editorial-nav">
+            <a className="blog-editorial-logo" href={asset("/")} aria-label="Bitaxus, ir al inicio"><img src={asset("/2166-3795.webp")} width="190" height="54" alt="Bitaxus" /></a>
+            <nav className="blog-editorial-nav-links" aria-label="Navegación principal"><a href={asset("/")}>Inicio</a><a href={`${asset("/")}#empresas`}>Empresas</a><a href={`${asset("/")}#personas`}>Personas</a><a className="active" href={blogPath}>Blog</a><a href={`${asset("/")}#contacto`}>Ayuda</a></nav>
+            <div className="blog-editorial-actions"><a href={loginUrl}>Iniciar sesión</a><a href={`${asset("/")}#contacto`}>Hablemos <ArrowRight /></a></div>
           </header>
-          <div className="blog-native-grid">
-            <div className="blog-native-copy">
-              <h1 id="blog-hero-title">Entender mejor<br />tu negocio también<br />es parte de<br /><span>hacerlo crecer.</span></h1>
-              <p>Historias, aprendizajes y herramientas para entender mejor lo que pasa con tus clientes, tus cobros, tu operación y tu crecimiento.</p>
-              <label className="blog-native-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos…" aria-label="Buscar guías o artículos" /></label>
-              <div className="blog-native-filters" aria-label="Filtrar publicaciones">{categories.map((category) => <button key={category} type="button" onClick={() => setActiveCategory(category)} className={activeCategory === category ? "active" : ""}>{category}</button>)}</div>
+          <div className="blog-editorial-grid">
+            <div className="blog-editorial-copy">
+              <p className="blog-editorial-kicker"><span />Bitaxus / notas de operación</p>
+              <h1 id="blog-hero-title">Entender mejor<br />también es <span>operar</span><br />mejor.</h1>
+              <p className="blog-editorial-lede">Historias, aprendizajes y herramientas para entender mejor lo que pasa con tus clientes, tus cobros, tu operación y tu crecimiento.</p>
+              <div className="blog-editorial-tools"><label className="blog-editorial-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos…" aria-label="Buscar guías o artículos" /></label><div className="blog-editorial-filters" aria-label="Filtrar publicaciones">{categories.map((category) => <button key={category} type="button" onClick={() => setActiveCategory(category)} className={activeCategory === category ? "active" : ""}>{category}</button>)}</div></div>
             </div>
-            <article className="blog-native-feature">
-              <img src={asset(whatsappFeature.image)} width="556" height="308" fetchPriority="high" decoding="async" alt="Mover dinero desde WhatsApp: cómo saber si el canal es confiable." />
-              <div className="blog-native-feature-footer"><button type="button" onClick={() => setSelectedArticle(whatsappFeature)}>Leer ahora <ArrowRight /></button></div>
+            <article className="blog-editorial-feature">
+              <div className="blog-editorial-cover"><img src={asset(articles[0].image)} width="1672" height="941" fetchPriority="high" decoding="async" alt="" /><span>01 / Lectura principal</span></div>
+              <div className="blog-editorial-feature-copy"><p>{articles[0].category}</p><h2>{articles[0].title}</h2><button type="button" onClick={() => setSelectedArticle(articles[0])}>Leer artículo <ArrowRight /></button></div>
             </article>
           </div>
         </div>
