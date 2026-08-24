@@ -2,7 +2,7 @@
  * Estilo de referencia: editorial Bitaxus.
  * Fondo negro texturizado, acento rojo de firma, tipografía BELAMOR y tarjetas tecnológicas sobrias.
  */
-import { ArrowRight, Search, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Search, X } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import "./Blog.css";
 import "./BlogOverrides.css";
@@ -76,9 +76,9 @@ export default function Blog() {
     <main className="blog-page">
       <header className="blog-nav">
         <div className="blog-shell blog-nav-inner">
-          <a className="blog-logo" href={asset("/")} aria-label="Bitaxus, ir al inicio"><img src={asset("/2166-3795.webp")} width="117" height="34" alt="Bitaxus" /></a>
-          <nav aria-label="Navegación principal"><a href={asset("/")}>Inicio</a><a href={`${asset("/")}#empresas`}>Empresas</a><a href={`${asset("/")}#personas`}>Personas</a><a className="active" href={blogPath}>Blog</a><a href={`${asset("/")}#contacto`}>Ayuda</a></nav>
-          <div className="blog-nav-actions"><a href={loginUrl}>Iniciar sesión</a><a className="blog-outline-cta" href={`${asset("/")}#contacto`}>Hablemos <ArrowRight /></a></div>
+          <a className="blog-logo" href={asset("/")} aria-label="Bitaxus, ir al inicio"><img src={asset("/2166-3795.webp")} width="196" height="56" alt="Bitaxus" /></a>
+          <nav className="blog-center-nav" aria-label="Navegación principal"><a className="home" href={asset("/")}>Inicio <ChevronDown /></a><a href={`${asset("/")}#empresas`}>Empresas <ChevronDown /></a><a href={`${asset("/")}#personas`}>Personas <ChevronDown /></a><a className="active" href={blogPath}>Blog <ChevronDown /></a><a href={`${asset("/")}#contacto`}>Ayuda <ChevronDown /></a></nav>
+          <div className="blog-nav-actions"><a className="blog-login" href={loginUrl}>Iniciar sesión</a><a className="blog-outline-cta" href={`${asset("/")}#contacto`}>Hablemos <ArrowRight /></a></div>
         </div>
       </header>
 
