@@ -204,7 +204,7 @@ function renderArticleBlocks(article: BlogArticle) {
     else if (line.toLowerCase() === "preguntas frecuentes") block = <h2>Preguntas frecuentes</h2>;
     else if (line.startsWith("Bitaxus ·")) block = <div className="blog-reader-cta"><p className="blog-eyebrow">{line}</p><h3>Cobras. Pagas. Sabes.</h3><p>Una experiencia Bitaxus para conservar el contexto de tus cobros, pagos y movimientos.</p><a href={`${asset("/")}#contacto`} className="blog-primary-cta">Conocer Bitaxus <ArrowRight /></a></div>;
     else if (line.startsWith("👉")) block = <p className="blog-reader-link">{line.replace("👉 ", "")}</p>;
-    else if (faqQuestionIndexes.has(index)) block = <details className="blog-reader-faq-card" open={index === faqIndex + 1}><summary><span>{String(faqQuestionNumbers.get(index) || 1).padStart(2, "0")}</span><strong>{line}</strong><i>+</i></summary><div className="blog-reader-faq-answer"><p>{renderEmphasizedAnswer(lines[index + 1] || "")}</p></div></details>;
+    else if (faqQuestionIndexes.has(index)) block = <details className="blog-reader-faq-card" name="article-faq" open={index === faqIndex + 1} onToggle={(event) => { if (event.currentTarget.open) document.querySelectorAll<HTMLDetailsElement>('details[name="article-faq"]').forEach((detail) => { if (detail !== event.currentTarget) detail.open = false; }); }}><summary><span>{String(faqQuestionNumbers.get(index) || 1).padStart(2, "0")}</span><strong>{line}</strong><i>+</i></summary><div className="blog-reader-faq-answer"><p>{renderEmphasizedAnswer(lines[index + 1] || "")}</p></div></details>;
     else if (isArticleHeading(line, index, lines)) block = <h2>{line}</h2>;
     else block = <p>{line}</p>;
     return <Fragment key={`article-block-${index}`}>{visual}{block}</Fragment>;
