@@ -100,7 +100,7 @@ export default function Blog() {
       <section className="blog-section blog-latest">
         <div className="blog-shell">
           <div className="blog-section-head left"><p className="blog-eyebrow muted">Lo último</p><h2>Lecturas para tener más claridad.</h2></div>
-          {visibleArticles.length ? <div className="blog-card-grid">{visibleArticles.filter((article) => !article.featured).map((article) => <ArticleCard key={article.id} article={article} onRead={() => setSelectedArticle(article)} />)}</div> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
+          {visibleArticles.length ? <div className="blog-card-grid">{visibleArticles.filter((article) => !article.featured).map((article) => <ArticleCard key={article.id} article={article} variant="latest" onRead={() => setSelectedArticle(article)} />)}</div> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
         </div>
       </section>
 
@@ -151,7 +151,11 @@ export default function Blog() {
   );
 }
 
-function ArticleCard({ article, variant = "standard", onRead }: { article: (typeof articles)[number]; variant?: "standard" | "featured" | "wide"; onRead: () => void }) {
+function ArticleCard({ article, variant = "standard", onRead }: { article: (typeof articles)[number]; variant?: "standard" | "featured" | "wide" | "latest"; onRead: () => void }) {
+  if (variant === "latest") {
+    return <article className="blog-article-card latest"><div className="blog-card-media"><img src={asset(article.image)} width="1672" height="941" loading="lazy" decoding="async" alt="" /></div><div className="blog-card-body"><p className="blog-eyebrow">{article.category}</p><h3>{article.title}</h3><p>{article.summary}</p><button type="button" onClick={onRead}>Leer artículo <ArrowRight /></button></div></article>;
+  }
+
   return <article className={`blog-article-card ${variant}`}><img src={asset(article.image)} width="1672" height="941" loading={variant === "featured" ? "eager" : "lazy"} fetchPriority={variant === "featured" ? "high" : "auto"} decoding="async" alt="" /><div className="blog-card-shade" /><div className="blog-article-copy"><h3 className="sr-only">{article.title}</h3><p className="blog-eyebrow">{article.category}</p><button type="button" onClick={onRead}>Leer artículo <ArrowRight /></button></div></article>;
 }
 
