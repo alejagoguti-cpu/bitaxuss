@@ -2,7 +2,7 @@
  * Estilo de referencia: editorial Bitaxus.
  * Alternancia de fondos oscuros y claros como la landing Bitaxus, con acento rojo y titulares BELAMOR.
  */
-import { ArrowRight, ChevronDown, Search, X } from "lucide-react";
+import { ArrowRight, BookOpen, ChevronDown, Compass, Landmark, Lightbulb, Search, Sparkles, X } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import "./Blog.css";
 import "./BlogOverrides.css";
@@ -97,14 +97,14 @@ export default function Blog() {
 
       <section className="blog-section blog-latest">
         <div className="blog-shell">
-          <div className="blog-section-head left"><p className="blog-eyebrow muted">Lo último</p><h2>Lecturas para tener más claridad.</h2></div>
+          <div className="blog-section-head left"><div className="blog-section-kicker"><span className="blog-icon-disc" aria-hidden="true"><Sparkles /></span><p className="blog-eyebrow muted">Lo último</p></div><h2>Lecturas para tener más claridad.</h2></div>
           {visibleArticles.length ? <div className="blog-card-grid">{visibleArticles.filter((article) => !article.featured).map((article) => <ArticleCard key={article.id} article={article} onRead={() => setSelectedArticle(article)} />)}</div> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
         </div>
       </section>
 
       <section className="blog-section blog-capsules">
         <div className="blog-shell">
-          <div className="blog-section-head"><p className="blog-eyebrow">Explora por cápsulas</p><h2>Cuatro formas de mirar tu negocio</h2><p>Cada cápsula reúne los temas que más importan según el momento en el que estás.</p></div>
+          <div className="blog-section-head"><div className="blog-section-kicker"><span className="blog-icon-disc" aria-hidden="true"><Compass /></span><p className="blog-eyebrow">Explora por cápsulas</p></div><h2>Cuatro formas de mirar tu negocio</h2><p>Cada cápsula reúne los temas que más importan según el momento en el que estás.</p></div>
           <div className="blog-capsule-grid">
             <Capsule number="01" title="Control de negocio" copy="Entiende mejor lo que pasa dentro de tu operación." active onClick={() => setActiveCategory("Control de negocio")} />
             <Capsule number="02" title="Emprendimiento" copy="Crecer también cambia la forma de manejar tu empresa." onClick={() => setActiveCategory("Emprendimiento")} />
@@ -116,7 +116,7 @@ export default function Blog() {
 
       <section className="blog-section blog-global">
         <div className="blog-shell">
-          <div className="blog-section-head left"><p className="blog-eyebrow">Bitaxus Global</p><h2>Cuando tu negocio cruza fronteras, hay mucho más que entender.</h2></div>
+          <div className="blog-section-head left"><div className="blog-section-kicker"><span className="blog-icon-disc dark" aria-hidden="true"><Landmark /></span><p className="blog-eyebrow">Bitaxus Global</p></div><h2>Cuando tu negocio cruza fronteras, hay mucho más que entender.</h2></div>
           <div className="blog-global-layout">
             <ArticleCard article={articles[0]} variant="wide" onRead={() => setSelectedArticle(articles[0])} />
             <div className="blog-global-list">
@@ -129,16 +129,16 @@ export default function Blog() {
 
       <section className="blog-section blog-experience">
         <div className="blog-shell blog-experience-grid">
-          <div><p className="blog-eyebrow">Desde la experiencia</p><h2>Muchos de estos temas empezaron antes de Bitaxus.</h2><p>Buena parte de lo que escribimos nace de situaciones reales que hemos visto acompañando empresas y emprendedores: negocios que crecían más rápido de lo que podían controlar, cobros que se enredaban y decisiones que se tomaban sin la información completa.</p><div className="blog-author"><span>AT</span><p><b>Alejandra Torres</b><small>Fundadora de Bitaxus</small></p></div></div>
+          <div><div className="blog-section-kicker"><span className="blog-icon-disc" aria-hidden="true"><Landmark /></span><p className="blog-eyebrow">Desde la experiencia</p></div><h2>Muchos de estos temas empezaron antes de Bitaxus.</h2><p>Buena parte de lo que escribimos nace de situaciones reales que hemos visto acompañando empresas y emprendedores: negocios que crecían más rápido de lo que podían controlar, cobros que se enredaban y decisiones que se tomaban sin la información completa.</p><div className="blog-author"><span>AT</span><p><b>Alejandra Torres</b><small>Fundadora de Bitaxus</small></p></div></div>
           <div className="blog-experience-cards">{["Lo que aprendí acompañando negocios que crecían más rápido de lo que podían controlar", "El día que entendí por qué facturar no es lo mismo que recibir", "Cobrar bien no es incomodar: cómo lo aprendí como consultora"].map((title, index) => <button key={title} type="button" onClick={() => setSelectedArticle(articles[index + 1] || articles[0])}><span>0{index + 1}</span><strong>{title}</strong><ArrowRight /></button>)}</div>
         </div>
       </section>
 
       <section className="blog-section blog-explains">
-        <div className="blog-shell"><div className="blog-section-head"><p className="blog-eyebrow">Bitaxus explica</p><h2>Hay cosas que suenan complicadas hasta que alguien las explica bien.</h2></div><div className="blog-explains-grid">{["¿Qué es la tesorería de una empresa?", "¿Qué diferencia hay entre facturado y recibido?", "¿Qué es cartera?", "¿Qué significa trazabilidad de un pago?"].map((title, index) => <button key={title} type="button" onClick={() => setSelectedArticle(articles[index % articles.length])}><span>0{index + 1}</span><strong>{title}</strong><ArrowRight /></button>)}</div></div>
+        <div className="blog-shell"><div className="blog-section-head"><div className="blog-section-kicker"><span className="blog-icon-disc" aria-hidden="true"><Lightbulb /></span><p className="blog-eyebrow">Bitaxus explica</p></div><h2>Hay cosas que suenan complicadas hasta que alguien las explica bien.</h2></div><div className="blog-explains-grid">{["¿Qué es la tesorería de una empresa?", "¿Qué diferencia hay entre facturado y recibido?", "¿Qué es cartera?", "¿Qué significa trazabilidad de un pago?"].map((title, index) => <button key={title} type="button" onClick={() => setSelectedArticle(articles[index % articles.length])}><span>0{index + 1}</span><strong>{title}</strong><ArrowRight /></button>)}</div></div>
       </section>
 
-      <section className="blog-section blog-news-section"><div className="blog-shell"><div className="blog-news"><div><p className="blog-eyebrow">Ideas de Bitaxus</p><h2>Ideas para entender mejor el negocio que estás construyendo.</h2><p>Recibe nuevos artículos, aprendizajes y guías de Bitaxus.</p></div><form onSubmit={submitNewsletter}><input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="tu@empresa.com" aria-label="Correo electrónico" /><button type="submit">Suscribirme <ArrowRight /></button><small role="status">{newsletterMessage || "Al suscribirte, aceptas nuestra política de privacidad."}</small></form></div></div></section>
+      <section className="blog-section blog-news-section"><div className="blog-shell"><div className="blog-news"><div><div className="blog-section-kicker"><span className="blog-icon-disc dark" aria-hidden="true"><BookOpen /></span><p className="blog-eyebrow">Ideas de Bitaxus</p></div><h2>Ideas para entender mejor el negocio que estás construyendo.</h2><p>Recibe nuevos artículos, aprendizajes y guías de Bitaxus.</p></div><form onSubmit={submitNewsletter}><input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="tu@empresa.com" aria-label="Correo electrónico" /><button type="submit">Suscribirme <ArrowRight /></button><small role="status">{newsletterMessage || "Al suscribirte, aceptas nuestra política de privacidad."}</small></form></div></div></section>
 
       <section className="blog-product-cta"><div className="blog-shell"><h2>Leerlo ayuda. Tenerlo claro todos los días, más.</h2><p>Bitaxus está construyendo una experiencia para ayudarte a mantener más contexto sobre tus cobros, pagos y movimientos mientras tu negocio crece.</p><a href={asset("/")} className="blog-primary-cta">Conocer Bitaxus <ArrowRight /></a></div></section>
 
