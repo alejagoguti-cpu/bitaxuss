@@ -2,8 +2,8 @@
  * Estilo de referencia: editorial Bitaxus.
  * Alternancia de fondos oscuros y claros como la landing Bitaxus, con acento rojo y titulares BELAMOR.
  */
-import { ArrowRight, ChevronDown, Search } from "lucide-react";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { ArrowLeft, ArrowRight, ChevronDown, Search } from "lucide-react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import "./Blog.css";
 import "./BlogOverrides.css";
@@ -18,6 +18,11 @@ export default function Blog() {
   const [, setLocation] = useLocation();
   const [email, setEmail] = useState("");
   const [newsletterMessage, setNewsletterMessage] = useState("");
+  const latestCarouselRef = useRef<HTMLDivElement>(null);
+
+  const scrollLatest = (direction: number) => {
+    latestCarouselRef.current?.scrollBy({ left: direction * Math.max(300, latestCarouselRef.current.clientWidth * 0.72), behavior: "smooth" });
+  };
 
   useEffect(() => {
     document.title = "Blog Bitaxus | Ideas para entender mejor tu negocio";
@@ -63,8 +68,8 @@ export default function Blog() {
 
       <section className="blog-section blog-latest">
         <div className="blog-shell">
-          <div className="blog-section-head left"><p className="blog-eyebrow muted">Lo último</p><h2>Lecturas para tener más claridad.</h2></div>
-          {visibleArticles.length ? <div className="blog-card-grid">{visibleArticles.filter((article) => !article.featured).map((article) => <ArticleCard key={article.id} article={article} variant="latest" href={`${blogPath}/article/${article.id}`} />)}</div> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
+          <div className="blog-latest-heading"><div className="blog-section-head left"><p className="blog-eyebrow muted">Lo último</p><h2>Lecturas para tener más claridad.</h2></div><div className="blog-carousel-controls" aria-label="Navegar por artículos"><button type="button" onClick={() => scrollLatest(-1)} aria-label="Artículos anteriores"><ArrowLeft /></button><button type="button" onClick={() => scrollLatest(1)} aria-label="Siguientes artículos"><ArrowRight /></button></div></div>
+          {visibleArticles.length ? <div className="blog-card-carousel" ref={latestCarouselRef} role="list">{visibleArticles.map((article) => <div className="blog-card-slide" role="listitem" key={article.id}><ArticleCard article={article} variant="latest" href={`${blogPath}/article/${article.id}`} /></div>)}</div> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
         </div>
       </section>
 
