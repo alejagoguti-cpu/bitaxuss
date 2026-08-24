@@ -698,3 +698,16 @@
 @media (max-width: 620px) {
   .article-page .reader-reference-frame.reader-reference-light { box-shadow: 0 12px 26px rgba(35,25,22,.055); }
 }
+
+
+/* Corrección de contraste: las reglas antiguas para spans no deben ocultar los iconos. */
+.article-page .reader-reference-frame .reader-visual-icon,
+.article-page .reader-reference-frame .reader-reference-column > .reader-visual-icon,
+.article-page .reader-reference-frame .reader-reference-flow > div > .reader-visual-icon,
+.article-page .reader-reference-frame .reader-reference-timeline > div > .reader-visual-icon,
+.article-page .reader-reference-frame .reader-reference-checklist > div > .reader-visual-icon { display: grid !important; color: #a90005 !important; }
+.article-page .reader-reference-frame .reader-visual-icon svg { display: block; color: currentColor !important; stroke: currentColor !important; opacity: 1 !important; visibility: visible !important; }
+.article-page .reader-reference-frame .reader-visual-icon.reader-visual-icon-red { color: #fff !important; background: #ba0b0d !important; }
+.article-page .reader-reference-frame .reader-visual-icon.reader-visual-icon-red svg { color: #fff !important; stroke: #fff !important; }
+.article-page .reader-reference-frame.reader-reference-dark .reader-visual-icon:not(.reader-visual-icon-red) { color: #a90005 !important; background: #fff !important; }
+.article-page .reader-reference-frame.reader-reference-light .reader-visual-icon:not(.reader-visual-icon-red) { color: #a90005 !important; background: #fff !important; }
