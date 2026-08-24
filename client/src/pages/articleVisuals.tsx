@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { ArrowUpRight, BadgeCheck, ChartNoAxesCombined, CircleDollarSign, Clock3, FileCheck2, Gauge, ListChecks, Search, ShieldCheck, UsersRound, WalletCards } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type { BlogArticle } from "./blogData";
 
 type VisualPreset = {
@@ -28,14 +30,23 @@ const visualPresets: Record<string, VisualPreset> = {
   "plazo-cliente": { eyebrow: "DOS FORMAS DE DAR PLAZO", title: "Esperar también es una decisión financiera.", leftLabel: "NEGOCIO A", leftTitle: "Acepta sin medir", leftCopy: "Financia al cliente sin ver cuánto tiempo puede sostener esa espera.", rightLabel: "NEGOCIO B", rightTitle: "Decide con contexto", rightCopy: "Conoce el impacto del plazo y protege la continuidad de su operación.", conclusion: "Cada plazo cambia la velocidad del negocio.", flow: ["Venta", "Espera", "Caja"], timeline: ["Se acuerda el plazo", "El dinero no llega", "La operación espera"], checklist: ["Cuánto esperas", "Qué comprometes", "Qué proteges"] },
 };
 
+const comparisonIcons: [LucideIcon, LucideIcon] = [CircleDollarSign, Gauge];
+const flowIcons: LucideIcon[] = [Search, ListChecks, ChartNoAxesCombined];
+const timelineIcons: LucideIcon[] = [Clock3, FileCheck2, BadgeCheck];
+const checklistIcons: LucideIcon[] = [WalletCards, ShieldCheck, UsersRound];
+
+function VisualIcon({ icon: Icon, tone = "light" }: { icon: LucideIcon; tone?: "light" | "red" }) {
+  return <span className={`reader-visual-icon reader-visual-icon-${tone}`} aria-hidden="true"><Icon size={23} strokeWidth={1.9} /></span>;
+}
+
 function ReferenceFrame({ eyebrow, title, children, conclusion }: { eyebrow: string; title: string; children: ReactNode; conclusion?: string }) {
   return <section className="reader-reference-frame"><p className="reader-reference-eyebrow">{eyebrow}</p><h3>{title}</h3>{children}{conclusion && <p className="reader-reference-conclusion">{conclusion}</p>}</section>;
 }
 
 export function ArticleVisuals({ article, part }: { article: BlogArticle; part: 1 | 2 | 3 | 4 }) {
   const preset = visualPresets[article.id] || visualPresets["control-ventas"];
-  if (part === 1) return <ReferenceFrame eyebrow={preset.eyebrow} title={preset.title} conclusion={preset.conclusion}><div className="reader-reference-columns"><div className="reader-reference-column"><span>{preset.leftLabel}</span><strong>{preset.leftTitle}</strong><p>{preset.leftCopy}</p></div><div className="reader-reference-column accent"><span>{preset.rightLabel}</span><strong>{preset.rightTitle}</strong><p>{preset.rightCopy}</p></div></div></ReferenceFrame>;
-  if (part === 2) return <ReferenceFrame eyebrow="RECORRIDO DE LA OPERACIÓN" title="Lo que ocurre entre una decisión y su resultado."><div className="reader-reference-flow">{preset.flow.map((item, index) => <div key={item}><span>0{index + 1}</span><strong>{item}</strong>{index < 2 && <i>→</i>}</div>)}</div></ReferenceFrame>;
-  if (part === 3) return <ReferenceFrame eyebrow="SECUENCIA DEL NEGOCIO" title="Cada momento cambia lo que puedes decidir."><div className="reader-reference-timeline">{preset.timeline.map((item, index) => <div key={item}><span>{index + 1}</span><p>{item}</p></div>)}</div></ReferenceFrame>;
-  return <ReferenceFrame eyebrow="PREGUNTAS PARA LEER MEJOR" title="Tres señales antes de tomar la siguiente decisión."><div className="reader-reference-checklist">{preset.checklist.map((item, index) => <div key={item}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></div>)}</div></ReferenceFrame>;
+  if (part === 1) return <ReferenceFrame eyebrow={preset.eyebrow} title={preset.title} conclusion={preset.conclusion}><div className="reader-reference-columns"><div className="reader-reference-column"><VisualIcon icon={comparisonIcons[0]} /><span>{preset.leftLabel}</span><strong>{preset.leftTitle}</strong><p>{preset.leftCopy}</p></div><div className="reader-reference-column accent"><VisualIcon icon={comparisonIcons[1]} tone="red" /><span>{preset.rightLabel}</span><strong>{preset.rightTitle}</strong><p>{preset.rightCopy}</p></div></div></ReferenceFrame>;
+  if (part === 2) return <ReferenceFrame eyebrow="RECORRIDO DE LA OPERACIÓN" title="Lo que ocurre entre una decisión y su resultado."><div className="reader-reference-flow">{preset.flow.map((item, index) => <div key={item}><VisualIcon icon={flowIcons[index]} tone={index === 1 ? "red" : "light"} /><span>0{index + 1}</span><strong>{item}</strong>{index < 2 && <i><ArrowUpRight size={18} /></i>}</div>)}</div></ReferenceFrame>;
+  if (part === 3) return <ReferenceFrame eyebrow="SECUENCIA DEL NEGOCIO" title="Cada momento cambia lo que puedes decidir."><div className="reader-reference-timeline">{preset.timeline.map((item, index) => <div key={item}><VisualIcon icon={timelineIcons[index]} tone={index === 1 ? "red" : "light"} /><span>{index + 1}</span><p>{item}</p></div>)}</div></ReferenceFrame>;
+  return <ReferenceFrame eyebrow="PREGUNTAS PARA LEER MEJOR" title="Tres señales antes de tomar la siguiente decisión."><div className="reader-reference-checklist">{preset.checklist.map((item, index) => <div key={item}><VisualIcon icon={checklistIcons[index]} tone={index === 1 ? "red" : "light"} /><span>{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></div>)}</div></ReferenceFrame>;
 }
