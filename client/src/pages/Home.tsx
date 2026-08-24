@@ -3,9 +3,10 @@
  * Fondo negro editorial, rojo #ba0b0d como firma de acción y composición tecnológica asimétrica.
  */
 import { ArrowRight, ChevronDown, Menu, Send, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const navLinks = ["Inicio", "Empresas", "Personas", "Blog", "Ayuda"];
+const getPageAsset = (source: string) => `${import.meta.env.BASE_URL}${source.replace(/^\//, "")}`;
 
 const operations = [
   { title: "Recaudos", text: "Programa y registra los pagos que esperas recibir.", icon: "/2209-865.svg" },
@@ -36,6 +37,33 @@ function ScrollLink({ href, children, className = "" }: { href: string; children
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeModule, setActiveModule] = useState(0);
+  useEffect(() => {
+    document.querySelectorAll<HTMLImageElement>('img[src^="/"]').forEach((image) => {
+      image.src = getPageAsset(image.getAttribute("src") || "");
+    });
+
+    const setBackground = (selector: string, asset: string) => {
+      document.querySelectorAll<HTMLElement>(selector).forEach((element) => {
+        element.style.backgroundImage = `url('${getPageAsset(asset)}')`;
+      });
+    };
+
+    setBackground(".agent-section", "/2189-770.webp");
+    setBackground(".global-section", "/2190-827.webp");
+    setBackground(".audience-card.company", "/2189-794.webp");
+    setBackground(".audience-card.people", "/2189-775.webp");
+    setBackground(".technology-section", "/2190-825.webp");
+    setBackground(".contact-section", "/2288-19.webp");
+    setBackground(".contact-panel", "/2166-4425.webp");
+    setBackground(".footer", "/2288-19.webp");
+
+    const fontStyle = document.createElement("style");
+    fontStyle.textContent = [300, 400, 500, 600, 700]
+      .map((weight) => `@font-face{font-family:'Belamor';src:url('${getPageAsset(`/fonts/Belamor-${weight === 300 ? "Light" : weight === 400 ? "Regular" : weight === 500 ? "Medium" : weight === 600 ? "SemiBold" : "Bold"}.otf`)}') format('opentype');font-weight:${weight};font-style:normal;font-display:swap;}`)
+      .join("");
+    document.head.appendChild(fontStyle);
+    return () => fontStyle.remove();
+  }, []);
   const modules: Array<[string, string, string[]]> = [
     ["Recaudos", "Canales habilitados para recibir y relacionar los pagos de tus clientes.", ["QR Dinámico", "Transferencias", "Tarjetas", "Conciliación"]],
     ["Pagos y dispersiones", "Organiza pagos individuales o múltiples desde una sola experiencia.", ["Pagos programados", "Dispersión masiva", "Beneficiarios", "Comprobantes"]],
