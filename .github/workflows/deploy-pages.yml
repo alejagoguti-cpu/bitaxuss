@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir -p ./dist/public/blog
           cp ./dist/public/index.html ./dist/public/blog/index.html
-          for article in plataformas exterior primer-pago tasa; do
+          for article in control-ventas gastos-operacion cierre-mes empresa-crecio contratar-mas delegar-control cobrar-parte-vender condiciones-pago plazo-cliente; do
             mkdir -p "./dist/public/blog/article/${article}"
             cp ./dist/public/index.html "./dist/public/blog/article/${article}/index.html"
           done

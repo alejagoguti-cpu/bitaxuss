@@ -10,7 +10,7 @@ import "./BlogOverrides.css";
 
 import { articles, asset, blogPath, BlogArticle, loginUrl } from "./blogData";
 
-const categories = ["Todos", "Flujo de Caja", "Pagos y Cobros", "Estrategia"];
+const categories = ["Todos", "Control de negocio", "Emprendimiento", "Clientes y ventas"];
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("Todos");
@@ -28,10 +28,7 @@ export default function Blog() {
   const visibleArticles = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return articles.filter((article) => {
-      const categoryMatches = activeCategory === "Todos"
-        || (activeCategory === "Flujo de Caja" && article.category === "Control de negocio")
-        || (activeCategory === "Pagos y Cobros" && article.category === "Global")
-        || (activeCategory === "Estrategia" && article.category === "Emprendimiento");
+      const categoryMatches = activeCategory === "Todos" || article.category === activeCategory;
       const searchMatches = !normalizedQuery || `${article.title} ${article.summary} ${article.category}`.toLowerCase().includes(normalizedQuery);
       return categoryMatches && searchMatches;
     });
@@ -118,32 +115,39 @@ export default function Blog() {
   );
 }
 
+const isArticleHeading = (line: string, index: number, lines: string[]) => {
+  if (line.length < 18 || line.length > 105) return false;
+  if (/^[¿?]/.test(line) || /[.!,:;]$/.test(line)) return false;
+  if (/^(Por |Durante |Cuando |Y |Pero |No |Es |La |Una |Un |A |En |Para |Si |También |Porque |Eso |Ahí |Al |Con |Lo |Los |Las |Hay |Puede |Muchas |Parte |Desde |Cada |Mientras |Por eso|De hecho)/i.test(line)) return false;
+  return index > 0 && lines[index - 1].length > 80;
+};
+
+function renderArticleBlocks(article: BlogArticle) {
+  const lines = article.content.split(/\n+/).map((line) => line.trim()).filter(Boolean);
+  const faqIndex = lines.findIndex((line) => line.toLowerCase() === "preguntas frecuentes");
+  return lines.map((line, index) => {
+    if (line.toLowerCase() === "preguntas frecuentes") return <h2 key={`heading-${index}`}>Preguntas frecuentes</h2>;
+    if (line.startsWith("Bitaxus ·")) return <div className="blog-reader-cta" key={`cta-${index}`}><p className="blog-eyebrow">{line}</p><h3>Cobras. Pagas. Sabes.</h3><p>Una experiencia Bitaxus para conservar el contexto de tus cobros, pagos y movimientos.</p><a href={`${asset("/")}#contacto`} className="blog-primary-cta">Conocer Bitaxus <ArrowRight /></a></div>;
+    if (line.startsWith("👉")) return <p className="blog-reader-link" key={`link-${index}`}>{line.replace("👉 ", "")}</p>;
+    if (faqIndex >= 0 && index > faqIndex && line.endsWith("?") && line.length < 180) return <h3 className="blog-reader-faq-question" key={`faq-${index}`}>{line}</h3>;
+    if (isArticleHeading(line, index, lines)) return <h2 key={`heading-${index}`}>{line}</h2>;
+    return <p key={`paragraph-${index}`}>{line}</p>;
+  });
+}
+
 export function ArticleReader({ article, onClose }: { article: BlogArticle; onClose: () => void }) {
-  const isCashflow = article.id === "plataformas" || article.id === "tasa";
   return <div className="blog-reader-page" role="presentation"><article className="blog-reader" role="article" aria-label={article.title}>
     <div className="blog-reader-bar"><button type="button" className="blog-reader-back" onClick={onClose}><span>←</span> Volver al blog</button><span className="blog-reader-mark">BITAXUS <i>LECTURA</i></span></div>
-    <header className="blog-reader-header"><p className="blog-eyebrow">{article.category}</p><h1>{article.title}</h1><p className="blog-reader-dek">{article.summary}</p><div className="blog-reader-meta"><span>Por <b>Alejandra Torres</b></span><span>Fundadora de Bitaxus</span><span>{isCashflow ? "7 min de lectura" : "5 min de lectura"}</span></div></header>
+    <header className="blog-reader-header"><p className="blog-eyebrow">{article.category}</p><h1>{article.title}</h1><p className="blog-reader-dek">{article.summary}</p><div className="blog-reader-meta"><span>Por <b>Alejandra Torres</b></span><span>Fundadora de Bitaxus</span><span>7 min de lectura</span></div></header>
     <figure className="blog-reader-hero"><img src={asset(article.image)} alt="" /><figcaption>Una mirada Bitaxus para entender mejor lo que ocurre detrás de cada operación.</figcaption></figure>
-    <div className="blog-reader-layout"><aside className="blog-reader-toc"><span>En este artículo</span><a href="#ventas">La trampa de mirar solo las ventas</a><a href="#facturado">Facturado, recibido y lo que te queda</a><a href="#cartera">Cobrar tarde también tiene un costo</a><a href="#dos-negocios">Dos negocios que venden distinto</a><a href="#que-mirar">Qué mirar para saber cómo estás</a></aside><div className="blog-reader-prose">
-      <p id="ventas">Cerraste un buen mes. Las ventas subieron, el equipo está ocupado y la sensación general es de que el negocio va bien. Y, sin embargo, cuando toca pagar a proveedores o cubrir la nómina, la cuenta no cuadra con esa sensación.</p>
-      <p>No es raro. Es una de las situaciones más comunes en negocios que están creciendo: <strong>vender más y, aun así, sentir que no queda más</strong>. La respuesta casi nunca está en las ventas. Está en lo que pasa entre que vendes y que el ingreso realmente queda disponible.</p>
-      <h2>La trampa de mirar solo las ventas</h2><p>Las ventas son la métrica más fácil de celebrar y la más incompleta para tomar decisiones. Miden lo que prometiste entregar, no lo que ya entró ni lo que te queda después de tus compromisos.</p><p>Cuando la única brújula es “cuánto vendimos”, es fácil crecer hacia un lugar incómodo: más operación, más obligaciones y menos claridad sobre el terreno que pisas.</p>
-      <h2 id="facturado">Facturado, recibido y lo que realmente te queda</h2><p>Tres palabras que solemos usar como sinónimos y que significan cosas muy distintas. Separarlas es, muchas veces, el primer paso para entender el negocio de verdad.</p>
-      <div className="reader-diagram"><p className="blog-eyebrow">Concepto Bitaxus</p><h3>Facturado <b>≠</b> Recibido <b>≠</b> Lo que te quedó</h3><div className="reader-funnel"><div className="reader-funnel-row"><div><strong>Facturado</strong><small>Lo que vendiste.</small></div><span className="reader-funnel-bar full">100%</span></div><div className="reader-funnel-row"><div><strong>Recibido</strong><small>Lo que efectivamente entró.</small></div><span className="reader-funnel-bar received">Menos lo que aún te deben</span></div><div className="reader-funnel-row"><div><strong>Lo que quedó</strong><small>Lo disponible después de compromisos y salidas.</small></div><span className="reader-funnel-bar real">Lo real</span></div></div></div>
-      <p>Un negocio puede facturar mucho, recibir a destiempo y quedarse con muy poco disponible. En el día a día, lo único que puedes usar para pagar y decidir es esa última franja: <strong>lo que quedó</strong>.</p>
-      <h2 id="cartera">Cobrar tarde también tiene un costo</h2><p>Cuando una venta se convierte en un pago que “ya llegará”, pasa a ser cartera: dinero que es tuyo pero que todavía no está disponible. Mientras tanto, tus obligaciones no esperan.</p><p>Esa diferencia de tiempos —cobras en 45 días pero pagas en 15— es la que aprieta la caja de muchos negocios sanos en el papel. No es un problema de rentabilidad; es un problema de <strong>cuándo</strong> entra cada cosa.</p>
-      <blockquote>Vender más no significa automáticamente que tu negocio esté mejor.</blockquote>
-      <h2 id="dos-negocios">Dos negocios que venden distinto</h2><p>Para verlo con claridad, vale la pena comparar dos negocios que, sobre el papel, podrían parecer buenos por igual:</p>
-      <div className="reader-comparison"><div className="reader-comparison-grid"><div><span>Negocio A</span><strong>Vende más</strong><ul><li>Cobra tarde</li><li>Tiene cartera acumulada</li><li>No conoce claramente sus compromisos</li></ul></div><div className="better"><span>Negocio B</span><strong>Vende menos</strong><ul><li>Cobra mejor</li><li>Conoce qué está pendiente</li><li>Tiene mayor claridad sobre su operación</li></ul></div></div><p>Más ventas no siempre significan una operación más saludable.</p></div>
-      <p>El Negocio A se ve mejor un lunes por la mañana. El Negocio B duerme mejor. Y a mediano plazo, la claridad suele ganarle al volumen.</p>
-      <h2 id="que-mirar">Qué mirar para saber cómo está de verdad tu negocio</h2><p>No hace falta un tablero complejo. Con mirar de cerca unas pocas cosas ya cambia la conversación: cuánto de lo que facturaste ya entró, cuánto te deben y desde cuándo, qué compromisos tienes en las próximas semanas y qué te queda disponible después de todo eso.</p><p>Cuando esas respuestas están a la mano, dejas de decidir por sensación y empiezas a decidir por lo que realmente está pasando.</p>
-      <div className="blog-reader-cta"><p className="blog-eyebrow">Cómo lo estamos abordando en Bitaxus</p><h3>Este es uno de los problemas que encontramos repetidamente acompañando negocios.</h3><p>Bitaxus está construyendo una experiencia para ayudarte a mantener a la mano lo que pasa con tus cobros, pagos y movimientos.</p><a href={`${asset("/")}#contacto`} className="blog-primary-cta" onClick={onClose}>Conocer Bitaxus <ArrowRight /></a></div>
-      <h2>Preguntas frecuentes</h2><div className="blog-reader-faq"><details open><summary>¿Facturar es lo mismo que recibir?<span>+</span></summary><p>No. Facturar es registrar una venta y el compromiso de que te paguen; recibir es cuando ese pago efectivamente entra.</p></details><details><summary>¿Qué es la cartera de un negocio?<span>+</span></summary><p>Es el conjunto de ventas que ya hiciste pero todavía no te han pagado. Es dinero tuyo, pero no disponible.</p></details><details><summary>¿Cómo sé cuánto me queda realmente?<span>+</span></summary><p>Parte de lo que efectivamente recibiste y resta tus compromisos y salidas de las próximas semanas.</p></details><details><summary>¿Vender más siempre es bueno?<span>+</span></summary><p>Vender más es bueno cuando viene acompañado de cobrar bien y tener claridad sobre lo que queda.</p></details></div>
-      <h2>Vender más está bien. Saber qué te queda, mejor.</h2><p>Crecer no es el problema. El problema es crecer a ciegas, celebrando ventas mientras la caja cuenta otra historia. Mirar de cerca lo que facturas, lo que recibes y lo que te queda te hace entender mejor el negocio que ya tienes entre manos.</p><div className="blog-reader-author"><div className="blog-reader-avatar">AT</div><div><p className="blog-eyebrow">Sobre la autora</p><h3>Alejandra Torres</h3><span>Fundadora de Bitaxus</span><p>Parte de Bitaxus nace de necesidades que Alejandra ha visto repetirse mientras las empresas crecen y necesitan entender mejor lo que ocurre dentro de su negocio.</p></div></div>
+    <div className="blog-reader-layout"><aside className="blog-reader-toc"><span>En este artículo</span><a href="#inicio">Introducción</a><a href="#contenido">La idea central</a><a href="#faq">Preguntas frecuentes</a><a href="#cierre">Cierre</a></aside><div className="blog-reader-prose" id="contenido">
+      <p id="inicio">{article.summary}</p>
+      {renderArticleBlocks(article)}
+      <div id="faq" />
+      <div id="cierre" />
     </div></div>
   </article></div>;
 }
-
 function ArticleCard({ article, variant = "standard", href }: { article: (typeof articles)[number]; variant?: "standard" | "featured" | "wide" | "latest"; href: string }) {
   if (variant === "latest") {
     return <article className="blog-article-card latest"><div className="blog-card-media"><img src={asset(article.image)} width="1672" height="941" loading="lazy" decoding="async" alt="" /></div><div className="blog-card-body"><p className="blog-eyebrow">{article.category}</p><h3>{article.title}</h3><p>{article.summary}</p><a className="blog-article-read" href={href}>Leer artículo <ArrowRight /></a></div></article>;
