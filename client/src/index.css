@@ -22,6 +22,9 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: #000; }
 body { margin: 0; min-width: 320px; background: #000; color: #fbf9f8; font-family: Inter, sans-serif; }
+.chat-input input { flex: 1; min-width: 0; padding: 11px 16px; border: 0; border-radius: 999px; color: #1b1c1c; outline: 0; background: #fff; }
+.chat-feedback { min-height: 38px; margin: 0; padding: 10px 16px; color: #34635d; background: #eff8f5; font-size: 11px; line-height: 1.4; }
+.exchange-notice { margin: 14px 0 0; color: rgba(255,255,255,.78); font-size: 12px; line-height: 1.5; }
 button, input { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 a { color: inherit; text-decoration: none; }
