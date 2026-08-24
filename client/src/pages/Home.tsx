@@ -9,7 +9,7 @@ const navLinks = [
   { label: "Inicio", href: "#inicio" },
   { label: "Empresas", href: "#empresas" },
   { label: "Personas", href: "#personas" },
-  { label: "Blog", href: "#tecnologia" },
+  { label: "Blog", href: "blog" },
   { label: "Ayuda", href: "#contacto" },
 ];
 const getPageAsset = (source: string) => `${import.meta.env.BASE_URL}${source.replace(/^\//, "")}`;
@@ -77,7 +77,7 @@ export default function Home() {
           <ScrollLink href="#inicio" className="hero-hotspot home">Inicio</ScrollLink>
           <ScrollLink href="#empresas" className="hero-hotspot empresas">Empresas</ScrollLink>
           <ScrollLink href="#personas" className="hero-hotspot personas">Personas</ScrollLink>
-          <ScrollLink href="#tecnologia" className="hero-hotspot blog">Blog</ScrollLink>
+          <a href="blog" className="hero-hotspot blog">Blog</a>
           <ScrollLink href="#contacto" className="hero-hotspot ayuda">Ayuda</ScrollLink>
           <a className="hero-hotspot login" href={loginUrl}>Iniciar sesión</a>
           <ScrollLink href="#contacto" className="hero-hotspot speak">Hablemos</ScrollLink>
@@ -194,7 +194,7 @@ export default function Home() {
 
 function FooterColumn({ title, links }: { title: string; links: string[] }) {
   const destinations: Record<string, string> = {
-    "Inicio": "#inicio", "Empresas": "#empresas", "Personas": "#personas", "Bitaxus Global": "#global", "Pioneros": "#pioneros", "Blog": "#tecnologia", "Ayuda": "#contacto", "Recaudos": "#tecnologia", "Pagos y dispersiones": "#tecnologia", "Integraciones API": "#tecnologia", "Orquestación": "#tecnologia", "Agente Bitaxus": "#agente", "Iniciar sesión": loginUrl,
+    "Inicio": "#inicio", "Empresas": "#empresas", "Personas": "#personas", "Bitaxus Global": "#global", "Pioneros": "#pioneros", "Blog": "blog", "Ayuda": "#contacto", "Recaudos": "#tecnologia", "Pagos y dispersiones": "#tecnologia", "Integraciones API": "#tecnologia", "Orquestación": "#tecnologia", "Agente Bitaxus": "#agente", "Iniciar sesión": loginUrl,
   };
   return <div className="footer-column"><h4>{title}</h4>{links.map((link) => <a href={destinations[link] || "#contacto"} key={link}>{link}</a>)}</div>;
 }

@@ -1,0 +1,7 @@
+/* Ajustes finales: las portadas ya contienen el copy editorial; se evita duplicarlo sobre la imagen. */
+.blog-hero h1 { max-width: 630px; font-size: clamp(34px, 4vw, 53px); line-height: 1.1; }
+.blog-card-shade { background: linear-gradient(0deg, rgba(0,0,0,.62) 3%, rgba(0,0,0,.02) 76%); }
+.blog-article-copy, .blog-article-card.featured .blog-article-copy { right: 22px; bottom: 22px; left: 22px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+.blog-article-copy .blog-eyebrow { margin: 0; padding: 7px 10px; border: 1px solid rgba(255,255,255,.32); border-radius: 999px; color: #fff; background: rgba(0,0,0,.42); backdrop-filter: blur(4px); }
+.blog-article-copy button { margin: 0; }
+@media (max-width: 620px) { .blog-hero h1 { font-size: 38px; }.blog-article-copy, .blog-article-card.featured .blog-article-copy { right: 18px; bottom: 18px; left: 18px; } }

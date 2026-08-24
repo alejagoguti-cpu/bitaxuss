@@ -1,6 +1,7 @@
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import Blog from "./pages/Blog";
 import Home from "./pages/Home";
 
 const appBasePath = import.meta.env.BASE_URL === "/"
@@ -10,6 +11,7 @@ const appBasePath = import.meta.env.BASE_URL === "/"
 function Router() {
   return (
     <Switch>
+      <Route path={`${appBasePath}/blog`} component={Blog} />
       <Route path={appBasePath || "/"} component={Home} />
       {appBasePath && <Route path={`${appBasePath}/`} component={Home} />}
       <Route path={"/404"} component={NotFound} />
