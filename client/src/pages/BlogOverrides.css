@@ -363,8 +363,8 @@
 }
 
 
-/* Rediseño editorial del módulo Bitaxus Global. */
-.blog-global { background: #070606; }
+/* Rediseño editorial del módulo Bitaxus Global: conserva el fondo original de Bitaxus. */
+.blog-global { background: #000 url('/2190-827.webp') center/cover no-repeat; }
 .blog-global .blog-shell { width: min(1160px, calc(100% - 48px)); }
 .blog-global .blog-section-head.left { max-width: 780px; margin-bottom: 34px; }
 .blog-global .blog-section-head .blog-eyebrow { margin-bottom: 13px; color: #ef4437; }
