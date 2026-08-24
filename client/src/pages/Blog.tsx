@@ -2,7 +2,7 @@
  * Estilo de referencia: editorial Bitaxus.
  * Alternancia de fondos oscuros y claros como la landing Bitaxus, con acento rojo y titulares BELAMOR.
  */
-import { ArrowRight, Search, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Search, X } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import "./Blog.css";
 import "./BlogOverrides.css";
@@ -45,6 +45,14 @@ const articles = [
 
 const categories = ["Todos", "Flujo de Caja", "Pagos y Cobros", "Estrategia"];
 
+const whatsappFeature = {
+  id: "whatsapp-feature",
+  category: "Pagos y Cobros",
+  title: "Mover dinero desde WhatsApp: cómo saber si el canal es confiable",
+  summary: "Una guía para entender qué señales revisar antes de mover dinero por un canal de mensajería.",
+  image: "/blog-whatsapp-feature-header.webp?v=2",
+};
+
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const [query, setQuery] = useState("");
@@ -77,13 +85,26 @@ export default function Blog() {
 
   return (
     <main className="blog-page">
-      <section className="blog-figma-hero" aria-labelledby="blog-hero-title" data-node-id="2495-2">
-        <h1 id="blog-hero-title" className="sr-only">Entender mejor tu negocio también es parte de hacerlo crecer.</h1>
-        <img className="blog-figma-hero-render" src={asset("/blog-figma-2495-hero.webp")} width="1313" height="745" fetchPriority="high" decoding="async" alt="Hero de Bitaxus Blog: entender mejor tu negocio también es parte de hacerlo crecer." />
-        <nav className="blog-figma-nav-hotspots" aria-label="Navegación principal"><a href={asset("/")} className="blog-figma-hotspot home">Inicio</a><a href={`${asset("/")}#empresas`} className="blog-figma-hotspot companies">Empresas</a><a href={`${asset("/")}#personas`} className="blog-figma-hotspot people">Personas</a><a href={blogPath} className="blog-figma-hotspot active">Blog</a><a href={`${asset("/")}#contacto`} className="blog-figma-hotspot help">Ayuda</a><a href={loginUrl} className="blog-figma-hotspot login">Iniciar sesión</a><a href={`${asset("/")}#contacto`} className="blog-figma-hotspot contact">Hablemos</a></nav>
-        <label className="blog-figma-search"><Search size={17} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos…" aria-label="Buscar guías o artículos" /></label>
-        <div className="blog-figma-filters" aria-label="Filtrar publicaciones">{categories.map((category) => <button key={category} type="button" onClick={() => setActiveCategory(category)} className={activeCategory === category ? "active" : ""}>{category}</button>)}</div>
-        <button className="blog-figma-featured-link" type="button" onClick={() => setSelectedArticle(articles[0])}>Leer ahora</button>
+      <section className="blog-native-hero" aria-labelledby="blog-hero-title" data-node-id="2495-2">
+        <div className="blog-native-shell">
+          <header className="blog-native-nav">
+            <a className="blog-native-logo" href={asset("/")} aria-label="Bitaxus, ir al inicio"><img src={asset("/2166-3795.webp")} width="190" height="54" alt="Bitaxus" /></a>
+            <nav className="blog-native-nav-links" aria-label="Navegación principal"><a href={asset("/")}>Inicio <ChevronDown /></a><a href={`${asset("/")}#empresas`}>Empresas <ChevronDown /></a><a href={`${asset("/")}#personas`}>Personas <ChevronDown /></a><a className="active" href={blogPath}>Blog <ChevronDown /></a><a href={`${asset("/")}#contacto`}>Ayuda <ChevronDown /></a></nav>
+            <div className="blog-native-actions"><a href={loginUrl}>Iniciar sesión</a><a href={`${asset("/")}#contacto`}>Hablemos <ArrowRight /></a></div>
+          </header>
+          <div className="blog-native-grid">
+            <div className="blog-native-copy">
+              <h1 id="blog-hero-title">Entender mejor<br />tu negocio también<br />es parte de<br /><span>hacerlo crecer.</span></h1>
+              <p>Historias, aprendizajes y herramientas para entender mejor lo que pasa con tus clientes, tus cobros, tu operación y tu crecimiento.</p>
+              <label className="blog-native-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos…" aria-label="Buscar guías o artículos" /></label>
+              <div className="blog-native-filters" aria-label="Filtrar publicaciones">{categories.map((category) => <button key={category} type="button" onClick={() => setActiveCategory(category)} className={activeCategory === category ? "active" : ""}>{category}</button>)}</div>
+            </div>
+            <article className="blog-native-feature">
+              <img src={asset(whatsappFeature.image)} width="556" height="308" fetchPriority="high" decoding="async" alt="Mover dinero desde WhatsApp: cómo saber si el canal es confiable." />
+              <div className="blog-native-feature-footer"><button type="button" onClick={() => setSelectedArticle(whatsappFeature)}>Leer ahora <ArrowRight /></button></div>
+            </article>
+          </div>
+        </div>
       </section>
 
       <section className="blog-section blog-latest">
