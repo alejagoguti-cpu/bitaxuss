@@ -86,7 +86,6 @@ export default function Blog() {
             <h1 id="blog-hero-title">Entender mejor tu negocio también es parte de hacerlo <span>crecer.</span></h1>
             <p className="blog-lede">Historias, aprendizajes y herramientas para entender mejor lo que pasa con tus clientes, tus cobros, tu operación y tu crecimiento.</p>
             <label className="blog-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos…" aria-label="Buscar guías o artículos" /></label>
-            <div className="blog-filters" aria-label="Filtrar publicaciones">{categories.map((category) => <button key={category} type="button" onClick={() => setActiveCategory(category)} className={activeCategory === category ? "active" : ""}>{category}</button>)}</div>
           </div>
           <ArticleCard article={articles[0]} variant="featured" href={`${blogPath}/article/${articles[0].id}`} />
         </div>
@@ -94,6 +93,7 @@ export default function Blog() {
 
       <section className="blog-section blog-latest">
         <div className="blog-shell">
+          <div className="blog-category-toolbar"><label htmlFor="blog-category-select">Categoría</label><select id="blog-category-select" value={activeCategory} onChange={(event) => setActiveCategory(event.target.value)} aria-label="Filtrar artículos por categoría">{categories.map((category) => <option key={category} value={category}>{category}</option>)}</select></div>
           <div className="blog-latest-heading"><div className="blog-section-head left"><p className="blog-eyebrow muted">Lo último</p><h2>Lecturas para tener más claridad.</h2></div><div className="blog-carousel-controls" aria-label="Navegar por artículos"><button type="button" onClick={() => scrollLatest(-1)} aria-label="Artículos anteriores"><ArrowLeft /></button><button type="button" onClick={() => scrollLatest(1)} aria-label="Siguientes artículos"><ArrowRight /></button></div></div>
           {visibleArticles.length ? <><div className="blog-card-carousel" ref={latestCarouselRef} role="list" onMouseEnter={() => setIsCarouselPaused(true)} onMouseLeave={() => setIsCarouselPaused(false)} onFocusCapture={() => setIsCarouselPaused(true)} onBlurCapture={() => setIsCarouselPaused(false)}>{visibleArticles.map((article) => <div className="blog-card-slide" role="listitem" key={article.id}><ArticleCard article={article} variant="latest" href={`${blogPath}/article/${article.id}`} /></div>)}</div><div className="blog-carousel-dots" role="tablist" aria-label="Páginas del carrusel">{Array.from({ length: latestPageCount }, (_, index) => <button key={index} type="button" role="tab" aria-selected={latestPage === index} aria-label={`Ir a la página ${index + 1}`} className={latestPage === index ? "active" : ""} onClick={() => goToLatestPage(index)} />)}</div></> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
         </div>
