@@ -16,8 +16,8 @@ function Router() {
       <Route path={appBasePath || "/"} component={Home} />
       {appBasePath && <Route path={`${appBasePath}/`} component={Home} />}
       <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
+      {/* This is a single-page marketing site; render the landing under deployment-specific path prefixes. */}
+      <Route component={Home} />
     </Switch>
   );
 }
