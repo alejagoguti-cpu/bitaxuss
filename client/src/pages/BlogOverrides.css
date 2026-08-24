@@ -231,3 +231,24 @@
 .blog-article-copy .blog-article-read svg,
 .blog-card-body .blog-article-read svg { width: 16px; }
 .blog-article-read:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+
+/* Regla final: Belamor solo para titulares; el resto usa la tipografía del resumen. */
+.article-page .blog-reader-header h1,
+.article-page .blog-reader-prose h2,
+.article-page .blog-reader-prose h3,
+.article-page .reader-diagram h3,
+.article-page .reader-comparison-grid strong,
+.article-page .blog-reader-faq summary,
+.article-page .blog-reader-author h3 { font-family: Belamor, Montserrat, sans-serif; font-weight: 700; letter-spacing: -.045em; }
+.article-page .blog-reader-prose,
+.article-page .blog-reader-prose p,
+.article-page .blog-reader-prose li,
+.article-page .blog-reader-dek,
+.article-page .blog-reader-meta,
+.article-page .reader-diagram small,
+.article-page .reader-funnel-bar,
+.article-page .reader-comparison-grid li,
+.article-page .reader-comparison > p,
+.article-page .blog-reader-faq details p,
+.article-page .blog-reader-author p { font-family: Inter, Arial, sans-serif; }
