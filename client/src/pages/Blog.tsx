@@ -4,51 +4,18 @@
  */
 import { ArrowRight, ChevronDown, Search, X } from "lucide-react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { useLocation } from "wouter";
 import "./Blog.css";
 import "./BlogOverrides.css";
 
-const asset = (source: string) => `${import.meta.env.BASE_URL}${source.replace(/^\//, "")}`;
-const blogPath = `${import.meta.env.BASE_URL}blog`;
-const loginUrl = "https://app.bitaxus.com/login";
-
-const articles = [
-  {
-    id: "plataformas",
-    category: "Global",
-    title: "Plataformas, pagos inmediatos y dólares digitales: así está cambiando la forma de recibir ingresos en Latam.",
-    summary: "Trabajar con clientes en el exterior abre oportunidades, pero también nuevas preguntas sobre cobros, tasas y control de tu operación.",
-    image: "/blog/plataformas-pagos.webp",
-    featured: true,
-  },
-  {
-    id: "exterior",
-    category: "Global",
-    title: "Si recibes pagos del exterior, guarda esto antes de mover tu dinero",
-    summary: "Qué revisar antes de mover recursos que llegan desde otros países y mantener claridad sobre la operación.",
-    image: "/blog/pagos-exterior.webp",
-  },
-  {
-    id: "primer-pago",
-    category: "Emprendimiento",
-    title: "Tu primer pago internacional: qué revisar antes de decirle sí al cliente.",
-    summary: "Una guía para dar el siguiente paso cuando tu negocio empieza a trabajar con el exterior.",
-    image: "/blog/primer-pago.webp",
-  },
-  {
-    id: "tasa",
-    category: "Control de negocio",
-    title: "La tasa que ves en Google no es la que llega a tu bolsillo",
-    summary: "Entender la diferencia entre una referencia de mercado y el valor final que recibe tu operación.",
-    image: "/blog/tasa-google.webp",
-  },
-];
+import { articles, asset, blogPath, BlogArticle, loginUrl } from "./blogData";
 
 const categories = ["Todos", "Flujo de Caja", "Pagos y Cobros", "Estrategia"];
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("Todos");
   const [query, setQuery] = useState("");
-  const [selectedArticle, setSelectedArticle] = useState<(typeof articles)[number] | null>(null);
+  const [, setLocation] = useLocation();
   const [email, setEmail] = useState("");
   const [newsletterMessage, setNewsletterMessage] = useState("");
 
@@ -93,14 +60,14 @@ export default function Blog() {
             <label className="blog-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos…" aria-label="Buscar guías o artículos" /></label>
             <div className="blog-filters" aria-label="Filtrar publicaciones">{categories.map((category) => <button key={category} type="button" onClick={() => setActiveCategory(category)} className={activeCategory === category ? "active" : ""}>{category}</button>)}</div>
           </div>
-          <ArticleCard article={articles[0]} variant="featured" onRead={() => setSelectedArticle(articles[0])} />
+          <ArticleCard article={articles[0]} variant="featured" onRead={() => setLocation(`${blogPath}/article/${articles[0].id}`)} />
         </div>
       </section>
 
       <section className="blog-section blog-latest">
         <div className="blog-shell">
           <div className="blog-section-head left"><p className="blog-eyebrow muted">Lo último</p><h2>Lecturas para tener más claridad.</h2></div>
-          {visibleArticles.length ? <div className="blog-card-grid">{visibleArticles.filter((article) => !article.featured).map((article) => <ArticleCard key={article.id} article={article} variant="latest" onRead={() => setSelectedArticle(article)} />)}</div> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
+          {visibleArticles.length ? <div className="blog-card-grid">{visibleArticles.filter((article) => !article.featured).map((article) => <ArticleCard key={article.id} article={article} variant="latest" onRead={() => setLocation(`${blogPath}/article/${article.id}`)} />)}</div> : <div className="blog-empty"><p>No encontramos artículos con esa búsqueda.</p><button type="button" onClick={() => { setQuery(""); setActiveCategory("Todos"); }}>Ver todos los artículos</button></div>}
         </div>
       </section>
 
@@ -120,10 +87,10 @@ export default function Blog() {
         <div className="blog-shell">
           <div className="blog-section-head left"><p className="blog-eyebrow">Bitaxus Global</p><h2>Cuando tu negocio cruza fronteras, hay mucho más que entender.</h2></div>
           <div className="blog-global-layout">
-            <ArticleCard article={articles[0]} variant="wide" onRead={() => setSelectedArticle(articles[0])} />
+            <ArticleCard article={articles[0]} variant="wide" onRead={() => setLocation(`${blogPath}/article/${articles[0].id}`)} />
             <div className="blog-global-list">
-              {articles.slice(1).map((article) => <button className="blog-list-article" type="button" key={article.id} onClick={() => setSelectedArticle(article)}><span>{article.category}</span><strong>{article.title}</strong><ArrowRight /></button>)}
-              <button className="blog-list-article" type="button" onClick={() => setSelectedArticle(articles[2])}><span>Global</span><strong>Operar en varias monedas sin perder el control de tu caja</strong><ArrowRight /></button>
+              {articles.slice(1).map((article) => <button className="blog-list-article" type="button" key={article.id} onClick={() => setLocation(`${blogPath}/article/${article.id}`)}><span>{article.category}</span><strong>{article.title}</strong><ArrowRight /></button>)}
+              <button className="blog-list-article" type="button" onClick={() => setLocation(`${blogPath}/article/${articles[2].id}`)}><span>Global</span><strong>Operar en varias monedas sin perder el control de tu caja</strong><ArrowRight /></button>
             </div>
           </div>
         </div>
@@ -132,12 +99,12 @@ export default function Blog() {
       <section className="blog-section blog-experience">
         <div className="blog-shell blog-experience-grid">
           <div><p className="blog-eyebrow">Desde la experiencia</p><h2>Muchos de estos temas empezaron antes de Bitaxus.</h2><p>Buena parte de lo que escribimos nace de situaciones reales que hemos visto acompañando empresas y emprendedores: negocios que crecían más rápido de lo que podían controlar, cobros que se enredaban y decisiones que se tomaban sin la información completa.</p><div className="blog-author"><span>AT</span><p><b>Alejandra Torres</b><small>Fundadora de Bitaxus</small></p></div></div>
-          <div className="blog-experience-cards">{["Lo que aprendí acompañando negocios que crecían más rápido de lo que podían controlar", "El día que entendí por qué facturar no es lo mismo que recibir", "Cobrar bien no es incomodar: cómo lo aprendí como consultora"].map((title, index) => <button key={title} type="button" onClick={() => setSelectedArticle(articles[index + 1] || articles[0])}><span>0{index + 1}</span><strong>{title}</strong><ArrowRight /></button>)}</div>
+          <div className="blog-experience-cards">{["Lo que aprendí acompañando negocios que crecían más rápido de lo que podían controlar", "El día que entendí por qué facturar no es lo mismo que recibir", "Cobrar bien no es incomodar: cómo lo aprendí como consultora"].map((title, index) => <button key={title} type="button" onClick={() => setLocation(`${blogPath}/article/${(articles[index + 1] || articles[0]).id}`)}><span>0{index + 1}</span><strong>{title}</strong><ArrowRight /></button>)}</div>
         </div>
       </section>
 
       <section className="blog-section blog-explains">
-        <div className="blog-shell"><div className="blog-section-head"><p className="blog-eyebrow">Bitaxus explica</p><h2>Hay cosas que suenan complicadas hasta que alguien las explica bien.</h2></div><div className="blog-explains-grid">{["¿Qué es la tesorería de una empresa?", "¿Qué diferencia hay entre facturado y recibido?", "¿Qué es cartera?", "¿Qué significa trazabilidad de un pago?"].map((title, index) => <button key={title} type="button" onClick={() => setSelectedArticle(articles[index % articles.length])}><span>0{index + 1}</span><strong>{title}</strong><ArrowRight /></button>)}</div></div>
+        <div className="blog-shell"><div className="blog-section-head"><p className="blog-eyebrow">Bitaxus explica</p><h2>Hay cosas que suenan complicadas hasta que alguien las explica bien.</h2></div><div className="blog-explains-grid">{["¿Qué es la tesorería de una empresa?", "¿Qué diferencia hay entre facturado y recibido?", "¿Qué es cartera?", "¿Qué significa trazabilidad de un pago?"].map((title, index) => <button key={title} type="button" onClick={() => setLocation(`${blogPath}/article/${articles[index % articles.length].id}`)}><span>0{index + 1}</span><strong>{title}</strong><ArrowRight /></button>)}</div></div>
       </section>
 
       <section className="blog-section blog-news-section"><div className="blog-shell"><div className="blog-news"><div><p className="blog-eyebrow">Ideas de Bitaxus</p><h2>Ideas para entender mejor el negocio que estás construyendo.</h2><p>Recibe nuevos artículos, aprendizajes y guías de Bitaxus.</p></div><form onSubmit={submitNewsletter}><input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="tu@empresa.com" aria-label="Correo electrónico" /><button type="submit">Suscribirme <ArrowRight /></button><small role="status">{newsletterMessage || "Al suscribirte, aceptas nuestra política de privacidad."}</small></form></div></div></section>
@@ -146,14 +113,14 @@ export default function Blog() {
 
       <HomeFooter />
 
-      {selectedArticle && <ArticleReader article={selectedArticle} onClose={() => setSelectedArticle(null)} />}
+
     </main>
   );
 }
 
-function ArticleReader({ article, onClose }: { article: (typeof articles)[number]; onClose: () => void }) {
+export function ArticleReader({ article, onClose }: { article: BlogArticle; onClose: () => void }) {
   const isCashflow = article.id === "plataformas" || article.id === "tasa";
-  return <div className="blog-reader-backdrop" role="presentation" onMouseDown={onClose}><article className="blog-reader" role="dialog" aria-modal="true" aria-label={article.title} onMouseDown={(event) => event.stopPropagation()}>
+  return <div className="blog-reader-page" role="presentation"><article className="blog-reader" role="article" aria-label={article.title}>
     <div className="blog-reader-bar"><button type="button" className="blog-reader-back" onClick={onClose}><span>←</span> Volver al blog</button><span className="blog-reader-mark">BITAXUS <i>LECTURA</i></span><button type="button" className="blog-reader-close" aria-label="Cerrar artículo" onClick={onClose}><X /></button></div>
     <header className="blog-reader-header"><p className="blog-eyebrow">{article.category}</p><h1>{article.title}</h1><p className="blog-reader-dek">{article.summary}</p><div className="blog-reader-meta"><span>Por <b>Alejandra Torres</b></span><span>Fundadora de Bitaxus</span><span>{isCashflow ? "7 min de lectura" : "5 min de lectura"}</span></div></header>
     <figure className="blog-reader-hero"><img src={asset(article.image)} alt="" /><figcaption>Una mirada Bitaxus para entender mejor lo que ocurre detrás de cada operación.</figcaption></figure>

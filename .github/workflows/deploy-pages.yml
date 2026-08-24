@@ -31,8 +31,14 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build static site
         run: pnpm build
-      - name: Prepare blog entry point
-        run: mkdir -p ./dist/public/blog && cp ./dist/public/index.html ./dist/public/blog/index.html
+      - name: Prepare blog and article entry points
+        run: |
+          mkdir -p ./dist/public/blog
+          cp ./dist/public/index.html ./dist/public/blog/index.html
+          for article in plataformas exterior primer-pago tasa; do
+            mkdir -p "./dist/public/blog/article/${article}"
+            cp ./dist/public/index.html "./dist/public/blog/article/${article}/index.html"
+          done
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
