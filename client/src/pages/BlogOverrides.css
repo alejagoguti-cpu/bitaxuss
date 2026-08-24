@@ -744,3 +744,29 @@
   .article-page .reader-theme-waiting { border-radius: 30px 8px 30px 8px; }
   .article-page .reader-theme-terms .reader-reference-timeline > div { padding-left: 13px; }
 }
+
+
+/* Cierre editorial refinado: compacto, asimétrico y con jerarquía clara. */
+.article-page .blog-reader-closing { grid-template-columns: minmax(0, 1.3fr) minmax(220px, .7fr); gap: 62px; min-height: 0; padding: 45px 48px 38px; border-radius: 22px 22px 8px 8px; }
+.article-page .blog-reader-closing::before { top: -170px; right: -130px; width: 330px; height: 330px; opacity: .62; }
+.article-page .blog-reader-closing::after { height: 32%; opacity: .55; }
+.article-page .blog-reader-closing-main { max-width: 545px; }
+.article-page .blog-reader-closing .blog-eyebrow { margin-bottom: 14px; font-size: 10px; letter-spacing: .18em; }
+.article-page .blog-reader-closing h2 { max-width: 440px; margin-bottom: 20px; font-size: clamp(34px, 4vw, 51px); line-height: .94; }
+.article-page .blog-reader-closing-main > p:not(.blog-eyebrow) { max-width: 470px; margin-bottom: 11px; font-size: 14px; line-height: 1.5; }
+.article-page .blog-reader-closing .blog-primary-cta { margin-top: 14px; padding: 13px 18px; font-size: 12px; }
+.article-page .blog-reader-closing-signature { align-self: start; gap: 12px; padding-top: 16px; }
+.article-page .blog-reader-closing-signature > span { width: 38px; height: 38px; font-size: 12px; }
+.article-page .blog-reader-closing-signature .blog-eyebrow { margin-bottom: 6px; font-size: 8px; letter-spacing: .15em; }
+.article-page .blog-reader-closing-signature strong { font-size: 17px; line-height: 1.1; }
+.article-page .blog-reader-closing-signature em { margin-top: 3px; font-size: 9px; letter-spacing: .07em; }
+.article-page .blog-reader-closing-signature div > p:last-child { max-width: 270px; margin-top: 8px; font-size: 11px; line-height: 1.43; }
+.article-page .blog-reader-linkedin { gap: 7px; margin-top: 11px; font-size: 10px; }
+.article-page .blog-reader-linkedin svg:first-child { width: 23px; height: 23px; padding: 4px; border-radius: 6px; }
+@media (max-width: 700px) {
+  .article-page .blog-reader-closing { grid-template-columns: 1fr; gap: 28px; margin: 58px 0 44px; padding: 31px 22px 25px; border-radius: 18px 18px 7px 7px; }
+  .article-page .blog-reader-closing h2 { max-width: 330px; margin-bottom: 17px; font-size: 35px; }
+  .article-page .blog-reader-closing-main > p:not(.blog-eyebrow) { max-width: 100%; font-size: 13px; line-height: 1.48; }
+  .article-page .blog-reader-closing-signature { padding-top: 16px; }
+  .article-page .blog-reader-closing-signature div > p:last-child { max-width: none; font-size: 11px; line-height: 1.48; }
+}
