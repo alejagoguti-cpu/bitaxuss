@@ -487,3 +487,10 @@
 .reader-reference-checklist span { margin: 0; color: #b3a5a1; }
 .reader-reference-checklist strong { color: #322a28; font: 700 19px/1.05 Belamor, Montserrat, sans-serif; letter-spacing: -.035em; }
 @media (max-width: 620px) { .article-visual-system { gap: 23px; margin: 38px 0 48px; }.reader-reference-frame { padding: 27px 18px 25px; border-radius: 18px; }.reader-reference-frame .reader-reference-eyebrow { font-size: 10px; line-height: 1.25; }.reader-reference-frame h3 { margin-bottom: 23px; font-size: 32px; }.reader-reference-columns, .reader-reference-flow, .reader-reference-checklist { grid-template-columns: 1fr; gap: 10px; }.reader-reference-column { min-height: 0; padding: 21px 18px 19px; }.reader-reference-column strong { font-size: 25px; }.reader-reference-column p { font-size: 14px; }.reader-reference-flow > div { min-height: 69px; }.reader-reference-flow span { margin-bottom: 12px; }.reader-reference-flow strong { font-size: 22px; }.reader-reference-flow i { top: auto; right: 18px; bottom: -17px; transform: rotate(90deg); }.reader-reference-timeline { grid-template-columns: 1fr; gap: 18px; }.reader-reference-timeline::before { top: 14px; bottom: 14px; left: 13px; width: 1px; height: auto; }.reader-reference-timeline > div { display: grid; grid-template-columns: 28px 1fr; gap: 14px; align-items: center; padding: 0; text-align: left; }.reader-reference-timeline span { margin: 0; }.reader-reference-timeline p { margin: 0; }.reader-reference-checklist strong { font-size: 21px; } }
+
+
+/* Hero limpio solicitado: blanco real, sin halos ni difuminados rosados. */
+.article-page .blog-reader-header { background: #fff !important; }
+.article-page .blog-reader-header::before { display: none !important; }
+.article-page .blog-reader-hero { background: #fff !important; }
+.article-page .blog-reader-hero::before { display: none !important; }
