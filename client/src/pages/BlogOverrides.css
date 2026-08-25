@@ -847,6 +847,21 @@
 }
 
 
+/* Tipografía de visuales: sans serif limpia, sin Belamor. */
+.article-page .reader-reference-frame,
+.article-page .reader-reference-frame h3,
+.article-page .reader-reference-frame .reader-reference-eyebrow,
+.article-page .reader-reference-frame .reader-reference-column > span,
+.article-page .reader-reference-frame .reader-reference-column > strong,
+.article-page .reader-reference-frame .reader-reference-column > p,
+.article-page .reader-reference-frame .reader-reference-flow > div > span,
+.article-page .reader-reference-frame .reader-reference-flow > div > strong,
+.article-page .reader-reference-frame .reader-reference-timeline > div > span,
+.article-page .reader-reference-frame .reader-reference-timeline > div > p,
+.article-page .reader-reference-frame .reader-reference-checklist > div > span,
+.article-page .reader-reference-frame .reader-reference-checklist > div > strong,
+.article-page .reader-reference-frame .reader-reference-conclusion { font-family: Inter, Arial, sans-serif !important; }
+
 /* Escala editorial común para evitar saltos de tamaño entre recursos. */
 .article-page .reader-reference-frame {
   --visual-title: clamp(18px, 1.55vw, 26px);
