@@ -13,6 +13,7 @@ import { ArticleVisuals } from "./articleVisuals";
 import { SharedFooter } from "../components/SharedFooter";
 
 const categories = ["Todos", ...Array.from(new Set(articles.map((article) => article.category)))];
+const featuredArticle = articles.find((article) => article.id === "contratar-mas") || articles[0];
 
 const globalCategoryCopy: Record<string, string> = {
   "Control de negocio": "Mira qué está pasando dentro de tu operación.",
@@ -100,7 +101,7 @@ export default function Blog() {
             <p className="blog-lede">Historias, aprendizajes y herramientas para entender mejor lo que pasa con tus clientes, tus cobros, tu operación y tu crecimiento.</p>
             <label className="blog-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos" aria-label="Buscar guías o artículos" /></label>
           </div>
-          <ArticleCard article={articles[0]} variant="featured" href={`${blogPath}/article/${articles[0].id}`} />
+          <ArticleCard article={featuredArticle} variant="featured" href={`${blogPath}/article/${featuredArticle.id}`} />
         </div>
       </section>
 
