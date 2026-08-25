@@ -16,7 +16,7 @@ meta = [
     ('condiciones-pago', 'Clientes y ventas', 'El cliente te dijo que sí. ¿Dejaste claro cuándo y cómo te va a pagar?', 'Una venta no está completamente acordada si todavía no está claro cómo y cuándo se va a pagar.'),
     ('plazo-cliente', 'Clientes y ventas', 'Darle plazo a un cliente también es una decisión de tu negocio', 'Aceptar que un cliente pague después también significa decidir cuánto tiempo puede esperar tu negocio por ese dinero.'),
 ]
-images = ['/blog/tasa-google.webp', '/blog/pagos-exterior.webp', '/blog/primer-pago.webp', '/blog/empresa-crecio.webp']
+images = ['/blog/ventas-caja.webp', '/blog/pagos-exterior.webp', '/blog/primer-pago.webp', '/blog/empresa-crecio.webp']
 
 def clean_segment(segment):
     segment = [line.strip() for line in segment if line.strip()]
