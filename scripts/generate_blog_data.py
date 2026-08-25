@@ -16,7 +16,17 @@ meta = [
     ('condiciones-pago', 'Clientes y ventas', 'El cliente te dijo que sí. ¿Dejaste claro cuándo y cómo te va a pagar?', 'Una venta no está completamente acordada si todavía no está claro cómo y cuándo se va a pagar.'),
     ('plazo-cliente', 'Clientes y ventas', 'Darle plazo a un cliente también es una decisión de tu negocio', 'Aceptar que un cliente pague después también significa decidir cuánto tiempo puede esperar tu negocio por ese dinero.'),
 ]
-images = ['/blog/ventas-caja.webp', '/blog/pagos-exterior.webp', '/blog/primer-pago.webp', '/blog/empresa-crecio.webp']
+images_by_article = {
+    'control-ventas': '/blog/ventas-caja.webp',
+    'gastos-operacion': '/blog/pagos-exterior.webp',
+    'cierre-mes': '/blog/primer-pago.webp',
+    'empresa-crecio': '/blog/empresa-crecio.webp',
+    'contratar-mas': '/blog/tasa-google.webp',
+    'delegar-control': '/blog/pagos-exterior.webp',
+    'cobrar-parte-vender': '/blog/primer-pago.webp',
+    'condiciones-pago': '/blog/plataformas-pagos.webp',
+    'plazo-cliente': '/blog/tasa-google.webp',
+}
 
 def clean_segment(segment):
     segment = [line.strip() for line in segment if line.strip()]
@@ -33,7 +43,7 @@ for i, (start, end) in enumerate(zip(starts, ends)):
         'category': meta[i][1],
         'title': meta[i][2],
         'summary': meta[i][3],
-        'image': images[i % len(images)],
+        'image': images_by_article[meta[i][0]],
         'featured': i == 0,
         'content': '\n'.join(body),
     })
