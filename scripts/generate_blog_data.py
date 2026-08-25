@@ -23,7 +23,7 @@ images_by_article = {
     'empresa-crecio': '/blog/empresa-crecio.webp',
     'contratar-mas': '/blog/contratar-equipo.webp',
     'delegar-control': '/blog/delegar-equipo.webp',
-    'cobrar-parte-vender': '/blog/primer-pago.webp',
+    'cobrar-parte-vender': '/blog/cobrar-emprendedor.webp',
     'condiciones-pago': '/blog/plataformas-pagos.webp',
     'plazo-cliente': '/blog/tasa-google.webp',
 }
