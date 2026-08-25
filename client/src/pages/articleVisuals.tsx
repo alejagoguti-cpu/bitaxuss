@@ -123,8 +123,8 @@ function VisualIcon({ icon: Icon, tone = "light" }: { icon: LucideIcon; tone?: "
   return <span className={`reader-visual-icon reader-visual-icon-${tone}`} aria-hidden="true"><Icon size={23} strokeWidth={1.9} /></span>;
 }
 
-function ReferenceFrame({ eyebrow, title, children, conclusion, variant = "dark", theme = "orbit" }: { eyebrow: string; title: string; children: ReactNode; conclusion?: string; variant?: "light" | "dark"; theme?: string }) {
-  return <section className={`reader-reference-frame reader-reference-${variant} reader-theme-${theme}`}><p className="reader-reference-eyebrow">{eyebrow}</p><h3>{title}</h3>{children}{conclusion && <p className="reader-reference-conclusion">{conclusion}</p>}</section>;
+function ReferenceFrame({ eyebrow, title, children, conclusion, variant = "dark", theme = "orbit" }: { eyebrow?: string; title: string; children: ReactNode; conclusion?: string; variant?: "light" | "dark"; theme?: string }) {
+  return <section className={`reader-reference-frame reader-reference-${variant} reader-theme-${theme}`}>{eyebrow && <p className="reader-reference-eyebrow">{eyebrow}</p>}<h3>{title}</h3>{children}{conclusion && <p className="reader-reference-conclusion">{conclusion}</p>}</section>;
 }
 
 export function ArticleVisuals({ article, part }: { article: BlogArticle; part: 1 | 2 | 3 | 4 }) {
@@ -141,19 +141,19 @@ export function ArticleVisuals({ article, part }: { article: BlogArticle; part: 
     const visual = conciseVisuals[article.id]?.intro;
     const cards = visual?.cards || [second, fourth];
     const cardCopies = visual?.cardCopies || [third, fifth];
-    return <ReferenceFrame theme={theme} variant="light" eyebrow="UNA IDEA DEL ARTÍCULO" title={visual?.title || sourceTitle(first, article.summary)} conclusion={visual?.conclusion || sourceCopy(second, fallback)}><div className="reader-reference-columns">{cards.map((line, index) => <div className={`reader-reference-column${index === 1 ? " accent" : ""}`} key={`${line}-${index}`}><VisualIcon icon={comparisonIcons[index]} tone={index === 1 ? "red" : "light"} /><span>TEXTO / 0{index + 1}</span><strong>{visual ? line : sourceCardTitle(line, article.summary)}</strong><p>{visual ? cardCopies[index] : sourceCopy(cardCopies[index], fallback)}</p></div>)}</div></ReferenceFrame>;
+    return <ReferenceFrame theme={theme} variant="light" title={visual?.title || sourceTitle(first, article.summary)} conclusion={visual?.conclusion || sourceCopy(second, fallback)}><div className="reader-reference-columns">{cards.map((line, index) => <div className={`reader-reference-column${index === 1 ? " accent" : ""}`} key={`${line}-${index}`}><VisualIcon icon={comparisonIcons[index]} tone={index === 1 ? "red" : "light"} /><span>TEXTO / 0{index + 1}</span><strong>{visual ? line : sourceCardTitle(line, article.summary)}</strong><p>{visual ? cardCopies[index] : sourceCopy(cardCopies[index], fallback)}</p></div>)}</div></ReferenceFrame>;
   }
   if (part === 2) {
     const visual = conciseVisuals[article.id]?.flow;
     const cards = visual?.cards || [first, second, third];
-    return <ReferenceFrame theme={theme} eyebrow="RECORRIDO DEL ARTÍCULO" title={visual?.title || sourceTitle(second, article.summary)}><div className="reader-reference-flow">{cards.map((line, index) => <div key={`${line}-${index}`}><VisualIcon icon={flowIcons[index]} tone={index === 1 ? "red" : "light"} /><span>0{index + 1}</span><strong>{visual ? line : sourceCardTitle(line, article.summary)}</strong>{index < 2 && <i><ArrowUpRight size={18} /></i>}</div>)}</div></ReferenceFrame>;
+    return <ReferenceFrame theme={theme} title={visual?.title || sourceTitle(second, article.summary)}><div className="reader-reference-flow">{cards.map((line, index) => <div key={`${line}-${index}`}><VisualIcon icon={flowIcons[index]} tone={index === 1 ? "red" : "light"} /><span>0{index + 1}</span><strong>{visual ? line : sourceCardTitle(line, article.summary)}</strong>{index < 2 && <i><ArrowUpRight size={18} /></i>}</div>)}</div></ReferenceFrame>;
   }
   if (part === 3) {
     const visual = conciseVisuals[article.id]?.timeline;
     const copies = visual?.copies || [second, third, fourth];
-    return <ReferenceFrame theme={theme} variant="light" eyebrow="SECUENCIA DEL CONTENIDO" title={visual?.title || sourceTitle(third, article.summary)}><div className="reader-reference-timeline">{copies.map((line, index) => <div key={`${line}-${index}`}><VisualIcon icon={timelineIcons[index]} tone={index === 1 ? "red" : "light"} /><span>{index + 1}</span><p>{visual ? line : sourceCopy(line, fallback)}</p></div>)}</div></ReferenceFrame>;
+    return <ReferenceFrame theme={theme} variant="light" title={visual?.title || sourceTitle(third, article.summary)}><div className="reader-reference-timeline">{copies.map((line, index) => <div key={`${line}-${index}`}><VisualIcon icon={timelineIcons[index]} tone={index === 1 ? "red" : "light"} /><span>{index + 1}</span><p>{visual ? line : sourceCopy(line, fallback)}</p></div>)}</div></ReferenceFrame>;
   }
   const visual = conciseVisuals[article.id]?.checklist;
   const cards = visual?.cards || [third, fourth, fifth];
-  return <ReferenceFrame theme={theme} eyebrow="SEÑALES DEL MISMO BLOG" title={visual?.title || sourceTitle(fourth, article.summary)}><div className="reader-reference-checklist">{cards.map((line, index) => <div key={`${line}-${index}`}><VisualIcon icon={checklistIcons[index]} tone={index === 1 ? "red" : "light"} /><span>{String(index + 1).padStart(2, "0")}</span><strong>{visual ? line : sourceCardTitle(line, article.summary)}</strong></div>)}</div></ReferenceFrame>;
+  return <ReferenceFrame theme={theme} title={visual?.title || sourceTitle(fourth, article.summary)}><div className="reader-reference-checklist">{cards.map((line, index) => <div key={`${line}-${index}`}><VisualIcon icon={checklistIcons[index]} tone={index === 1 ? "red" : "light"} /><span>{String(index + 1).padStart(2, "0")}</span><strong>{visual ? line : sourceCardTitle(line, article.summary)}</strong></div>)}</div></ReferenceFrame>;
 }
