@@ -54,36 +54,68 @@ function sourceCardTitle(line: string, fallback: string) {
 
 type ConciseVisual = {
   title: string;
+  conclusion?: string;
   cards?: string[];
+  cardCopies?: string[];
   copies?: string[];
 };
 
-const conciseVisuals: Record<string, Partial<Record<"flow" | "timeline" | "checklist", ConciseVisual>>> = {
+type VisualKind = "intro" | "flow" | "timeline" | "checklist";
+
+const conciseVisuals: Record<string, Partial<Record<VisualKind, ConciseVisual>>> = {
+  "control-ventas": {
+    intro: { title: "VENDER MÁS NO BASTA", conclusion: "ENTENDER LO QUE QUEDA TAMBIÉN ES PARTE DE CRECER", cards: ["VENDER NO ES COBRAR", "CRECER REQUIERE TRAZABILIDAD"], cardCopies: ["Las ventas pueden subir y la caja seguir apretada.", "Relaciona ingresos, compromisos y pagos."] },
+    flow: { title: "ENTIENDE QUÉ QUEDA", cards: ["FACTURAR NO ES COBRAR", "LA CAJA TAMBIÉN CUENTA", "CRECER SIN CONTROL AMPLIFICA LOS PROBLEMAS"] },
+    timeline: { title: "MIRA MÁS QUE LAS VENTAS", copies: ["SEPARA LO FACTURADO DE LO RECIBIDO", "IDENTIFICA LO QUE YA TIENE DESTINO", "TOMA DECISIONES CON CONTEXTO"] },
+    checklist: { title: "SOSTENER EL CRECIMIENTO ES EL RETO", cards: ["CONOCE LO QUE COBRAS", "ANTICIPA TUS COMPROMISOS", "NO PIERDAS EL CONTROL"] },
+  },
   "gastos-operacion": {
-    flow: {
-      title: "POR ESO NO CREO QUE LA CONVERSACIÓN DEBA REDUCIRSE A IDENTIFICAR “GASTOS HORMIGA”",
-      cards: [
-        "LO MÁS DIFÍCIL ES RECORDAR TODOS TUS GASTOS.",
-        "LA CONVERSACIÓN NO DEBE REDUCIRSE A IDENTIFICAR “GASTOS HORMIGA”.",
-        "BUSCAS CLARIDAD, NO SOLO GASTAR MENOS.",
-      ],
-    },
-    timeline: {
-      title: "YA NO BUSCAS SOLO GASTAR MENOS. ENTIENDES LA ESTRUCTURA DE TU OPERACIÓN.",
-      copies: [
-        "AHORRAR EN UN COSTO NO SIEMPRE REDUCE EL COSTO TOTAL.",
-        "CADA NUEVA HERRAMIENTA CAMBIA LA ESTRUCTURA DEL NEGOCIO.",
-        "RELACIONAR CADA SALIDA CON SU CONTEXTO MEJORA LAS DECISIONES.",
-      ],
-    },
-    checklist: {
-      title: "CONOCER EL VALOR DE UNA SALIDA ES ÚTIL. ENTENDER SU CONTEXTO ES MEJOR.",
-      cards: [
-        "ENTIENDE DÓNDE Y POR QUÉ GASTAS.",
-        "RELACIONA CADA SALIDA CON SU CONTEXTO.",
-        "UN MOVIMIENTO AISLADO SOLO MUESTRA QUE SALIÓ DINERO.",
-      ],
-    },
+    intro: { title: "AHORRAR NO ES REDUCIR EL TOTAL", conclusion: "MIRA LA ESTRUCTURA COMPLETA DE TU OPERACIÓN", cards: ["LOS GASTOS SE ACUMULAN", "REVISA EL COSTO REAL"], cardCopies: ["Cada herramienta, licencia y comisión cambia el total.", "Comparar periodos revela lo que la memoria no ve."] },
+    flow: { title: "GASTAR MENOS NO SIEMPRE ALCANZA", cards: ["RECUERDA TODOS TUS GASTOS", "NO TODO GASTO PEQUEÑO ES INNECESARIO", "BUSCAS CLARIDAD, NO SOLO AHORRO"] },
+    timeline: { title: "ENTIENDE TU ESTRUCTURA", copies: ["UN AHORRO PUEDE OCULTAR NUEVOS COSTOS", "CADA HERRAMIENTA CAMBIA TU OPERACIÓN", "MIRA EL TOTAL, NO SOLO CADA SALIDA"] },
+    checklist: { title: "CADA SALIDA TIENE CONTEXTO", cards: ["SABES DÓNDE GASTAS", "ENTIENDES POR QUÉ GASTAS", "NO MIRES MOVIMIENTOS AISLADOS"] },
+  },
+  "cierre-mes": {
+    intro: { title: "CIERRA Y ENTIENDE", conclusion: "EL SALDO FINAL ES SOLO EL PUNTO DE PARTIDA", cards: ["CONCILIA TUS MOVIMIENTOS", "ENTIENDE QUÉ QUEDÓ"], cardCopies: ["Relaciona ingresos, pagos y compromisos.", "Distingue saldo disponible de dinero comprometido."] },
+    flow: { title: "EL SALDO NO LO EXPLICA TODO", cards: ["QUÉ ENTRÓ", "QUÉ SALIÓ", "QUÉ SIGUE PENDIENTE"] },
+    timeline: { title: "CIERRA CON INFORMACIÓN", copies: ["ORDENA LOS MOVIMIENTOS", "EXPLICA LAS DIFERENCIAS", "PREPARA EL SIGUIENTE MES"] },
+    checklist: { title: "CERRAR BIEN TE PERMITE DECIDIR MEJOR", cards: ["CONCILIA", "EXPLICA", "PLANEA"] },
+  },
+  "empresa-crecio": {
+    intro: { title: "CRECER EXIGE ORDEN", conclusion: "CRECER CAMBIA LA FORMA DE OPERAR", cards: ["MÁS MOVIMIENTOS", "MÁS DECISIONES"], cardCopies: ["El volumen exige una lectura más clara.", "Cada cambio necesita responsables y contexto."] },
+    flow: { title: "CRECER CAMBIA LA OPERACIÓN", cards: ["AUMENTAN LOS DATOS", "SE REPARTEN LAS RESPONSABILIDADES", "NECESITAS MÁS CONTEXTO"] },
+    timeline: { title: "CRECER EXIGE ESTRUCTURA", copies: ["DEJA DE DEPENDER DE LA MEMORIA", "CONSERVA EL CONTEXTO", "COMPARA LO QUE ESTÁ CAMBIANDO"] },
+    checklist: { title: "CRECER SIN PERDER VISIBILIDAD", cards: ["ORDENA LA INFORMACIÓN", "DEFINE RESPONSABILIDADES", "MIDE ANTES DE DECIDIR"] },
+  },
+  "contratar-mas": {
+    intro: { title: "ANTES DE CONTRATAR, ENTIENDE", conclusion: "A VECES EL SIGUIENTE PASO ES ORDENAR, NO SUMAR PERSONAS", cards: ["IDENTIFICA EL CUELLO DE BOTELLA", "MIDE LA CARGA REAL"], cardCopies: ["No todo problema se resuelve con más equipo.", "Decide con información sobre tareas y tiempos."] },
+    flow: { title: "MÁS PERSONAS NO SIEMPRE RESUELVEN", cards: ["MIRA LA CARGA", "ORDENA EL PROCESO", "CONTRATA CON CRITERIO"] },
+    timeline: { title: "ENTIENDE LA NECESIDAD", copies: ["OBSERVA DÓNDE SE FRENA EL TRABAJO", "SEPARA VOLUMEN DE DESORDEN", "ELIGE LA SOLUCIÓN ADECUADA"] },
+    checklist: { title: "CRECER EL EQUIPO TAMBIÉN ES UNA DECISIÓN OPERATIVA", cards: ["DEFINE EL PROBLEMA", "CALCULA EL IMPACTO", "CONTRATA CUANDO TENGA SENTIDO"] },
+  },
+  "delegar-control": {
+    intro: { title: "DELEGAR ES CREAR CONTROL", conclusion: "EL CONTROL DEBE QUEDAR EN EL PROCESO", cards: ["DEFINE RESPONSABLES", "CONSERVA LA VISIBILIDAD"], cardCopies: ["Cada persona debe saber qué hacer.", "El negocio no puede depender de una sola persona."] },
+    flow: { title: "DELEGA SIN CENTRALIZAR", cards: ["DOCUMENTA", "ASIGNA", "REVISA"] },
+    timeline: { title: "UN PROCESO REDUCE LA DEPENDENCIA", copies: ["EXPLICA CÓMO SE HACE", "DEFINE QUIÉN RESPONDE", "MIDE LO QUE OCURRE"] },
+    checklist: { title: "DELEGA Y CONSERVA CONTEXTO", cards: ["TAREAS CLARAS", "RESPONSABLES VISIBLES", "DECISIONES CON INFORMACIÓN"] },
+  },
+  "cobrar-parte-vender": {
+    intro: { title: "COBRAR ES PARTE DE VENDER", conclusion: "UNA RELACIÓN COMERCIAL NECESITA CLARIDAD", cards: ["ACUERDA EL COBRO", "HAZ SEGUIMIENTO"], cardCopies: ["Define valor, fecha y condiciones.", "Cobrar no debería depender de la incomodidad."] },
+    flow: { title: "VENDER NO TERMINA CON EL SÍ", cards: ["ACUERDA", "REGISTRA", "DA SEGUIMIENTO"] },
+    timeline: { title: "COBRAR CLARO PROTEGE LA RELACIÓN", copies: ["DEFINE LAS CONDICIONES", "CONSERVA EL CONTEXTO", "ACTÚA A TIEMPO"] },
+    checklist: { title: "COBRAR BIEN CUIDA EL NEGOCIO", cards: ["HABLA CLARO", "CUMPLE LO ACORDADO", "MANTÉN LA RELACIÓN"] },
+  },
+  "condiciones-pago": {
+    intro: { title: "UNA VENTA NECESITA UN ACUERDO", conclusion: "EL CUÁNDO Y EL CÓMO TAMBIÉN IMPORTAN", cards: ["DEFINE EL PLAZO", "ANTICIPA EL IMPACTO"], cardCopies: ["La fecha de pago hace parte del acuerdo.", "Cada condición afecta tu operación."] },
+    flow: { title: "DEFINE CÓMO PAGARÁ", cards: ["ACUERDA EL PLAZO", "REGISTRA LA CONDICIÓN", "HAZ SEGUIMIENTO"] },
+    timeline: { title: "EL PAGO CAMBIA TU OPERACIÓN", copies: ["ACLARA CUÁNDO COBRAS", "CALCULA LO QUE DEBES ESPERAR", "PROTEGE TU FLUJO DE CAJA"] },
+    checklist: { title: "UN ACUERDO EVITA CONFUSIONES", cards: ["PLAZO DEFINIDO", "CONDICIONES REGISTRADAS", "SEGUIMIENTO A TIEMPO"] },
+  },
+  "plazo-cliente": {
+    intro: { title: "DAR PLAZO TAMBIÉN FINANCIA", conclusion: "ESPERAR POR EL DINERO TAMBIÉN TIENE UN COSTO", cards: ["MIDE TU CAPACIDAD", "DECIDE CON CONTEXTO"], cardCopies: ["No todos los negocios pueden esperar igual.", "El plazo debe responder a la operación."] },
+    flow: { title: "DAR PLAZO ES DECIDIR", cards: ["EVALÚA", "ACUERDA", "CONTROLA"] },
+    timeline: { title: "ANTES DE ESPERAR, ENTIENDE", copies: ["CALCULA EL TIEMPO", "MIRA TUS COMPROMISOS", "DEFINE UNA CONDICIÓN SOSTENIBLE"] },
+    checklist: { title: "VENDER A PLAZO CAMBIA TU CAJA", cards: ["CONOCE EL COSTO", "ELIGE EL PLAZO", "HAZ SEGUIMIENTO"] },
   },
 };
 
@@ -105,7 +137,12 @@ export function ArticleVisuals({ article, part }: { article: BlogArticle; part: 
   const fourth = sourcePick(lines, .65, fallback);
   const fifth = sourcePick(lines, .82, fallback);
 
-  if (part === 1) return <ReferenceFrame theme={theme} variant="light" eyebrow="UNA IDEA DEL ARTÍCULO" title={sourceTitle(first, article.summary)} conclusion={sourceCopy(second, fallback)}><div className="reader-reference-columns"><div className="reader-reference-column"><VisualIcon icon={comparisonIcons[0]} /><span>TEXTO / 01</span><strong>{sourceCardTitle(second, article.summary)}</strong><p>{sourceCopy(third, fallback)}</p></div><div className="reader-reference-column accent"><VisualIcon icon={comparisonIcons[1]} tone="red" /><span>TEXTO / 02</span><strong>{sourceCardTitle(fourth, article.summary)}</strong><p>{sourceCopy(fifth, fallback)}</p></div></div></ReferenceFrame>;
+  if (part === 1) {
+    const visual = conciseVisuals[article.id]?.intro;
+    const cards = visual?.cards || [second, fourth];
+    const cardCopies = visual?.cardCopies || [third, fifth];
+    return <ReferenceFrame theme={theme} variant="light" eyebrow="UNA IDEA DEL ARTÍCULO" title={visual?.title || sourceTitle(first, article.summary)} conclusion={visual?.conclusion || sourceCopy(second, fallback)}><div className="reader-reference-columns">{cards.map((line, index) => <div className={`reader-reference-column${index === 1 ? " accent" : ""}`} key={`${line}-${index}`}><VisualIcon icon={comparisonIcons[index]} tone={index === 1 ? "red" : "light"} /><span>TEXTO / 0{index + 1}</span><strong>{visual ? line : sourceCardTitle(line, article.summary)}</strong><p>{visual ? cardCopies[index] : sourceCopy(cardCopies[index], fallback)}</p></div>)}</div></ReferenceFrame>;
+  }
   if (part === 2) {
     const visual = conciseVisuals[article.id]?.flow;
     const cards = visual?.cards || [first, second, third];
