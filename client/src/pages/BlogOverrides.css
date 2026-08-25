@@ -1086,3 +1086,11 @@
     text-align: left;
   }
 }
+
+/* Tarjeta destacada: título superior y etiqueta de novedad sobre la imagen. */
+.blog-article-card.featured .blog-card-shade { background: linear-gradient(180deg, rgba(0,0,0,.76) 0%, rgba(0,0,0,.14) 48%, rgba(0,0,0,.82) 100%); }
+.blog-featured-top { position: absolute; z-index: 2; top: 28px; right: 34px; left: 34px; display: grid; gap: 13px; pointer-events: none; }
+.blog-new-badge { display: inline-flex; width: max-content; align-items: center; padding: 7px 11px; border: 1px solid rgba(255,255,255,.42); border-radius: 999px; color: #fff; background: linear-gradient(120deg, #e6382e, #9a1213); box-shadow: 0 8px 18px rgba(0,0,0,.22); font: 800 10px/1 Inter, sans-serif; letter-spacing: .15em; text-transform: uppercase; }
+.blog-featured-top h2 { max-width: 570px; margin: 0; color: #fff; font: 700 clamp(24px, 2.25vw, 35px)/1.06 Belamor, Montserrat, sans-serif; letter-spacing: -.045em; text-transform: none; text-wrap: balance; }
+@media (max-width: 940px) { .blog-featured-top { top: 24px; right: 28px; left: 28px; }.blog-featured-top h2 { max-width: 610px; font-size: clamp(24px, 4.2vw, 34px); } }
+@media (max-width: 620px) { .blog-featured-top { top: 20px; right: 20px; left: 20px; gap: 10px; }.blog-new-badge { padding: 6px 9px; font-size: 9px; }.blog-featured-top h2 { font-size: clamp(22px, 7vw, 29px); line-height: 1.08; } }
