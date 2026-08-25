@@ -98,7 +98,7 @@ export default function Blog() {
             <p className="blog-eyebrow">Bitaxus Blog</p>
             <h1 id="blog-hero-title">Entender mejor tu negocio también es parte de hacerlo <span>crecer.</span></h1>
             <p className="blog-lede">Historias, aprendizajes y herramientas para entender mejor lo que pasa con tus clientes, tus cobros, tu operación y tu crecimiento.</p>
-            <label className="blog-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos…" aria-label="Buscar guías o artículos" /></label>
+            <label className="blog-search"><Search size={18} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar guías o artículos" aria-label="Buscar guías o artículos" /></label>
           </div>
           <ArticleCard article={articles[0]} variant="featured" href={`${blogPath}/article/${articles[0].id}`} />
         </div>
