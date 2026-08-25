@@ -875,3 +875,31 @@
   .article-page .reader-reference-flow > div > strong,
   .article-page .reader-reference-checklist > div > strong { line-height: 1.12; }
 }
+
+
+/* Cards de recursos: proporción estable y copy contenido, sin alterar el resto de la página. */
+.article-page .reader-reference-column,
+.article-page .reader-reference-flow > div,
+.article-page .reader-reference-checklist > div { box-sizing: border-box; min-width: 0; }
+.article-page .reader-reference-column { min-height: 0; padding: 20px 19px 18px; }
+.article-page .reader-reference-column > strong,
+.article-page .reader-reference-flow > div > strong,
+.article-page .reader-reference-checklist > div > strong { display: block; max-width: 100%; overflow-wrap: anywhere; font-size: clamp(16px, 1.2vw, 19px) !important; line-height: 1.12 !important; }
+.article-page .reader-reference-column > p,
+.article-page .reader-reference-flow > div > p,
+.article-page .reader-reference-checklist > div > p { font-size: 12.5px !important; line-height: 1.42 !important; }
+.article-page .reader-reference-column > span:not(.reader-visual-icon),
+.article-page .reader-reference-flow > div > span:not(.reader-visual-icon),
+.article-page .reader-reference-checklist > div > span:not(.reader-visual-icon) { font-size: 8px !important; line-height: 1.25 !important; }
+.article-page .reader-reference-columns { align-items: stretch; }
+.article-page .reader-reference-columns .reader-reference-column { height: 100%; }
+.article-page .reader-reference-flow > div { min-height: 0; padding: 14px 15px; }
+.article-page .reader-reference-checklist > div { min-height: 0; padding: 14px 15px; }
+@media (max-width: 820px) {
+  .article-page .reader-reference-column { padding: 17px 15px 16px; }
+  .article-page .reader-reference-column > strong,
+  .article-page .reader-reference-flow > div > strong,
+  .article-page .reader-reference-checklist > div > strong { font-size: 16px !important; line-height: 1.14 !important; }
+  .article-page .reader-reference-flow > div,
+  .article-page .reader-reference-checklist > div { padding: 13px 14px; }
+}
