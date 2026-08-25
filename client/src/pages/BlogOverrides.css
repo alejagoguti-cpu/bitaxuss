@@ -717,7 +717,7 @@
 .article-page .reader-reference-frame.reader-reference-light h3 { color: #171515; }
 .article-page .reader-reference-light .reader-reference-column { border-color: #e7e2df; background: #fff; }
 .article-page .reader-reference-light .reader-reference-column.accent { border-color: rgba(186,11,13,.28); background: #fff7f6; }
-.article-page .reader-reference-light .reader-reference-column > span:not(.reader-visual-icon) { color: #8f8784; }
+.article-page .reader-reference-light .reader-reference-column > span:not(.reader-visual-icon) { color: #6f6865; }
 .article-page .reader-reference-light .reader-reference-column.accent > span:not(.reader-visual-icon) { color: #a90005; }
 .article-page .reader-reference-light .reader-reference-column strong { color: #171515; }
 .article-page .reader-reference-light .reader-reference-column p { color: #6f6865; }
@@ -958,4 +958,19 @@
   .article-page .reader-reference-checklist > div,
   .article-page .reader-reference-frame .reader-visual-icon,
   .article-page .reader-reference-flow i svg { animation: none !important; }
+}
+
+
+/* Foco de teclado visible en fondos claros y oscuros del blog. */
+.blog-page :is(a[href], button, input, select):focus-visible,
+.article-page :is(a[href], button, input, select):focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #ba0b0d;
+}
+.blog-page .blog-search:focus-within,
+.blog-page .blog-editorial-search:focus-within {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 5px #ba0b0d;
 }
