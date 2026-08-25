@@ -40,6 +40,7 @@ for i, (start, end) in enumerate(zip(starts, ends)):
 
 out = Path('/home/ubuntu/bitaxuss/client/src/pages/blogData.ts')
 parts = [
+    'export const asset = (source: string) => `${import.meta.env.BASE_URL}${source.replace(/^\\//, "")}`;',
     'export const blogPath = `${import.meta.env.BASE_URL}blog`;',
     'export const loginUrl = "https://app.bitaxus.com/login";',
     '',

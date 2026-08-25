@@ -974,3 +974,115 @@
   outline-offset: 4px;
   box-shadow: 0 0 0 5px #ba0b0d;
 }
+
+
+/* Timeline limpia: horizontal en escritorio, vertical solo en pantallas pequeñas. */
+@media (min-width: 621px) {
+  .article-page .reader-theme-closeout .reader-reference-timeline,
+  .article-page .reader-theme-terms .reader-reference-timeline {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    padding-left: 0;
+  }
+  .article-page .reader-theme-closeout .reader-reference-timeline::before,
+  .article-page .reader-theme-terms .reader-reference-timeline::before {
+    top: 26px;
+    right: 9%;
+    bottom: auto;
+    left: 9%;
+    width: auto;
+    height: 1px;
+  }
+  .article-page .reader-theme-closeout .reader-reference-timeline > div,
+  .article-page .reader-theme-terms .reader-reference-timeline > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 12px;
+    text-align: center;
+  }
+  .article-page .reader-theme-closeout .reader-reference-timeline > div > .reader-visual-icon,
+  .article-page .reader-theme-terms .reader-reference-timeline > div > .reader-visual-icon {
+    margin: 0 auto 15px;
+  }
+  .article-page .reader-theme-closeout .reader-reference-timeline > div > span:not(.reader-visual-icon),
+  .article-page .reader-theme-terms .reader-reference-timeline > div > span:not(.reader-visual-icon) {
+    display: flex;
+    width: 27px;
+    height: 27px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0 auto 13px;
+    border: 1px solid #dca7a3;
+    border-radius: 50%;
+    color: #a90005;
+    background: #fff;
+    font-size: 9px;
+    line-height: 1;
+    letter-spacing: 0;
+    text-align: center;
+  }
+  .article-page .reader-theme-closeout .reader-reference-timeline > div > p,
+  .article-page .reader-theme-terms .reader-reference-timeline > div > p {
+    max-width: 180px;
+    margin: 0 auto;
+    font-size: clamp(13px, .95vw, 15px);
+    line-height: 1.35;
+    text-align: center;
+  }
+}
+@media (max-width: 620px) {
+  .article-page .reader-reference-timeline {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .article-page .reader-reference-timeline::before {
+    top: 25px;
+    right: auto;
+    bottom: 25px;
+    left: 25px;
+    width: 1px;
+    height: auto;
+  }
+  .article-page .reader-reference-timeline > div {
+    display: grid;
+    grid-template-columns: 50px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: 0 14px;
+    align-items: center;
+    padding: 0;
+    text-align: left;
+  }
+  .article-page .reader-reference-timeline > div > .reader-visual-icon {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    justify-self: center;
+    margin: 0;
+  }
+  .article-page .reader-reference-timeline > div > span:not(.reader-visual-icon) {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0 0 5px;
+    border: 1px solid #dca7a3;
+    border-radius: 50%;
+    color: #a90005;
+    background: #fff;
+    font-size: 9px;
+    line-height: 1;
+    letter-spacing: 0;
+    text-align: center;
+  }
+  .article-page .reader-reference-timeline > div > p {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    text-align: left;
+  }
+}

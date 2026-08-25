@@ -195,7 +195,7 @@ Siempre habrá algo que continúe al siguiente periodo. Puede ser un cliente que
 Eso no convierte automáticamente el cierre en un mal cierre.
 La diferencia está en si esos pendientes están identificados o si van a reaparecer después como una sorpresa.
 No es lo mismo empezar septiembre sabiendo que tres clientes de agosto continúan pendientes que descubrir el día veinte que una factura nunca fue cobrada porque todos asumieron que alguien más estaba haciendo seguimiento. Tampoco es igual saber que cierto dinero visible en la cuenta está comprometido para un pago próximo que utilizarlo pensando que está completamente disponible.
-Por eso creo que una parte importante del cierre consiste precisamente en conservar continuidad, Lo que terminó debería quedar suficientemente explicado y lo que no terminó debería quedar suficientemente identificado.Cuando eso sucede, el siguiente mes no empieza tratando de recordar el anterior. Empieza sabiendo desde dónde continúa la operación.Y eso cambia mucho más de lo que parece. Una decisión que se toma el día primero no depende únicamente del saldo que aparece esa mañana. También puede considerar qué clientes siguen pendientes, qué obligaciones vienen en camino y qué asuntos del periodo anterior todavía necesitan atención.
+Por eso creo que una parte importante del cierre consiste precisamente en conservar continuidad. Lo que terminó debería quedar suficientemente explicado y lo que no terminó debería quedar suficientemente identificado. Cuando eso sucede, el siguiente mes no empieza tratando de recordar el anterior. Empieza sabiendo desde dónde continúa la operación. Y eso cambia mucho más de lo que parece. Una decisión que se toma el día primero no depende únicamente del saldo que aparece esa mañana. También puede considerar qué clientes siguen pendientes, qué obligaciones vienen en camino y qué asuntos del periodo anterior todavía necesitan atención.
 El cierre deja de ser entonces una actividad que mira únicamente hacia atrás. Se convierte en el punto de partida del siguiente periodo.
 Cuando puedes explicar el mes, dejas de administrar por sensación
 Hay algo que encuentro especialmente valioso en este proceso: la conversación dentro del negocio empieza a cambiar.
@@ -213,7 +213,7 @@ Ese es uno de los problemas que hoy estamos trabajando en resolver desde Bitaxus
 Bitaxus IA forma parte de esa experiencia ayudando a registrar instrucciones y consultar la información disponible sobre las operaciones dentro de las capacidades habilitadas y las autorizaciones del usuario.
 No buscamos que una inteligencia artificial decida si una empresa cerró bien o mal, ni que determine qué debería hacer después. Esa interpretación y esas decisiones siguen perteneciendo al negocio.
 Lo que sí queremos es que, cuando llegue el momento de tomarlas, exista algo más útil que una lista de movimientos aislados.
-Porque un saldo puede decirte cuánto hay,El contexto es lo que te ayuda a entender qué pasó.
+Porque un saldo puede decirte cuánto hay. El contexto es lo que te ayuda a entender qué pasó.
 Preguntas frecuentes
 ¿Qué significa hacer un cierre mensual de un negocio?
 En términos sencillos, significa revisar lo ocurrido durante el periodo y dejar suficientemente claro qué se recibió, qué se pagó, qué compromisos fueron atendidos y qué asuntos continúan abiertos. El objetivo no es solamente conocer el saldo final, sino entender cómo se construyó ese resultado.
@@ -228,7 +228,7 @@ Sí. Cerrar un periodo no significa que absolutamente todo tenga que resolverse 
 ¿Cómo puede ayudar Bitaxus con esta información?
 Bitaxus está trabajando para que los cobros, pagos y movimientos conserven más contexto y puedan consultarse de una forma más organizada. Bitaxus IA puede ayudar a registrar instrucciones y consultar la información disponible alrededor de esas operaciones, mientras las decisiones continúan en manos del usuario.
 El mes puede terminar sin que su historia quede incompleta
-Volvamos al momento del principio: llega final de mes, abres la cuenta y miras cuánto quedó,Ese número sigue siendo importante. Lo que cambia es lo que hacemos después de verlo.
+Volvamos al momento del principio: llega final de mes, abres la cuenta y miras cuánto quedó. Ese número sigue siendo importante. Lo que cambia es lo que hacemos después de verlo.
 Podemos quedarnos con el saldo y asumir que resume todo lo que ocurrió, o podemos preguntarnos qué hay detrás de ese resultado. Qué parte corresponde realmente a este periodo, qué compromisos ya atendimos, qué sigue abierto y qué información necesitamos conservar para comenzar el siguiente mes sin volver a reconstruir lo anterior.
 Para mí, esa segunda lectura se parece mucho más a entender un negocio.
 Un buen cierre no necesita que absolutamente todo haya terminado. Necesita que lo ocurrido esté suficientemente claro y que aquello que continúa no se pierda simplemente porque cambió el mes.
