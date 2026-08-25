@@ -21,7 +21,7 @@ images_by_article = {
     'gastos-operacion': '/blog/pagos-exterior.webp',
     'cierre-mes': '/blog/primer-pago.webp',
     'empresa-crecio': '/blog/empresa-crecio.webp',
-    'contratar-mas': '/blog/tasa-google.webp',
+    'contratar-mas': '/blog/contratar-equipo.webp',
     'delegar-control': '/blog/pagos-exterior.webp',
     'cobrar-parte-vender': '/blog/primer-pago.webp',
     'condiciones-pago': '/blog/plataformas-pagos.webp',
