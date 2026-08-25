@@ -583,6 +583,10 @@
 /* Movimiento editorial compartido en todos los artículos; el footer queda fuera del alcance. */
 @keyframes articleReveal { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes articleSoftScale { from { opacity: 0; transform: scale(.985) translateY(12px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes visualTextReveal { from { opacity: 0; filter: blur(4px); } to { opacity: 1; filter: blur(0); } }
+@keyframes visualIconPop { 0% { opacity: 0; transform: scale(.78); } 70% { opacity: 1; transform: scale(1.06); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes visualArrowNudge { 0%, 100% { transform: translateX(0); opacity: .6; } 50% { transform: translateX(4px); opacity: 1; } }
+@keyframes visualCardGlow { 0%, 100% { box-shadow: 0 0 0 rgba(186,11,13,0); } 50% { box-shadow: 0 0 22px rgba(186,11,13,.16); } }
 @media (prefers-reduced-motion: no-preference) {
   .article-page .blog-reader-header > * { animation: articleReveal .7s cubic-bezier(.23,1,.32,1) both; }
   .article-page .blog-reader-header > *:nth-child(2) { animation-delay: .08s; }
@@ -604,6 +608,31 @@
   .article-page .reader-reference-frame,
   .article-page .blog-reader-faq-card { transition: transform .28s cubic-bezier(.23,1,.32,1), box-shadow .28s ease, border-color .28s ease; }
   .article-page .reader-reference-frame:hover { transform: translateY(-4px); box-shadow: 0 19px 40px rgba(54,39,35,.1); }
+  .article-page .reader-reference-frame > h3 { animation: visualTextReveal .62s .08s cubic-bezier(.23,1,.32,1) both; }
+  .article-page .reader-reference-column,
+  .article-page .reader-reference-flow > div,
+  .article-page .reader-reference-timeline > div,
+  .article-page .reader-reference-checklist > div { animation: visualTextReveal .58s cubic-bezier(.23,1,.32,1) both; }
+  .article-page .reader-reference-column:nth-child(1),
+  .article-page .reader-reference-flow > div:nth-child(1),
+  .article-page .reader-reference-timeline > div:nth-child(1),
+  .article-page .reader-reference-checklist > div:nth-child(1) { animation-delay: .18s; }
+  .article-page .reader-reference-column:nth-child(2),
+  .article-page .reader-reference-flow > div:nth-child(2),
+  .article-page .reader-reference-timeline > div:nth-child(2),
+  .article-page .reader-reference-checklist > div:nth-child(2) { animation-delay: .28s; }
+  .article-page .reader-reference-column:nth-child(3),
+  .article-page .reader-reference-flow > div:nth-child(3),
+  .article-page .reader-reference-timeline > div:nth-child(3),
+  .article-page .reader-reference-checklist > div:nth-child(3) { animation-delay: .38s; }
+  .article-page .reader-reference-frame .reader-visual-icon { animation: visualIconPop .58s .24s cubic-bezier(.23,1,.32,1) both; }
+  .article-page .reader-reference-flow > div:nth-child(2) { animation-name: visualTextReveal, visualCardGlow; animation-duration: .58s, 2.4s; animation-delay: .28s, .95s; animation-iteration-count: 1, infinite; }
+  .article-page .reader-reference-flow i svg { animation: visualArrowNudge 1.8s .8s ease-in-out infinite; }
+  .article-page .reader-reference-frame:hover .reader-visual-icon { box-shadow: 0 0 0 9px rgba(186,11,13,.13), 0 10px 27px rgba(186,11,13,.24); }
+  .article-page .reader-reference-frame:hover .reader-reference-column,
+  .article-page .reader-reference-frame:hover .reader-reference-flow > div,
+  .article-page .reader-reference-frame:hover .reader-reference-timeline > div,
+  .article-page .reader-reference-frame:hover .reader-reference-checklist > div { border-color: rgba(239,68,55,.42); }
 }
 @media (prefers-reduced-motion: reduce) {
   .article-page .blog-reader-header > *, .article-page .blog-reader-hero img,
@@ -917,4 +946,15 @@
   .article-page .reader-reference-checklist > div > strong { font-size: var(--visual-heading) !important; line-height: 1.14 !important; }
   .article-page .reader-reference-flow > div,
   .article-page .reader-reference-checklist > div { padding: 13px 14px; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .article-page .reader-reference-frame > h3,
+  .article-page .reader-reference-column,
+  .article-page .reader-reference-flow > div,
+  .article-page .reader-reference-timeline > div,
+  .article-page .reader-reference-checklist > div,
+  .article-page .reader-reference-frame .reader-visual-icon,
+  .article-page .reader-reference-flow i svg { animation: none !important; }
 }
