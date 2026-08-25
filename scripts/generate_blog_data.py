@@ -22,7 +22,7 @@ images_by_article = {
     'cierre-mes': '/blog/primer-pago.webp',
     'empresa-crecio': '/blog/empresa-crecio.webp',
     'contratar-mas': '/blog/contratar-equipo.webp',
-    'delegar-control': '/blog/pagos-exterior.webp',
+    'delegar-control': '/blog/delegar-equipo.webp',
     'cobrar-parte-vender': '/blog/primer-pago.webp',
     'condiciones-pago': '/blog/plataformas-pagos.webp',
     'plazo-cliente': '/blog/tasa-google.webp',
