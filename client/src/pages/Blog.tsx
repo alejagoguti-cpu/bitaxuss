@@ -14,6 +14,7 @@ import { SharedFooter } from "../components/SharedFooter";
 
 const categories = ["Todos", ...Array.from(new Set(articles.map((article) => article.category)))];
 const featuredArticle = articles.find((article) => article.id === "contratar-mas") || articles[0];
+const latestCategoryOrder = ["Emprendimiento", "Clientes y ventas", "Control de negocio"];
 
 const globalCategoryCopy: Record<string, string> = {
   "Control de negocio": "Mira qué está pasando dentro de tu operación.",
@@ -44,7 +45,7 @@ export default function Blog() {
       const categoryMatches = activeCategory === "Todos" || article.category === activeCategory;
       const searchMatches = !normalizedQuery || `${article.title} ${article.summary} ${article.category}`.toLowerCase().includes(normalizedQuery);
       return categoryMatches && searchMatches;
-    });
+    }).sort((first, second) => latestCategoryOrder.indexOf(first.category) - latestCategoryOrder.indexOf(second.category));
   }, [activeCategory, query]);
 
   const latestPageSize = 3;
