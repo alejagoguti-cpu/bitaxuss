@@ -25,7 +25,7 @@ images_by_article = {
     'delegar-control': '/blog/delegar-equipo.webp',
     'cobrar-parte-vender': '/blog/cobrar-emprendedor.webp',
     'condiciones-pago': '/blog/plataformas-pagos.webp',
-    'plazo-cliente': '/blog/tasa-google.webp',
+    'plazo-cliente': '/blog/plazo-cliente.webp',
 }
 
 def clean_segment(segment):
