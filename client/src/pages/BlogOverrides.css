@@ -1094,3 +1094,7 @@
 .blog-featured-top h2 { max-width: 570px; margin: 0; color: #fff; font: 700 clamp(23px, 2.15vw, 33px)/1.08 Inter, Montserrat, sans-serif; letter-spacing: -.035em; text-shadow: 0 2px 5px rgba(0,0,0,.88), 0 6px 18px rgba(0,0,0,.52); text-transform: none; text-wrap: balance; }
 @media (max-width: 940px) { .blog-featured-top { top: 24px; right: 28px; left: 28px; }.blog-featured-top h2 { max-width: 610px; font-size: clamp(23px, 4.2vw, 34px); } }
 @media (max-width: 620px) { .blog-featured-top { top: 20px; right: 20px; left: 20px; gap: 10px; }.blog-new-badge { padding: 6px 9px; font-size: 9px; }.blog-featured-top h2 { font-size: clamp(21px, 7vw, 28px); line-height: 1.1; } }
+
+
+/* Superposición de legibilidad únicamente para la foto de Control de negocio. */
+.blog-capsule.active::after { position: absolute; z-index: 0; inset: 0; content: ""; pointer-events: none; background: rgba(0,0,0,.48); }
