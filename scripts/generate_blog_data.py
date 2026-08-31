@@ -18,7 +18,7 @@ meta = [
 ]
 images_by_article = {
     'control-ventas': '/blog/ventas-caja.webp',
-    'gastos-operacion': '/blog/pagos-exterior.webp',
+    'gastos-operacion': '/blog/gastos-operacion.webp',
     'cierre-mes': '/blog/cierre-mes.webp',
     'empresa-crecio': '/blog/empresa-crecio.webp',
     'contratar-mas': '/blog/contratar-equipo.webp',
