@@ -118,10 +118,10 @@ export default function Blog() {
         <div className="blog-shell">
           <div className="blog-section-head"><p className="blog-eyebrow">Explora por cápsulas</p><h2>Cuatro formas de mirar tu negocio</h2><p>Cada cápsula reúne los temas que más importan según el momento en el que estás.</p></div>
           <div className="blog-capsule-grid">
-            <Capsule number="01" title="Control de negocio" copy="Entiende mejor lo que pasa dentro de tu operación." active onClick={() => setActiveCategory("Control de negocio")} />
-            <Capsule number="02" title="Emprendimiento" copy="Crecer también cambia la forma de manejar tu empresa." onClick={() => setActiveCategory("Emprendimiento")} />
-            <Capsule number="03" title="Clientes y ventas" copy="Vender es solo una parte. Cobrar y mantener la relación también cuenta." onClick={() => setActiveCategory("Clientes y ventas")} />
-            <Capsule number="04" title="Global" copy="Cuando tu negocio cruza fronteras, aparecen nuevas preguntas." onClick={() => setActiveCategory("Global")} />
+            <Capsule number="01" title="Emprendimiento" copy="Crecer también cambia la forma de manejar tu empresa." active onClick={() => setActiveCategory("Emprendimiento")} />
+            <Capsule number="02" title="Clientes y ventas" copy="Vender es solo una parte. Cobrar y mantener la relación también cuenta." onClick={() => setActiveCategory("Clientes y ventas")} />
+            <Capsule number="03" title="Global" copy="Cuando tu negocio cruza fronteras, aparecen nuevas preguntas." onClick={() => setActiveCategory("Global")} />
+            <Capsule number="04" title="Control de negocio" copy="Entiende mejor lo que pasa dentro de tu operación." onClick={() => setActiveCategory("Control de negocio")} />
           </div>
         </div>
       </section>
