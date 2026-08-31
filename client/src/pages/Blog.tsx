@@ -120,7 +120,7 @@ export default function Blog() {
             <Capsule number="01" title="Emprendimiento" copy="Crecer también cambia la forma de manejar tu empresa." onClick={() => setActiveCategory("Emprendimiento")} />
             <Capsule number="02" title="Clientes y ventas" copy="Vender es solo una parte. Cobrar y mantener la relación también cuenta." onClick={() => setActiveCategory("Clientes y ventas")} />
             <Capsule number="03" title="Global" copy="Cuando tu negocio cruza fronteras, aparecen nuevas preguntas." onClick={() => setActiveCategory("Global")} />
-            <Capsule number="04" title="Control de negocio" copy="Entiende mejor lo que pasa dentro de tu operación." onClick={() => setActiveCategory("Control de negocio")} />
+            <Capsule number="04" title="Control de negocio" copy="Entiende mejor lo que pasa dentro de tu operación." image="/blog/control-negocio-alejandra.png" onClick={() => setActiveCategory("Control de negocio")} />
           </div>
         </div>
       </section>
@@ -238,6 +238,6 @@ function ArticleCard({ article, variant = "standard", href }: { article: (typeof
   return <article className={`blog-article-card ${variant}`}><img src={asset(article.image)} width="1672" height="941" loading={variant === "featured" ? "eager" : "lazy"} fetchPriority={variant === "featured" ? "high" : "auto"} decoding="async" alt="" /><div className="blog-card-shade" />{variant === "featured" ? <div className="blog-featured-top"><span className="blog-new-badge">Nuevo</span><h2>{article.title}</h2></div> : null}<div className="blog-article-copy">{variant === "featured" ? null : <h3 className="sr-only">{article.title}</h3>}<p className="blog-eyebrow">{article.category}</p><a className="blog-article-read" href={href}>Leer artículo <ArrowRight /></a></div></article>;
 }
 
-function Capsule({ number, title, copy, active = false, onClick }: { number: string; title: string; copy: string; active?: boolean; onClick: () => void }) {
-  return <button type="button" className={`blog-capsule ${active ? "active" : ""}`} onClick={onClick}><span>{number}</span><strong>{title}</strong><p>{copy}</p><i>Explorar <ArrowRight /></i></button>;
+function Capsule({ number, title, copy, image, active = false, onClick }: { number: string; title: string; copy: string; image?: string; active?: boolean; onClick: () => void }) {
+  return <button type="button" className={`blog-capsule ${active ? "active" : ""} ${image ? "has-image" : ""}`} style={image ? { backgroundImage: `url(${image})` } : undefined} onClick={onClick}><span>{number}</span><strong>{title}</strong><p>{copy}</p><i>Explorar <ArrowRight /></i></button>;
 }
