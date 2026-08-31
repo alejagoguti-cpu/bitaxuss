@@ -86,7 +86,7 @@
 @media (max-width: 720px) { .blog-latest { background-size: 68px 68px; }.blog-latest::before { top: 46px; }.blog-latest::after, .blog-capsules::after, .blog-explains::after { opacity: .55; transform: scale(.7); }.blog-experience { background-size: 50% 100%; }.blog-explains-grid::before, .blog-experience-cards::before { display: none; } }
 
 /* El blog utiliza exactamente el footer base de la página de inicio. */
-.blog-latest::after, .blog-capsules::after, .blog-experience::after, .blog-explains::after, .blog-global::after, .blog-capsule::before, .blog-experience-cards button::before, .blog-explains-grid button::before { display: none; }.blog-capsule.active { background: #000 url('/blog/control-negocio-alejandra.png') 58% center/cover no-repeat; }.blog-global { isolation: isolate; background: #000 url('/2190-827.webp') center/cover no-repeat; }.blog-global::before { content: ""; position: absolute; z-index: -1; inset: 0; background: rgba(0,0,0,.38); }.blog-global .blog-shell { position: relative; z-index: 1; }
+.blog-latest::after, .blog-capsules::after, .blog-experience::after, .blog-explains::after, .blog-global::after, .blog-capsule::before, .blog-experience-cards button::before, .blog-explains-grid button::before { display: none; }.blog-capsule.active { background: #000 url('/2190-827.webp') center/cover no-repeat; }.blog-global { isolation: isolate; background: #000 url('/2190-827.webp') center/cover no-repeat; }.blog-global::before { content: ""; position: absolute; z-index: -1; inset: 0; background: rgba(0,0,0,.38); }.blog-global .blog-shell { position: relative; z-index: 1; }
 .blog-news-section { background: #000 url('/2288-19.webp') top center/cover no-repeat; }.blog-news { position: relative; isolation: isolate; background: linear-gradient(rgba(40,7,7,.5), rgba(40,7,7,.5)), url('/2166-4425.webp') center/cover no-repeat; }.blog-product-cta { isolation: isolate; overflow: hidden; background: #080606 url('/2190-825.webp') center/cover no-repeat; }.blog-product-cta::before { inset: 0; width: auto; height: auto; transform: none; background: linear-gradient(90deg, rgba(0,0,0,.3), rgba(0,0,0,.62)); }
 
 
@@ -1094,16 +1094,3 @@
 .blog-featured-top h2 { max-width: 570px; margin: 0; color: #fff; font: 700 clamp(23px, 2.15vw, 33px)/1.08 Inter, Montserrat, sans-serif; letter-spacing: -.035em; text-shadow: 0 2px 5px rgba(0,0,0,.88), 0 6px 18px rgba(0,0,0,.52); text-transform: none; text-wrap: balance; }
 @media (max-width: 940px) { .blog-featured-top { top: 24px; right: 28px; left: 28px; }.blog-featured-top h2 { max-width: 610px; font-size: clamp(23px, 4.2vw, 34px); } }
 @media (max-width: 620px) { .blog-featured-top { top: 20px; right: 20px; left: 20px; gap: 10px; }.blog-new-badge { padding: 6px 9px; font-size: 9px; }.blog-featured-top h2 { font-size: clamp(21px, 7vw, 28px); line-height: 1.1; } }
-
-
-/* Control de negocio: mismo diseño de cápsula, únicamente con el nuevo visual proporcionado. */
-.blog-capsule.has-image { color: #fff; background-color: #000; background-position: 58% center; background-size: cover; background-repeat: no-repeat; }
-.blog-capsule.has-image::after { position: absolute; inset: 0; content: ""; pointer-events: none; background: linear-gradient(90deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.3) 54%, rgba(0,0,0,.1) 100%); }
-.blog-capsule.has-image > span { border-color: rgba(255,255,255,.42); color: #fff; background: rgba(0,0,0,.24); }
-.blog-capsule.has-image > strong,
-.blog-capsule.has-image > p,
-.blog-capsule.has-image > i { color: #fff; }
-@media (max-width: 720px) {
-  .blog-capsule.has-image { background-position: 58% center; }
-  .blog-capsule.has-image::after { background: linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.2)); }
-}
