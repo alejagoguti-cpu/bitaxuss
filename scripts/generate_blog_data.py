@@ -24,7 +24,7 @@ images_by_article = {
     'contratar-mas': '/blog/contratar-equipo.webp',
     'delegar-control': '/blog/delegar-equipo.webp',
     'cobrar-parte-vender': '/blog/cobrar-emprendedor.webp',
-    'condiciones-pago': '/blog/plataformas-pagos.webp',
+    'condiciones-pago': '/blog/condiciones-cliente.webp',
     'plazo-cliente': '/blog/plazo-cliente.webp',
 }
 
